@@ -152,3 +152,57 @@
         position: static; /* Desactivar sticky en móviles */
     }
 }
+
+@media (max-width: 768px) {
+    .piercing-detail-container {
+        padding: 1rem;
+    }
+    .piercing-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+    }
+    .piercing-info h2 {
+        font-size: 1.6rem;
+        margin-bottom: 0.8rem;
+    }
+    .piercing-info p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: 1rem;
+    }
+    .aftercare-section h3,
+    .recommended-products-section h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.7rem;
+    }
+    .aftercare-list li {
+        font-size: 0.9rem;
+        margin-bottom: 0.4rem;
+    }
+    .recommended-products-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 0.8rem;
+    }
+    .recommended-product-card {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .recommended-product-card img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    .recommended-product-info {
+        padding: 0.5rem;
+        text-align: center;
+    }
+    .recommended-product-title {
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+    }
+    .recommended-product-price {
+        font-size: 0.85rem;
+    }
+}
