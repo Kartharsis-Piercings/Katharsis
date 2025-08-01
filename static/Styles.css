@@ -511,10 +511,6 @@
             text-align: right;
         }
 
-
-
-
-
 /* Responsive */
 @media (max-width: 768px) {
     .categories-grid {
@@ -1659,163 +1655,170 @@
             font-weight: bold;
         }
         
-        /* Estilos para pantallas más pequeñas (móviles) */
-    @media (max-width: 768px) {
-        body {
-            font-size: 0.9rem; /* Reducir el tamaño de la fuente base */
-            line-height: 1.6;
-        }
-        .container {
-            width: 95%; /* Hacer el contenedor más ancho en móviles */
-            margin: 1rem auto;
-            padding: 1rem;
-        }
-        .section-title {
-            font-size: 1.8rem; /* Reducir el tamaño de los títulos de sección */
-            margin-bottom: 1.5rem;
-        }
-        .btn {
-            padding: 0.7rem 1.2rem; /* Reducir el padding de los botones */
-            font-size: 0.9rem;
-        }
-        /* Ajustes para la navegación móvil */
-        nav {
-            padding: 0.5rem 5%;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .logo {
-            margin-bottom: 0.5rem;
-        }
-        .nav-links {
-            display: none; /* Ocultar el menú principal */
-            flex-direction: column;
-            width: 100%;
-            margin-top: 0.5rem;
-        }
-        .nav-links.active {
-            display: flex;
-        }
-        .nav-links li {
-            margin: 0.5rem 0;
-        }
-        #mobile-menu {
-            display: block; /* Mostrar el botón de menú hamburguesa */
-            cursor: pointer;
-            border: none;
-            background: transparent;
-            padding: 0.5rem;
-        }
-        .bar {
-            width: 25px;
-            height: 3px;
-            background-color: #fff;
-            margin: 3px 0;
-            transition: 0.4s;
-            display: block;
-        }
-        #mobile-menu.active .bar:nth-child(1) {
-            -webkit-transform: rotate(-45deg) translate(-5px, 6px);
-            transform: rotate(-45deg) translate(-5px, 6px);
-        }
-        #mobile-menu.active .bar:nth-child(2) {
-            opacity: 0;
-        }
-        #mobile-menu.active .bar:nth-child(3) {
-            -webkit-transform: rotate(45deg) translate(-5px, -6px);
-            transform: rotate(45deg) translate(-5px, -6px);
-        }
+
+        /* ==========================================================================
+   INICIO DE ESTILOS RESPONSIVE PARA MÓVILES
+   ========================================================================== */
+
+@media (max-width: 768px) {
+
+    /* --- Header y Menú Móvil --- */
+    header {
+        padding: 0.5rem 5%;
     }
 
-    @media (max-width: 768px) {
-    .hero {
-        padding: 4rem 5%;
-        text-align: center;
-    }
-    .hero-content h1 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-    }
-    .hero-content .sub-hero {
-        font-size: 1.1rem;
-        margin-bottom: 1.5rem;
-    }
-    .cta-buttons {
+    .nav-links {
+        position: fixed;
+        top: 68px; /* Ajusta la posición para que no se superponga con el header */
+        left: -100%; /* Empieza oculto fuera de la pantalla */
+        width: 250px;
+        height: calc(100vh - 68px);
+        background: rgba(10, 10, 10, 0.98);
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start; /* Alinea los links a la izquierda */
+        padding: 2rem;
+        transition: left 0.3s ease-in-out; /* Animación de deslizamiento */
     }
-    .cta-buttons a {
-        width: 80%;
-        margin: 0.5rem 0;
-        text-align: center;
-    }
-}
 
-@media (max-width: 768px) {
-    .carousel-container {
-        overflow: hidden;
+    .nav-links.active {
+        left: 0; /* Muestra el menú */
     }
-    .carousel-slide {
-        display: flex;
-        transition: transform 0.5s ease-in-out;
-    }
-    .slide img {
-        width: 100%; /* Cada imagen ocupa toda la pantalla */
-        display: block;
-    }
-    .carousel-btn {
-        display: none !important; /* Ocultar botones en móvil, el scroll es intuitivo */
-    }
-}
-@media (max-width: 768px) {
-    .categories-grid {
-        grid-template-columns: 1fr; /* Una columna en móviles */
-        gap: 1.5rem;
-    }
-    .category-card {
-        height: auto; /* Ajustar la altura automáticamente */
-        min-height: 250px; /* Altura mínima para el contenido */
-        border-radius: 10px;
-    }
-    .category-card .category-info {
-        padding: 1rem;
-    }
-    .category-card .category-info h3 {
-        font-size: 1.3rem;
-        margin-bottom: 0.5rem;
-    }
-    .category-card .category-info p {
-        font-size: 0.9rem;
-    }
-    .btn-category {
-        font-size: 0.85rem;
-        padding: 0.6rem 1rem;
-    }
-}
 
-@media (max-width: 768px) {
-    .testimonials {
+    .nav-links a {
+        margin: 1rem 0;
+        font-size: 1.1rem;
+        width: 100%;
+    }
+
+    .menu-toggle {
+        display: flex; /* Muestra el botón de hamburguesa */
+    }
+
+
+    /* --- Página de Inicio (Carrusel y Secciones) --- */
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .carousel-wrapper {
+        /* Apila el texto y el carrusel (soluciona foto 1) */
+        flex-direction: column;
         padding: 2rem 5%;
     }
-    .testimonials-grid {
-        grid-template-columns: 1fr; /* Una columna en móviles */
-        gap: 1.5rem;
+
+    .carousel-text {
+        text-align: center;
+        margin: 0 0 2rem 0; /* Elimina márgenes laterales y añade espacio abajo */
+        max-width: 100%;
     }
-    .testimonial-card {
-        padding: 1.5rem;
-        border-left-width: 3px;
-        border-radius: 8px;
+    
+    .carousel-container {
+        max-width: 100%; /* El carrusel ocupa todo el ancho disponible */
     }
-    .testimonial-card p {
-        font-size: 0.95rem;
-        margin-bottom: 1rem;
+
+    .features-grid {
+        grid-template-columns: 1fr; /* Apila las características en una sola columna */
     }
-    .testimonial-card p::before {
-        font-size: 1.5rem;
-        top: -1rem;
-        left: -0.7rem;
+    
+    
+    /* --- Catálogo y Tarjetas de Producto --- */
+    .catalog-container {
+        flex-direction: column;
     }
-    .testimonial-author {
-        font-size: 0.9rem;
+    
+    .catalog-filters, .catalog-products {
+        width: 100%;
+        padding: 0;
+        border: none;
+    }
+    
+    .catalog-filters {
+        border-bottom: 1px solid #333;
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .products-grid {
+        /* Muestra 2 columnas en tablets y 1 en celulares más pequeños */
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1rem;
+    }
+
+    .product-card .product-actions form {
+        /* Organiza los botones de la tarjeta (soluciona foto 3) */
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .product-card .size-select {
+        flex-grow: 1; /* El selector de tamaño ocupa el espacio disponible */
+        margin-bottom: 0;
+    }
+
+    .product-card .btn-add-cart {
+        flex-shrink: 0; /* Evita que el botón se encoja */
+        padding: 0.8rem; /* Un poco menos de padding */
+    }
+    
+    .product-card .btn-wishlist {
+        /* Posiciona el botón de wishlist en la esquina para un look más limpio */
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(26, 26, 26, 0.7);
+        backdrop-filter: blur(2px);
+    }
+
+    .products-grid {
+    /* Muestra 2 columnas en tablets y 1 en celulares más pequeños */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.product-card .product-actions form {
+    /* Organiza los botones "Selecciona tamaño" y "Añadir" en una fila */
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-card .size-select {
+    flex-grow: 1; /* El selector de tamaño ocupa el espacio disponible */
+    margin-bottom: 0;
+}
+
+.product-card .btn-add-cart {
+    flex-shrink: 0; /* Evita que el botón de añadir se encoja */
+}
+
+.product-card .btn-wishlist {
+    /* Posiciona el botón de wishlist en la esquina para un look más limpio */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(2px); /* Efecto de desenfoque para que se lea mejor */
+}
+
+}
+
+
+/* Estilos adicionales para pantallas muy pequeñas (celulares) */
+@media (max-width: 480px) {
+    .products-grid {
+        /* Asegura una sola columna en celulares */
+        grid-template-columns: 1fr;
+    }
+
+    .product-info h3 a {
+        font-size: 1rem;
+    }
+
+    .current-price {
+        font-size: 1.1rem;
     }
 }
