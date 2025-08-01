@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Bienvenidos a Katharsis</h1>
+            <p class="sub-hero">En Katharsis, creemos que el body art debe ser seguro. Por eso todas nuestras joyas son de Titanio grado Implante hipoalergénico. ¡Porque tu estilo no debe comprometer tu salud!</p>
+            <div class="cta-buttons">
+                <a href="{{ url_for('joyas') }}" class="btn btn-primary">Ver Catálogo</a>
+                <a href="{{ url_for('contacto') }}" class="btn btn-secondary">¿Necesitas ayuda? Contactanos</a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="carousel-section" style="display: flex; align-items: center; gap: 2rem;">
+            <div class="carousel-text" style="flex: 1;">
+                <h2>Galería de Trabajos</h2>
+                <p>Explora algunos de nuestros piercings y trabajos recientes. Cada imagen muestra la dedicación y profesionalismo de nuestro equipo. ¡Inspírate para tu próxima visita!</p>
+            </div>
+            <div class="carousel-container" style="flex: 2;">
+                <div class="carousel-slide">
+                    <div class="slide"><img src="../static/img/catalog-1.png" alt="Imagen 1"></div>
+                    <div class="slide"><img src="../static/img/catalog-2.jpeg" alt="Imagen 2"></div>
+                    <div class="slide"><img src="../static/img/catalog-3.jpeg" alt="Imagen 3"></div>
+                    <div class="slide"><img src="../static/img/catalog-4.jpeg" alt="Imagen 4"></div>
+                    <div class="slide"><img src="../static/img/catalog-5.jpeg" alt="Imagen 5"></div>
+                </div>
+                <button class="carousel-btn prev-btn">&#10094;</button>
+                <button class="carousel-btn next-btn">&#10095;</button>
+            </div>
+        </div>
+    </section>
+    
+    <section class="features">
+        <div class="features-grid">
+            <article class="feature-card">
+                <i class="fas fa-certificate"></i>
+                <h3>Materiales Premium</h3>
+                <p>Titanio Grado Implante hipoalergénico</p>
+            </article>
+            <article class="feature-card">
+                <i class="fas fa-user-md"></i>
+                <h3>Asesoramiento</h3>
+                <p>Expertos a su disposición para resolver sus dudas y problemas</p>
+            </article>
+            <article class="feature-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Máxima Higiene</h3>
+                <p>Protocolos sanitarios certificados internacionalmente</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="product-categories">
+        <h2 class="section-title">Categorías Destacadas</h2>
+        <div class="categories-grid">
+            <!-- Categoría 1: labrets -->
+            <div class="category-card" style="background-image: url('{{ url_for('static', filename='img/products/labret/zircon 3mm/ab/foto 1 - 1.webp') }}');">
+            <div class="category-info" style="padding: 1.5rem;">
+                <h3>Labrets</h3>
+                <p>Adórnate con hermosos Labrets de titanio rosca interna</p>
+                <a href="{{ url_for('joyas', category='Labrets') }}" class="btn btn-category">Ver en tienda</a>
+            </div>
+            </div>
+
+            <!-- Categoría 2: Nostrils -->
+            <div class="category-card" style="background-image: url('{{ url_for('static', filename='img/products/nostril/luna/foto 1 - 1.webp') }}');">
+                <div class="category-info" style="padding: 1.5rem;">
+                    <h3>Nostrils</h3>
+                    <p>Adórnate con un hermoso Nostril de Titanio</p>
+                    <a href="{{ url_for('joyas', category='Nostril') }}" class="btn btn-category">Ver en tienda</a>
+                </div>
+            </div>
+
+            <!-- Categoría 3: Aros -->
+            <div class="category-card" style="background-image: url('{{ url_for('static', filename='img/products/aros/0.8mm/foto 1.webp') }}');">
+                <div class="category-info" style="padding: 1.5rem;">
+                    <h3>Gemas y flats</h3>
+                    <p>Adórnate con hermosas joyas de titanio rosca interna</p>
+                    <a href="{{ url_for('joyas', category='Aros') }}" class="btn btn-category">Ver en tienda</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+        <div class="testimonials-grid">
+            <article class="testimonial-card">
+                <p>"¡La mejor experiencia! Súper profesional, todo muy limpio y la joya de titanio es hermosa. Cero problemas con la cicatrización. ¡Totalmente recomendado!"</p>
+                <footer class="testimonial-author">- Camila R.</footer>
+            </article>
+            <article class="testimonial-card">
+                <p>"Tenía muchas dudas sobre mi primer piercing en el cartílago, pero aquí me asesoraron con paciencia y me explicaron todo el proceso. Me sentí muy segura."</p>
+                <footer class="testimonial-author">- Javier M.</footer>
+            </article>
+            <article class="testimonial-card">
+                <p>"La calidad de las joyas es increíble. Compré un labret anodizado y el color es espectacular. Se nota la diferencia del titanio grado implante."</p>
+                <footer class="testimonial-author">- Sofia L.</footer>
+            </article>
+        </div>
+    </section>
+{% endblock %}

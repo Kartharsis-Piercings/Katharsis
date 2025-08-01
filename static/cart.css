@@ -1,0 +1,527 @@
+/* cart.css */
+.cart-section {
+    padding: 2rem 5%;
+    background: #0f0f0f;
+    min-height: 80vh;
+}
+
+.cart-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 0rem;
+    border-bottom: 1px solid #333;
+}
+
+.cart-header h1 {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.cart-steps {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.step {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: #252525;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.step.active {
+    background: #84529C;
+    color: white;
+    font-weight: bold;
+}
+
+.cart-grid {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 2rem;
+}
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cart-item {
+    display: flex;
+    background: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cart-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.item-image {
+    width: 160px;
+    height: 170px;
+    overflow: hidden;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-details {
+    flex: 1;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item-details h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.item-variant {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.item-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quantity-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #333;
+    border: none;
+    color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.quantity-btn:hover {
+    background: #444;
+}
+
+.quantity {
+    width: 30px;
+    text-align: center;
+}
+
+.item-price {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.item-remove {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: #ff5252;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.cart-summary {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+.summary-card {
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.summary-card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.summary-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary-row.discount {
+    color: #4CAF50;
+}
+
+.summary-divider {
+    height: 1px;
+    background: #333;
+    margin: 0.5rem 0;
+}
+
+.summary-row.total {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+.coupon-section {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.coupon-section input {
+    flex: 1;
+    background: #252525;
+    border: 1px solid #333;
+    color: #f5f5f5;
+    padding: 0.8rem;
+    border-radius: 4px;
+}
+
+.coupon-section button {
+    background: #333;
+    color: #f5f5f5;
+    border: none;
+    padding: 0 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.shipping-section {
+    margin-bottom: 1.5rem;
+}
+
+.shipping-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.shipping-section select, input {
+    margin: 10px;
+    width: 100%;
+    background: #252525;
+    border: 1px solid #333;
+    color: #f5f5f5;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+
+/* --- ESTILOS PARA GRUPOS DE CHECKBOX PERSONALIZADOS --- */
+
+/* Contenedor principal para cada grupo de checkbox */
+.terms-agreement,
+.form-group-checkbox {
+    margin: 1rem 0;
+    padding: 0rem;
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+/* El checkbox personalizado (se aplica a ambos grupos) */
+.terms-agreement input[type="checkbox"],
+.form-group-checkbox input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #111;
+    border: 2px solid #555;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    flex-shrink: 0; /* Evita que el checkbox se encoja */
+}
+
+/* Efecto hover */
+.terms-agreement input[type="checkbox"]:hover,
+.form-group-checkbox input[type="checkbox"]:hover {
+    border-color: #84529C;
+}
+
+/* Estilo cuando está seleccionado */
+.terms-agreement input[type="checkbox"]:checked,
+.form-group-checkbox input[type="checkbox"]:checked {
+    background-color: #84529C;
+    border-color: #84529C;
+}
+
+/* La "palomita" o "check" con Font Awesome */
+.terms-agreement input[type="checkbox"]:checked::after,
+.form-group-checkbox input[type="checkbox"]:checked::after {
+    content: '\f00c'; /* Código del ícono de check de Font Awesome */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 14px;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* La etiqueta de texto */
+.terms-agreement label,
+.form-group-checkbox label {
+    color: #ccc;
+    font-size: 0.65rem;
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+/* El enlace dentro de los términos y condiciones */
+.terms-agreement .legal-link {
+    color: #84529C;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.terms-agreement .legal-link:hover {
+    color: #a372c2;
+    text-decoration: underline;
+}
+
+/* --- ESTILOS PARA EL BOTÓN DE PAGO (NORMAL Y DESHABILITADO) --- */
+#checkout-btn {
+    width: 100%;
+    padding: 1rem;
+    background: #84529C;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, opacity 0.3s;
+    margin: 1.5rem 0;
+}
+
+#checkout-btn:hover {
+    background: #6a3d7f;
+}
+
+/* ¡NUEVO! Estilo para cuando el botón está deshabilitado */
+#checkout-btn:disabled {
+    background: #5a4864; /* Un color más opaco */
+    opacity: 0.5;
+    cursor: not-allowed; /* Cambia el cursor para indicar que no es clickeable */
+}
+
+.save-cart {
+    display: flex;
+    justify-content: center;
+}
+
+.save-cart button {
+    text-align: center;
+    color: #84529C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+    margin: 5px;
+}
+
+.secure-checkout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: #4CAF50;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+/* Apariencia del modal */
+
+.modal-content {
+    background: #1a1a1a;
+    color: #f5f5f5;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: 2rem auto;
+    position: relative;
+}
+
+.span, strong {
+    color: #84529C;
+}
+
+.total-to-pay #modal-total-amount {
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Empty cart styles */
+.empty-cart {
+    text-align: center;
+    padding: 3rem;
+    background: #1a1a1a;
+    border-radius: 10px;
+    margin: 2rem 0;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    color: #84529C;
+    margin-bottom: 1.5rem;
+}
+
+.empty-cart h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.empty-cart p {
+    color: #aaa;
+    margin-bottom: 2rem;
+}
+
+.btn-primary {
+    background: #84529C;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+}
+
+.btn-secondary {
+    background: #333;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+/* Related products */
+.related-products {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #333;
+}
+
+.related-products h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .cart-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .cart-summary {
+        position: static;
+    }
+}
+
+@media (max-width: 600px) {
+    .cart-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .cart-steps {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 1rem;
+    }
+    
+    .cart-item {
+        flex-direction: column;
+    }
+    
+    .item-image {
+        width: 100%;
+        height: 200px;
+    }
+}
+
+.product-badges-cart {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem; /* Espacio para que no se pegue a los controles */
+}
+
+/* Reutilizamos los estilos de los badges que ya existen en Styles.css */
+.badge-new, .badge-sale {
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+}
+
+.badge-new {
+    background: #84529C;
+}
+
+.badge-sale {
+    background: #ff5252;
+}

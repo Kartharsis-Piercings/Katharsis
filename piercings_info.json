@@ -1,0 +1,85 @@
+{
+  "body_zones": [
+    {
+      "zone_id": "oreja",
+      "zone_name": "Oreja",
+      "zone_description": "Los piercings en la oreja son de los más populares y ofrecen una amplia variedad de estilos, desde el clásico lóbulo hasta opciones más audaces en el cartílago.",
+      "piercings": [
+        {
+          "id": "helix",
+          "name": "Piercing Helix",
+          "description": "El piercing Helix se realiza en el cartílago superior externo de la oreja. Es una opción muy versátil que permite usar aros, barbells curvos o labrets con hermosos tops decorativos.",
+          "images": [
+            "/static/img/piercings/helix_1.jpg",
+            "/static/img/piercings/helix_2.jpg"
+          ],
+          "details": {
+            "pain_level": "4/10 (Moderado)",
+            "healing_time": "6 a 12 meses",
+            "initial_jewelry": "Labret de titanio, Barbell recto"
+          },
+          "aftercare_tips": [
+            "Limpiar dos veces al día con solución salina estéril.",
+            "No dormir sobre el piercing durante la cicatrización inicial.",
+            "Evitar el contacto con productos para el cabello y cosméticos.",
+            "No girar ni mover la joya intencionadamente."
+          ],
+          "recommended_product_tags": ["labrets", "titanio", "aros"]
+        },
+        {
+          "id": "lobulo",
+          "name": "Piercing Lóbulo",
+          "description": "El piercing en el lóbulo es el más común y el de más rápida cicatrización. Es ideal para principiantes y permite una gran variedad de joyería casi desde el inicio.",
+          "images": [
+            "/static/img/piercings/lobulo_1.jpg"
+          ],
+          "details": {
+            "pain_level": "2/10 (Bajo)",
+            "healing_time": "6 a 8 semanas",
+            "initial_jewelry": "Cualquier joya de titanio de calibre adecuado"
+          },
+          "aftercare_tips": [
+            "Limpiar una o dos veces al día con solución salina.",
+            "Asegurarse de que los cierres de las joyas no estén demasiado apretados."
+          ],
+          "recommended_product_tags": ["labrets", "titanio"]
+        }
+      ]
+    },
+    {
+      "zone_id": "nariz",
+      "zone_name": "Nariz",
+      "zone_description": "Los piercings en la nariz, como el nostril o el septum, son una forma elegante de acentuar los rasgos faciales. Requieren un cuidado meticuloso para una buena cicatrización.",
+      "piercings": [
+        {
+          "id": "septum",
+          "name": "Piercing Septum",
+          "description": "Se realiza en el 'punto dulce' del tabique nasal. Su gran ventaja es que puede ocultarse fácilmente girando la joya hacia adentro. La cicatrización suele ser rápida si se realiza correctamente.",
+          "images": [],
+          "details": {
+            "pain_level": "5/10 (Moderado)",
+            "healing_time": "2 a 3 meses",
+            "initial_jewelry": "Circular barbell (herradura), Clicker de titanio"
+          },
+          "aftercare_tips": [
+            "Limpiar la zona con solución salina, evitando mover demasiado la joya.",
+            "Tener cuidado al sonarse la nariz."
+          ],
+          "recommended_product_tags": ["herraduras", "aros", "titanio"]
+        }
+      ]
+    }
+  ],
+  "important_info": [
+    {
+      "id": "cuidados_generales",
+      "title": "Cuidados Generales Post-Perforación",
+      "content": "El cuidado posterior es crucial para una cicatrización exitosa. Lava siempre tus manos antes de tocar el piercing. Usa únicamente solución salina estéril para la limpieza. Nunca uses alcohol, agua oxigenada o cremas antibióticas, ya que pueden irritar la herida y retrasar la cicatrización..."
+    },
+    {
+      "id": "materiales_seguros",
+      "title": "La Importancia de los Materiales Seguros",
+      "content": "El material de tu joya inicial es fundamental. El titanio de grado implante (ASTM F-136) es la mejor opción, ya que es hipoalergénico y biocompatible, minimizando el riesgo de reacciones alérgicas e infecciones. El acero quirúrgico puede contener níquel, un alérgeno común..."
+    }
+  ]
+}

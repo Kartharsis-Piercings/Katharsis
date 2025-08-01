@@ -1,0 +1,154 @@
+/* Estructura principal de la guía de piercings */
+.piercing-guide-container {
+    display: flex;
+    gap: 2.5rem;
+    padding: 3rem 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+/* Columna de navegación izquierda */
+.piercing-nav {
+    width: 25%;
+    position: sticky; /* ¡Magia! El índice se queda fijo al hacer scroll */
+    top: 100px; /* Distancia desde la parte superior */
+    align-self: flex-start;
+    background: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #2a2a2a;
+}
+
+.piercing-nav h3 {
+    color: #84529C;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 1rem;
+}
+
+.piercing-nav ul {
+    list-style: none;
+}
+
+.piercing-nav li a {
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    padding: 0.75rem 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.piercing-nav li a:hover {
+    background-color: #252525;
+    color: #fff;
+    transform: translateX(5px);
+}
+
+.nav-divider {
+    height: 1px;
+    background: #333;
+    margin: 1rem 0;
+}
+
+/* Columna de contenido derecha */
+.piercing-content {
+    width: 75%;
+}
+
+.content-section {
+    margin-bottom: 4rem;
+    /* Evita que el título quede oculto bajo el header al navegar desde el índice */
+    scroll-margin-top: 100px; 
+}
+
+.content-section > h2 {
+    font-size: 2.5rem;
+    color: #84529C;
+    margin-bottom: 0.5rem;
+}
+
+.zone-description {
+    font-size: 1.1rem;
+    color: #bbb;
+    margin-bottom: 2.5rem;
+    max-width: 80ch;
+}
+
+/* Estilo para cada artículo de piercing */
+.piercing-article {
+    background: #151515;
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border: 1px solid #2a2a2a;
+}
+
+.piercing-article h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.piercing-article h4 {
+    font-size: 1.2rem;
+    color: #84529C;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.piercing-main-content {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.piercing-info-text {
+    flex: 2;
+    min-width: 300px;
+}
+
+.piercing-images {
+    flex: 1;
+    display: flex;
+    gap: 1rem;
+    min-width: 200px;
+}
+
+.piercing-images img {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.piercing-details-list, .aftercare-list {
+    list-style: none;
+    line-height: 1.8;
+    margin-top: 1rem;
+}
+
+.piercing-details-list li i {
+    color: #84529C;
+    margin-right: 0.75rem;
+    width: 20px; /* Alinea los íconos */
+}
+
+/* Grid para productos relacionados */
+.related-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .piercing-guide-container {
+        flex-direction: column;
+    }
+    .piercing-nav, .piercing-content {
+        width: 100%;
+        position: static; /* Desactivar sticky en móviles */
+    }
+}

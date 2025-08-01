@@ -1,0 +1,10 @@
+# Entorno virtual de Python
+venv/
+*.pyc
+__pycache__/
+
+# Archivo de variables de entorno (¡MUY IMPORTANTE!)
+.env
+
+# Archivos de sesión de Flask
+session_data/

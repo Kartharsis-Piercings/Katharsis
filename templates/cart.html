@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+
+{% block title %}Carrito de Compras | Katharsis{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='cart.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="cart-section">
+    <div class="cart-container">
+        <div class="cart-header">
+            <h1><i class="fas fa-shopping-cart"></i> Tu Carrito</h1>
+            <div class="cart-steps">
+                <div class="step active">1. Carrito</div>
+                <div class="step">2. Información</div>
+                <div class="step">3. Pago</div>
+                <div class="step">4. Confirmación</div>
+            </div>
+        </div>
+
+        {% if cart['cart_items'] %}
+        <div class="cart-grid">
+            <div class="cart-items">
+                {# CORRECCIÓN 1: Usar cart['cart_items'] en lugar de cart['items'] #}
+                {% for item in cart['cart_items'] %}
+                <div class="cart-item" data-id="{{ item.product_id }}-{{ item.size }}">
+                    <div class="item-image">
+                        <img src="{{ item.image }}" alt="{{ item.name }}">
+                    </div>
+                    
+                    <div class="item-details">
+                        <h3>{{ item.name }}</h3>
+                         <p class="item-variant">
+                                Tamaño: {{ item.size }} | 
+                                Material: {{ item.full_product.material | capitalize }} | 
+                                Zona: {{ item.full_product.body_parts | join(', ') | capitalize }}
+                            </p>
+                        <div class="product-badges-cart">
+                            {% if item.full_product.is_new %}
+                                <span class="badge-new">Nuevo</span>
+                            {% endif %}
+                            {% if item.full_product.on_sale %}
+                                <span class="badge-sale">-{{ ((item.full_product.price - item.full_product.sale_price) / item.full_product.price * 100) | round | int }}%</span>
+                            {% endif %}
+                        </div>
+
+
+                        <div class="item-controls">
+                            <div class="quantity-control">
+                                <button class="quantity-btn minus" data-id="{{ item.product_id }}-{{ item.size }}">-</button>
+                                <span class="quantity">{{ item.quantity }}</span>
+                                <button class="quantity-btn plus" data-id="{{ item.product_id }}-{{ item.size }}">+</button>
+                            </div>
+                            
+                            <div class="item-price">
+                                S/ {{ (item.price * item.quantity) | number_format }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="item-remove" data-id="{{ item.product_id }}-{{ item.size }}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <div class="cart-summary">
+                <div class="summary-card">
+                    <h2>Resumen de Compra</h2>
+                    
+                    <div class="summary-items">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span class="subtotal">S/ {{ subtotal | number_format }}</span>
+                        </div>
+                        
+                        <div class="summary-row">
+                            <span>Envío</span>
+                            <span id="shipping-cost-display">S/ {{ cart.shipping_cost | number_format }}</span>
+                        </div>
+
+                        {% if promo_message %}
+                        <div class="summary-row promo-message">
+                            <span>🎉</span>
+                            <span class="promo-text">{{ promo_message }}</span>
+                        </div>
+                        {% endif %}
+                        
+                        {% if coupon %}
+                        <div class="summary-row discount">
+                            <span>Descuento ({{ coupon.code }})</span>
+                            <span>
+                                {% if coupon.type == 'percentage' %}
+                                -{{ coupon.discount }}%
+                                {% else %}
+                                -S/ {{ coupon.discount | number_format }}
+                                {% endif %}
+                            </span>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="summary-divider"></div>
+                        
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span class="total">S/ {{ total | number_format }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="coupon-section">
+                        <input type="text" id="coupon-input" placeholder="Código de descuento">
+                        <button id="apply-coupon">Aplicar</button>
+                    </div>
+                    
+                    <div class="shipping-section">
+                        <h3><i class="fas fa-truck"></i> Detalles de Envío</h3>
+                        
+                        <div class="form-group">
+                            <label for="shipping-name">Nombre Completo</label>
+                            <input type="text" id="shipping-name" name="full_name" placeholder="Ej: Alexia Pérez">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shipping-dni">DNI</label>
+                            <input type="text" id="shipping-dni" name="dni" placeholder="Ej: 71234567">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shipping-region">Departamento</label>
+                            <select id="shipping-region" name="region">
+                                <option value="">Selecciona tu departamento</option>
+                                {% for region in regions %}
+                                <option value="{{ region }}" {% if cart.shipping_region == region %}selected{% endif %}>{{ region }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shipping-city">Ciudad / Provincia</label>
+                            <input type="text" id="shipping-city" name="city" placeholder="Ej: Lima">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shipping-address">Dirección de Envío</label>
+                            <input type="text" id="shipping-address" name="address" placeholder="Ej: Av. Principal 123, Dpto. 401">
+                        </div>
+                        
+                         <div class="form-group">
+                            <label for="shipping-phone">Número de Celular</label>
+                            <input type="tel" id="shipping-phone" name="phone" placeholder="Ej: 987654321" required>
+                        </div>
+                        <div class="form-group-checkbox">
+                            <input type="checkbox" id="whatsapp-consent-purchase" name="whatsapp_consent_purchase" checked>
+                            <label for="whatsapp-consent-purchase">Acepto que se me envíen los datos de mi compra al WhatsApp del número proporcionado.</label>
+                        </div>
+
+                        <div class="form-group-checkbox">
+                            <input type="checkbox" id="whatsapp-consent-offers" name="whatsapp_consent_offers">
+                            <label for="whatsapp-consent-offers">Acepto recibir ofertas y promociones al WhatsApp del número proporcionado.</label>
+                        </div>
+                    </div>
+                    
+                    <div class="terms-agreement">
+                        <input type="checkbox" id="terms-checkbox" name="terms">
+                        <label for="terms-checkbox">
+                            He leído y acepto los 
+                            <a href="{{ url_for('terminos_y_condiciones') }}" target="_blank" class="legal-link">Términos y Condiciones</a>.
+                        </label>
+                    </div>
+
+                    <button id="checkout-btn" class="btn-primary">
+                        Continuar al pago
+                    </button>
+                    
+                    <div class="save-cart">
+                        <button id="save-cart-btn"><i class="far fa-bookmark"></i> Guardar carrito para después</button>
+                    </div>
+                
+                    <div class="secure-checkout">
+                        <i class="fas fa-lock"></i>
+                        <span>Compra segura - Datos protegidos</span>
+                    </div>
+                </div>
+            </div>
+        </div> {# <-- CORRECCIÓN 2: Se añade el </div> que cierra .cart-grid #}
+        {% else %}
+            <div class="empty-cart">
+                <div class="empty-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h2>Tu carrito está vacío</h2>
+                <p>Añade productos para comenzar tu compra</p>
+                <a href="{{ url_for('joyas') }}" class="btn-primary">Explorar productos</a>
+            </div>
+        {% endif %}
+        
+
+        <div class="empty-cart">
+            {% if session.get('saved_cart') %}
+            <div class="restore-cart-section">
+                <p>¿Quieres recuperar tu carrito guardado?</p>
+                <button id="restore-cart-btn" class="btn-secondary">Restaurar Carrito</button>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if recently_viewed %}
+        <div class="related-products">
+            <h2>Productos que podrían interesarte</h2>
+            <div class="products-grid">
+                {% for product in recently_viewed %}
+                <div class="product-card">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<div id="yape-payment-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <button class="close-modal-btn" id="close-yape-modal">&times;</button>
+        <div class="yape-modal-body">
+            <div class="yape-qr-section">
+                <h3>¡Último paso! Paga con Yape</h3>
+                <p>1. Escanea el código QR desde tu app Yape.</p>
+                <p>2. Asegúrate de pagar el monto exacto.</p>
+                <img src="../static/img/yape-QR.jpeg" alt="Código QR de Yape" class="yape-qr-image">
+                <div class="yape-info">
+                    <p>Si no puedes escanear el código, también puedes enviar el pago directamente a:</p>
+                    <p>Número: <strong>+51 922 207 389</strong></p> 
+                </div>
+            </div>
+            <div class="yape-verification-section">
+                <h3>Confirmación de Pago</h3>
+                <div class="total-to-pay">
+                    <span>Total a Pagar:</span>
+                    <strong id="modal-total-amount">S/ {{ total | number_format }}</strong>
+                </div>
+                <p class="verification-instructions">
+                    ¿Ya realizaste el pago?
+                    <br>
+                    <strong>Ingresa el código de operación de tu Yapeo</strong> para confirmar.
+                </p>
+                <form id="yape-verification-form">
+                    <div class="form-group">
+                        <label for="yape-code">Código de Operación Yape</label>
+                        <input type="text" id="yape-code" name="yape_code" placeholder="Ej: 1K4F6H8" required>
+                    </div>
+                    <button type="submit" class="btn-confirm-payment">Verificar y Finalizar Compra</button>
+                    <div id="verification-status" class="verification-status"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='cart.js') }}"></script>
+{% endblock %}

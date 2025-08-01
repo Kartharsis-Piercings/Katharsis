@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}Guía de Piercings | Katharsis{% endblock %}
+
+{% block extra_css %}
+    {# ¡Añadiremos un nuevo archivo CSS solo para esta página! #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='piercings.css') }}">
+{% endblock %}
+
+
+{% block content %}
+    <section class="hero" style="height: 60vh; background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), url('../static/img/hero-background.png') center calc(50% - 95px)/cover;">
+        <div class="hero-content">
+            <h1>Guía de Piercings</h1>
+            <p>Todo lo que necesitas saber para tu próxima perforación</p>
+        </div>
+    </section>
+
+    <div class="piercing-guide-container">
+        <aside class="piercing-nav">
+            <h3>Navegación</h3>
+            <ul>
+                {# Bucle para las zonas del cuerpo #}
+                {% for zone in piercings_data.body_zones %}
+                    <li><a href="#{{ zone.zone_id }}">{{ zone.zone_name }}</a></li>
+                {% endfor %}
+
+                {# Bucle para los datos importantes #}
+                {% if piercings_data.important_info %}
+                    <li class="nav-divider"></li>
+                    <li><a href="#datos-importantes">Datos Importantes</a></li>
+                {% endif %}
+            </ul>
+        </aside>
+
+        <main class="piercing-content">
+            {# --- SECCIÓN PARA ZONAS DEL CUERPO Y SUS PIERCINGS --- #}
+            {% for zone in piercings_data.body_zones %}
+                <section id="{{ zone.zone_id }}" class="content-section">
+                    <h2>{{ zone.zone_name }}</h2>
+                    <p class="zone-description">{{ zone.zone_description }}</p>
+
+                    {# Bucle para cada piercing dentro de una zona #}
+                    {% for piercing in zone.piercings %}
+                        <article class="piercing-article">
+                            <h3>{{ piercing.name }}</h3>
+                            <div class="piercing-main-content">
+                                <div class="piercing-info-text">
+                                    <p>{{ piercing.description }}</p>
+                                    <ul class="piercing-details-list">
+                                        <li><strong><i class="fas fa-bolt"></i> Nivel de Dolor:</strong> {{ piercing.details.pain_level }}</li>
+                                        <li><strong><i class="far fa-clock"></i> Cicatrización:</strong> {{ piercing.details.healing_time }}</li>
+                                        <li><strong><i class="fas fa-gem"></i> Joyería Inicial:</strong> {{ piercing.details.initial_jewelry }}</li>
+                                    </ul>
+                                </div>
+                                {% if piercing.images %}
+                                <div class="piercing-images">
+                                    {% for image in piercing.images %}
+                                        <img src="{{ url_for('static', filename=image.replace('/static/', '')) }}" alt="Ejemplo de {{ piercing.name }}">
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            <h4><i class="fas fa-medkit"></i> Consejos de Cuidado</h4>
+                            <ul class="aftercare-list">
+                                {% for tip in piercing.aftercare_tips %}
+                                    <li>{{ tip }}</li>
+                                {% endfor %}
+                            </ul>
+
+                            {# --- SECCIÓN DE PRODUCTOS RECOMENDADOS --- #}
+                            {% if piercing.recommended_products %}
+                                <h4><i class="fas fa-star"></i> Joyas Recomendadas</h4>
+                                <div class="related-products-grid">
+                                    {# Reutilizamos el diseño de las tarjetas de producto #}
+                                    {% for product in piercing.recommended_products %}
+                                        {% include 'product_card.html' %} {# Asumimos que tienes una plantilla para la tarjeta de producto #}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </article>
+                    {% endfor %}
+                </section>
+            {% endfor %}
+
+            {# --- SECCIÓN PARA DATOS IMPORTANTES --- #}
+            {% if piercings_data.important_info %}
+                <section id="datos-importantes" class="content-section">
+                    <h2>Datos Importantes</h2>
+                    {% for info in piercings_data.important_info %}
+                        <article class="piercing-article">
+                            <h3>{{ info.title }}</h3>
+                            <p>{{ info.content }}</p>
+                        </article>
+                    {% endfor %}
+                </section>
+            {% endif %}
+
+        </main>
+    </div>
+
+    {% block extra_js %}
+    <script src="{{ url_for('static', filename='catalog.js') }}"></script>
+    <script src="{{ url_for('static', filename='product_card.js') }}"></script>
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,152 @@
+/* static/servicios.css */
+
+.services-section {
+    padding: 3rem 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.service-card {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(132, 82, 156, 0.1);
+    border-color: #84529C;
+}
+
+/* Tarjeta destacada para el paquete */
+.service-card.featured {
+    background: linear-gradient(145deg, #2c1a3a, #1a1a1a);
+    border-color: #84529C;
+    transform: scale(1.03);
+}
+.service-card.featured:hover {
+    transform: scale(1.05) translateY(-8px);
+}
+
+
+.service-card i {
+    font-size: 2.5rem;
+    color: #84529C;
+    margin-bottom: 1.5rem;
+    width: fit-content;
+    transition: transform 0.3s ease;
+}
+
+.service-card i:hover {
+    transform: scale(1.1);
+    color: #f5f5f5; /* Cambia el color al pasar el mouse */
+}
+
+.service-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: #f5f5f5;
+}
+
+.service-card p {
+    color: #bbb;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1; /* Hace que el p ocupe el espacio para alinear botones */
+}
+
+.service-card ul {
+    list-style: none;
+    padding-left: 0;
+    color: #ccc;
+}
+
+.service-card ul li {
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+}
+
+.service-card ul li i.fa-check {
+    color: #4CAF50;
+    margin-right: 0.5rem;
+}
+
+/* Tarjetas más pequeñas para info rápida */
+.service-card.small-card {
+    text-align: center;
+    align-items: center;
+}
+
+.proximamente {
+    background: #84529C;
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* Contenedor de Llamada a la Acción (CTA) */
+.cta-container {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 3rem 2rem;
+    background: #151515;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+}
+
+.cta-container h2 {
+    font-size: 2rem;
+    color: #84529C;
+    margin-bottom: 1rem;
+}
+
+.cta-container p {
+    color: #bbb;
+    margin-bottom: 2rem;
+    max-width: 60ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-container .btn-primary {
+    font-size: 1.2rem;
+    padding: 1rem 2.5rem;
+}
+
+.cta-container .btn-primary i {
+    margin-right: 0.5rem;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    .service-card.featured {
+        transform: none; /* Reset en móvil para mejor layout */
+    }
+}
+@media (max-width: 480px) {
+    .service-card i {
+        font-size: 2rem; /* Ajustar iconos en móviles */
+    }
+    .service-card h3 {
+        font-size: 1.4rem; /* Ajustar títulos en móviles */
+    }
+    .cta-container h2 {
+        font-size: 1.8rem; /* Ajustar título CTA en móviles */
+    }
+}

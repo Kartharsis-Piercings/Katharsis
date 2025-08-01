@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+
+{% block title %}Joyas | Katharsis{% endblock %}
+
+
+{% block content %}
+    <section class="hero" style="height: 50vh; background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), url('../static/img/hero-background.png') center calc(50% - 95px)/cover;">
+        <div class="hero-content">
+            <h1>Nuestra Colección de Joyas</h1>
+            <p>Titanio grado implante - Seguridad y estilo en cada pieza</p>
+        </div>
+    </section>
+
+    <div class="catalog-container">
+        <!-- Filtros y controles -->
+        <aside class="catalog-filters">
+            <div class="filter-section">
+                <h3>Categorías</h3>
+                <ul class="filter-list">
+                    <li>
+                        <a href="{{ url_for('joyas', category='all', body_part=current_filters.body_part, material=current_filters.material, max_price=current_filters.max_price, sort_by=current_filters.sort_by) }}"
+                        class="{% if current_filters.category == 'all' %}filter-active{% endif %}">
+                            Todos
+                        </a>
+                    </li>
+                    {% for cat in categories %}
+                    <li>
+                        <a href="{{ url_for('joyas', category=cat.id, body_part=current_filters.body_part, material=current_filters.material, max_price=current_filters.max_price, sort_by=current_filters.sort_by) }}"
+                        class="{% if current_filters.category == cat.id|string %}filter-active{% endif %}">
+                            {{ cat.name }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="filter-section">
+                <h3>Zona del cuerpo</h3>
+                <ul class="filter-list">
+                    <li>
+                        <a href="{{ url_for('joyas', body_part='all', category=current_filters.category, material=current_filters.material, max_price=current_filters.max_price, sort_by=current_filters.sort_by) }}"
+                        class="{% if current_filters.body_part == 'all' %}filter-active{% endif %}">
+                            Todos
+                        </a>
+                    </li>
+                    {% for part in body_parts %}
+                    <li>
+                        <a href="{{ url_for('joyas', body_part=part.id, category=current_filters.category, material=current_filters.material, max_price=current_filters.max_price, sort_by=current_filters.sort_by) }}"
+                        class="{% if current_filters.body_part == part.id %}filter-active{% endif %}">
+                            {{ part.name }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="filter-section">
+                <h3>Material</h3>
+                <ul class="filter-list">
+                    <li>
+                        <a href="{{ url_for('joyas', material='all', category=current_filters.category, body_part=current_filters.body_part, max_price=current_filters.max_price, sort_by=current_filters.sort_by) }}"
+                        class="{% if current_filters.material == 'all' %}filter-active{% endif %}">
+                            Todos
+                        </a>
+                    </li>
+                    {% for mat in materials %}
+                    <li>
+                        <a href="{{ url_for('joyas', material=mat.id, category=current_filters.category, body_part=current_filters.body_part, max_price=current_filters.max_price, sort_by=current_filters.sort_by) }}"
+                        class="{% if current_filters.material == mat.id %}filter-active{% endif %}">
+                            {{ mat.name }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <div class="filter-section">
+                <h3>Precio</h3>
+                <form method="GET" action="{{ url_for('joyas') }}" id="price-filter-form">
+                    <input type="hidden" name="category" value="{{ current_filters.category }}">
+                    <input type="hidden" name="body_part" value="{{ current_filters.body_part }}">
+                    <input type="hidden" name="material" value="{{ current_filters.material }}">
+                    <input type="hidden" name="sort_by" value="{{ current_filters.sort_by }}">
+                    
+                    <div class="price-range">
+                        <input type="range" min="0" max="300" step="10" value="{{ current_filters.max_price }}" class="price-slider"
+                            name="max_price" id="price-slider">
+                        <div class="price-values">
+                            <span>S/ 0</span>
+                            <span>S/ <span id="max-price-display">{{ current_filters.max_price | number_format }}</span></span>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-apply-filters">Aplicar Filtros</button>
+                </form>
+            </div>
+            
+            <a href="{{ url_for('joyas') }}" class="btn-clear-filters">Limpiar Filtros</a>
+        </aside>
+        
+        <!-- Productos -->
+        <main class="catalog-products">
+            <div class="catalog-controls">
+                <div class="sort-options">
+                    <span>Ordenar por:</span>
+                    <select id="sort-select">
+                        <option value="popular" {% if sort_by == 'popular' %}selected{% endif %}>Más populares</option>
+                        <option value="price_asc" {% if sort_by == 'price_asc' %}selected{% endif %}>Precio: menor a mayor</option>
+                        <option value="price_desc" {% if sort_by == 'price_desc' %}selected{% endif %}>Precio: mayor a menor</option>
+                        <option value="newest" {% if sort_by == 'newest' %}selected{% endif %}>Más nuevos</option>
+                    </select>
+                </div>
+                
+                <div class="view-options">
+                    <button class="view-btn grid-view active"><i class="fas fa-th"></i></button>
+                    <button class="view-btn list-view"><i class="fas fa-list"></i></button>
+                </div>
+            </div>
+            
+            <div class="products-grid">
+                {% if products %}
+                    {% for product in products %}
+                    <div class="product-card">
+                        <div class="product-image">
+                            <a href="{{ url_for('product_detail', product_id=product.id) }}">
+                                <img src="{{ url_for('static', filename=product.images[0]) }}" alt="{{ product.name }}">
+                                {% if product.images|length > 1 %}
+                                <div class="additional-images">
+                                    {% for i in range(1, product.images|length) %}
+                                        {% if i <= 2 %} {# Mostrar hasta 2 imágenes adicionales #}
+                                        <img src="{{ url_for('static', filename=product.images[i]) }}" alt="{{ product.name }} vista {{ i+1 }}">
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if product.images|length > 3 %}
+                                    <span class="more-images">+{{ product.images|length - 3 }}</span>
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+                            </a>
+                            <div class="product-badges">
+                                {% if product.is_new %}<span class="badge-new">Nuevo</span>{% endif %}
+                                {% if product.on_sale %}<span class="badge-sale">-{{ ((product.price - product.sale_price) / product.price * 100) | round | int }}%</span>{% endif %}
+                            </div>
+                            <button class="quick-view" data-product-id="{{ product.id }}">Vista rápida</button>
+                        </div>
+                        <div class="product-info">
+                            <h3><a href="{{ url_for('product_detail', product_id=product.id) }}">{{ product.name }}</a></h3>
+                            <p class="product-category">{{ product.category | capitalize }}</p>
+                            <div class="product-price">
+                                {% if product.on_sale %}
+                                <span class="current-price">S/ {{ product.sale_price | number_format }}</span>
+                                <span class="old-price">S/ {{ product.price | number_format }}</span>
+                                {% else %}
+                                <span class="current-price">S/ {{ product.price | number_format }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="product-actions">
+                                <form method="POST" action="{{ url_for('add_to_cart') }}">
+                                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                                    <select name="size" class="size-select" required>
+                                        <option value="" disabled selected>Selecciona tamaño</option>
+                                        {% for size in product.sizes %}
+                                        <option value="{{ size }}">{{ size }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="btn-add-cart">Añadir al carrito</button>
+                                </form>
+                                <button class="btn-wishlist" data-product-id="{{ product.id }}">
+                                    {% if product.id in wishlist %}
+                                        <i class="fas fa-heart" style="color: #ff5252;"></i>
+                                    {% else %}
+                                        <i class="far fa-heart"></i>
+                                    {% endif %}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <div class="no-products">
+                    <p>No se encontraron productos con los filtros seleccionados.</p>
+                    <a href="{{ url_for('joyas') }}" class="btn-clear">Ver todos los productos</a>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Paginación -->
+            {% if total_pages > 1 %}
+            <div class="pagination">
+                {# Botón 'Anterior' #}
+                {% if page > 1 %}
+                <a href="{{ url_for('joyas', 
+                    page=page-1, 
+                    category=current_filters.category, 
+                    body_part=current_filters.body_part,
+                    material=current_filters.material, 
+                    max_price=current_filters.max_price, 
+                    sort_by=current_filters.sort_by) }}" 
+                class="prev"><i class="fas fa-chevron-left"></i></a>
+                {% endif %}
+                
+                {# Números de página #}
+                {% for p in range(1, total_pages + 1) %}
+                <a href="{{ url_for('joyas', 
+                    page=p, 
+                    category=current_filters.category, 
+                    body_part=current_filters.body_part,
+                    material=current_filters.material, 
+                    max_price=current_filters.max_price, 
+                    sort_by=current_filters.sort_by) }}" 
+                class="page {% if p == page %}active{% endif %}">{{ p }}</a>
+                {% endfor %}
+                
+                {# Botón 'Siguiente' #}
+                {% if page < total_pages %}
+                <a href="{{ url_for('joyas', 
+                    page=page+1, 
+                    category=current_filters.category, 
+                    body_part=current_filters.body_part,
+                    material=current_filters.material, 
+                    max_price=current_filters.max_price, 
+                    sort_by=current_filters.sort_by) }}" 
+                class="next"><i class="fas fa-chevron-right"></i></a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </main>
+    </div>
+
+    <!-- Modal Vista Rápida -->
+    <div class="quick-view-modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="modal-product">
+                <!-- Contenido dinámico será insertado por JavaScript -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Función para validar selección de tamaño
+function validateSize(form) {
+    const sizeSelect = form.querySelector('select[name="size"]');
+    if (!sizeSelect.value) {
+        alert("Por favor selecciona un tamaño");
+        return false;
+    }
+    return true;
+}
+
+// Asignar la validación a todos los formularios
+document.querySelectorAll('.add-to-cart-form').forEach(form => {
+    form.onsubmit = function() {
+        return validateSize(this);
+    };
+});
+</script>
+<script src="{{ url_for('static', filename='catalog.js') }}"></script>
+{% endblock %}
+

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}Términos y Condiciones | Katharsis{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='terminos.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="legal-section">
+    <div class="legal-container">
+        <div class="legal-header">
+            <h1>Términos y Condiciones</h1>
+            <p>Fecha de última actualización: 16 de julio de 2025</p>
+        </div>
+
+        <article class="legal-article">
+            <p>Bienvenido/a a Katharsis Piercing. Al navegar por nuestro sitio web y/o realizar una compra, aceptas y estás sujeto/a a los siguientes términos y condiciones. Por favor, léelos con atención.</p>
+        </article>
+        
+        <article class="legal-article">
+            <h2>1. Políticas Operativas</h2>
+
+            <h4>1.1. Política de Envíos</h4>
+            <p>Nos comprometemos a que recibas tus joyas de la manera más rápida y segura posible. Gestionamos nuestros envíos bajo las siguientes modalidades:</p>
+            <ul>
+                <li><strong>Zona 1: Delivery Local (Tarapoto, Morales y Banda de Shilcayo)</strong><br>
+                    Costo: ¡Gratuito!<br>
+                    Tiempo de Entrega: Entre 12 y 24 horas, previa coordinación de horario contigo vía WhatsApp.</li>
+                <li><strong>Zona 2: Envíos Regionales (Demás distritos de la Región San Martín)</strong><br>
+                    Costo: Determinado por la tarifa de la empresa de transporte regional (ej: Móvil Tours, etc.), la cual será comunicada para tu aprobación antes del envío.<br>
+                    Tiempo de Entrega: Entre 24 y 48 horas tras la confirmación del pago.</li>
+                <li><strong>Zona 3: Envíos Nacionales (Resto de Regiones del Perú)</strong><br>
+                    Costo: Determinado por la tarifa de Shalom u Olva Courier, la cual será comunicada para tu aprobación.<br>
+                    Tiempo de Entrega: Entre 48 y 72 horas (días hábiles) tras la confirmación del pago.</li>
+            </ul>
+            <p><strong>Responsabilidad del Cliente:</strong> Es responsabilidad del cliente proporcionar una dirección de entrega correcta y completa. Para los envíos mediante courier, se proporcionará un número de seguimiento. Aclararemos próximamente la política a seguir en caso de ausencia en el domicilio.</p>
+
+            <h4>1.2. Atención al Cliente</h4>
+            <p>Para cualquier consulta, coordinación o soporte, puedes contactarnos a través de nuestro WhatsApp, el formulario de contacto de esta web o por mensaje directo en nuestras redes sociales. Nuestro horario de atención es de Lunes a Sábado, de 10:00 AM a 8:00 PM.</p>
+            
+            <h4>1.3. Métodos de Pago</h4>
+            <p>Actualmente, todas las compras se procesan a través de la aplicación Yape. Para confirmar tu pedido, es indispensable que, al finalizar el proceso de pago en nuestra web, ingreses el código de operación único que genera la aplicación Yape para tu transacción. No almacenamos los datos de tu transacción; el código se utiliza una única vez para verificar el pago.</p>
+        </article>
+
+        <article class="legal-article">
+            <h2>2. Textos Legales y Regulatorios</h2>
+
+            <h4>2.1. Política de Devoluciones y Cambios</h4>
+            <p>De acuerdo con el Código de Protección y Defensa del Consumidor, detallamos nuestra política:</p>
+            <ul>
+                <li><strong>Para Joyería Corporal de Piercing:</strong> Por motivos de salud, seguridad e higiene, y en concordancia con la normativa sanitaria, no se aceptan devoluciones ni cambios de joyería corporal (piercings) una vez que el empaque sellado de esterilización ha sido abierto o si la joya ha sido utilizada.</li>
+                <li><strong>Excepciones (Defectos o Errores):</strong> Se considerará un cambio si el producto presenta un defecto de fábrica evidente o si has recibido un producto equivocado. En tales casos, deberás contactarnos dentro de un plazo máximo de 48 horas tras haber recibido el pedido, enviando evidencia fotográfica del producto sin retirar de su empaque sellado original.</li>
+            </ul>
+
+            <h4>2.2. Política de Privacidad y Uso de Datos Personales (Ley N° 29733)</h4>
+            <p><strong>Identidad del Responsable:</strong> Katharsis Piercing, representado por Edgar Arturo Chumbe Portocarrero, con [Número de RUC/RUS].</p>
+            <p><strong>Finalidad:</strong> Tus datos (nombre, DNI, dirección, teléfono, email) son utilizados exclusivamente para procesar y enviar tu pedido, y para responder a tus consultas. Solo si marcas activamente la casilla de consentimiento, conservaremos ciertos datos para informarte sobre futuras promociones.</p>
+            <p><strong>Transferencia a Terceros:</strong> Tus datos de contacto se compartirán con las empresas de courier para poder realizar la entrega.</p>
+            <p><strong>Derechos ARCO:</strong> Tienes derecho a solicitar el Acceso, Rectificación, Cancelación y Oposición sobre tus datos. Para ello, envía una solicitud al correo electrónico katharsis.piercings@gmail.com o a nuestras redes sociales, adjuntando su nombre completo y Codigo de Seguridad del movimiento de Yape.</p>
+
+            <h4>2.3. Política de Cookies</h4>
+            <p>Nuestro sitio utiliza cookies esenciales para el funcionamiento del carrito de compras (cookie de sesión) y cookies de terceros para el funcionamiento del mapa interactivo (Google Maps). Puedes gestionar estas cookies desde la configuración de tu navegador.</p>
+        </article>
+        
+        <article class="legal-article">
+            <h2>3. Libro de Reclamaciones</h2>
+            <p>Conforme a lo establecido en el Código de Protección y Defensa del Consumidor, esta tienda cuenta con un Libro de Reclamaciones Virtual a tu disposición.</p>
+            <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdPpBcxoCtJalYDdM863tTpZatymRqT4wK4ENE8SyKzHDlGgQ/viewform?usp=dialog" target="_blank" class="legal-link">Haz clic aquí para acceder al Libro de Reclamaciones</a></p>
+        </article>
+
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}Servicios | Katharsis{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='servicios.css') }}">
+{% endblock %}
+
+{% block content %}
+    <section class="hero" style="height: 50vh; background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), url('../static/img/hero-background.png') center calc(50% - 95px)/cover;">
+        <div class="hero-content">
+            <h1>Servicios Profesionales</h1>
+            <p>Calidad, seguridad y estilo en cada procedimiento.</p>
+        </div>
+    </section>
+
+    <section class="services-section">
+        <div class="services-grid">
+
+            <article class="service-card">
+                <i class="fas fa-star"></i>
+                <h3> Piercings Profesionales</h3>
+                <p>Perforaciones seguras y precisas con técnicas de asepsia y materiales esterilizados. Tu seguridad es nuestra prioridad.</p>
+                <ul>
+                    <li><strong>Áreas:</strong> Nostril, Septum, Ombligo, Helix, Lóbulo, Tragus, Flat y más.</li>
+                    <li><strong>Material Incluido:</strong> Joya de Titanio Grado Implante ASTM F-136.</li>
+                    <li><strong>Joya Propia:</strong> Permitida si es Titanio o Oro 18k (grosor 1.0/1.2mm).</li>
+                    <li><strong>Duración:</strong> 15-30 min de atención personalizada.</li>
+                </ul>
+            </article>
+
+            <article class="service-card featured">
+                <i class="fas fa-box-open"></i>
+                <h3> Paquete Piercing + Joya</h3>
+                <p>La experiencia completa. Llévate tu perforación, una Joya de titanio y un Kit de Limpieza para un Cuidado Perfecto desde el día uno.</p>
+                <ul>
+                    <li><i class="fas fa-check"></i> Perforación Profesional.</li>
+                    <li><i class="fas fa-check"></i> Joya de Titanio Grado Implante.</li>
+                    <li><i class="fas fa-check"></i> <strong>Kit de Limpieza de Regalo</strong></li>
+                </ul>
+            </article>
+
+            <article class="service-card">
+                <i class="fas fa-palette"></i>
+                <h3> Anodizado de Joyas</h3>
+                <p>Dale un color único a tus piezas de titanio. Personaliza tu estilo con nuestra paleta de 26 colores vibrantes, o atrevete con un diseño más único </p>
+                <ul>
+                    <li><strong>Gratis:</strong> En la compra de tu joya de titanio (color entero).</li>
+                    <li><strong>Con costo:</strong> Para piezas externas o diseños avanzados (patrones).</li>
+                    <li><strong class="proximamente">Próximamente:</strong> Asesoría de estilo para combinaciones.</li>
+                </ul>
+            </article>
+
+            <article class="service-card">
+                <i class="fas fa-hand-holding-medical"></i>
+                <h3> Seguimiento Post-Perforación</h3>
+                <p>No te dejamos solo/a. Te acompañamos durante toda la cicatrización para asegurar los mejores resultados.</p>
+                <ul>
+                    <li><strong>Revisiones Gratuitas:</strong> Check-in a los 7 días y seguimiento vía mensaje.</li>
+                    <li><strong>Downsize Profesional:</strong> Cambio de barra sin costo al mes de la perforación.</li>
+                </ul>
+            </article>
+
+            <article class="service-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3> Seguridad y Certificaciones</h3>
+                <p>Garantía de profesionalismo avalado por formación y protocolos clínicos de primer nivel.</p>
+                <ul>
+                    <li><strong>Formación:</strong> Personal Capacitados con Estudios Superiores</li>
+                    <li><strong>Materiales:</strong> Herramientas y Materiales Esterilizados</li>
+                    <li><strong>Esterilización:</strong> Joyas procesadas en autoclave para máxima seguridad.</li>
+                </ul>
+            </article>
+            
+            <article class="service-card">
+                <i class="fas fa-truck"></i>
+                <h3> Extras y Experiencia Premium</h3>
+                <p>Servicios pensados para ofrecerte una experiencia superior y personalizada donde estés.</p>
+                <ul>
+                    <li><strong>Servicio a Domicilio:</strong> Delivery gratuito dentro de Tarapoto (zonas céntricas).</li>
+                </ul>
+            </article>
+
+
+            <article class="service-card small-card">
+                <i class="fas fa-calendar-check"></i>
+                <h3>Reserva de Citas</h3>
+                <p>Asegura tu espacio vía WhatsApp con un adelanto de S/10.</p>
+            </article>
+
+            <article class="service-card small-card">
+                 <i class="fas fa-credit-card"></i>
+                <h3>Facilidades de Pago</h3>
+                <p>Tarifas claras y opciones de financiamiento para correcciones de piercings.</p>
+            </article>
+
+            <article class="service-card small-card">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Limitaciones</h3>
+                <p>Por tu seguridad, no realizamos piercings Smile, Snake Eyes o en genitales.</p>
+            </article>
+        </div>
+
+        <div class="cta-container">
+            <h2>¿Lista/o para tu nuevo piercing?</h2>
+            <p>Contáctame por WhatsApp para resolver tus dudas y agendar tu cita. ¡Te espero!</p>
+            <a href="https://wa.me/51936215481?text=Hola,%20quisiera%20reservar%20una%20cita%20para%20un%20piercing." class="btn btn-primary" target="_blank">
+                <i class="fab fa-whatsapp"></i> Reservar mi Cita
+            </a>
+        </div>
+    </section>
+{% endblock %}

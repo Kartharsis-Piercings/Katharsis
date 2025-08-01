@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} | Katharsis{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='product_detail.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="product-detail-section">
+    <div class="container">
+        <div class="product-detail-container">
+            <!-- Galería de imágenes -->
+            <div class="product-gallery">
+                <div class="main-image">
+                    <img src="{{ url_for('static', filename=product.images[0]) }}" alt="{{ product.name }}" id="main-product-image">
+                </div>
+                <div class="thumbnails">
+                    {% for image in product.images %}
+                    <img src="{{ url_for('static', filename=image) }}" 
+                         alt="{{ product.name }} vista {{ loop.index }}"
+                         class="{% if loop.first %}active{% endif %}"
+                         data-image="{{ url_for('static', filename=image) }}">
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- Información del producto -->
+            <div class="product-info">
+                <h1>{{ product.name }}</h1>
+                
+                <div class="product-meta">
+                    <span class="category">{{ product.category | capitalize }}</span>
+                    <span class="material">{{ product.material | capitalize }}</span>
+                    {% if product.is_new %}<span class="badge-new">Nuevo</span>{% endif %}
+                </div>
+                
+                <div class="product-price">
+                    {% if product.on_sale %}
+                    <span class="current-price">S/ {{ product.sale_price | number_format }}</span>
+                    <span class="old-price">S/ {{ product.price | number_format }}</span>
+                    <span class="discount">-{{ ((product.price - product.sale_price) / product.price * 100) | round | int }}%</span>
+                    {% else %}
+                    <span class="current-price">S/ {{ product.price | number_format }}</span>
+                    {% endif %}
+                </div>
+                
+                <div class="product-description">
+                    <p>{{ product.description }}</p>
+                </div>
+                
+                <form method="POST" action="{{ url_for('add_to_cart') }}" class="add-to-cart-form">
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    
+                    <div class="form-group">
+                        <label for="size">Tamaño:</label>
+                        <select name="size" id="size" required>
+                            <option value="" disabled selected>Selecciona tamaño</option>
+                            {% for size in product.sizes %}
+                            <option value="{{ size }}">{{ size }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quantity">Cantidad:</label>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus">-</button>
+                            <input type="number" name="quantity" id="quantity" value="1" min="1" max="10">
+                            <button type="button" class="quantity-btn plus">+</button>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-add-cart">Añadir al carrito</button>
+                </form>
+                
+                <div class="product-specs">
+                    <h3>Especificaciones</h3>
+                    <ul>
+                        <li><strong>Material:</strong> {{ product.material | capitalize }}</li>
+                        <li><strong>Rosca:</strong> Interna</li>
+                        <li><strong>Garantía:</strong> 1 año contra defectos de fabricación</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Productos relacionados -->
+        {% if related_products %}
+        <div class="related-products">
+            <h2>Productos Relacionados</h2>
+            <div class="products-grid">
+                {% for product in related_products %}
+                <div class="product-card">
+                    <div class="product-image">
+                        <a href="{{ url_for('product_detail', product_id=product.id) }}">
+                            <img src="{{ url_for('static', filename=product.images[0]) }}" alt="{{ product.name }}">
+                        </a>
+                        <div class="product-badges">
+                            {% if product.is_new %}<span class="badge-new">Nuevo</span>{% endif %}
+                            {% if product.on_sale %}<span class="badge-sale">-{{ ((product.price - product.sale_price) / product.price * 100) | round | int }}%</span>{% endif %}
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3><a href="{{ url_for('product_detail', product_id=product.id) }}">{{ product.name }}</a></h3>
+                        <p class="product-category">{{ product.category | capitalize }}</p>
+                        <div class="product-price">
+                            {% if product.on_sale %}
+                            <span class="current-price">S/ {{ product.sale_price | number_format }}</span>
+                            <span class="old-price">S/ {{ product.price | number_format }}</span>
+                            {% else %}
+                            <span class="current-price">S/ {{ product.price | number_format }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Galería de imágenes
+document.querySelectorAll('.thumbnails img').forEach(thumb => {
+    thumb.addEventListener('click', function() {
+        const mainImage = document.getElementById('main-product-image');
+        mainImage.src = this.getAttribute('data-image');
+        
+        // Actualizar clase activa
+        document.querySelectorAll('.thumbnails img').forEach(img => {
+            img.classList.remove('active');
+        });
+        this.classList.add('active');
+    });
+});
+
+// Controles de cantidad
+document.querySelector('.quantity-btn.plus').addEventListener('click', () => {
+    const input = document.getElementById('quantity');
+    input.value = parseInt(input.value) + 1;
+});
+
+document.querySelector('.quantity-btn.minus').addEventListener('click', () => {
+    const input = document.getElementById('quantity');
+    if (parseInt(input.value) > 1) {
+        input.value = parseInt(input.value) - 1;
+    }
+});
+
+// --- AÑADIR AL CARRITO CON AJAX ---
+document.querySelector('.add-to-cart-form').addEventListener('submit', async function(e) {
+    e.preventDefault(); // Prevenimos la recarga de la página
+
+    const form = this;
+    const btn = form.querySelector('.btn-add-cart');
+    const sizeSelect = form.querySelector('select[name="size"]');
+
+    // Validación simple
+    if (!sizeSelect.value) {
+        alert('Por favor, selecciona un tamaño.');
+        return;
+    }
+
+    // Guardamos el estado original del botón
+    const originalText = btn.textContent;
+    const originalBg = btn.style.backgroundColor;
+
+    // Mostramos feedback visual en el botón
+    btn.textContent = '✓ Añadido';
+    btn.style.backgroundColor = '#4CAF50'; // Verde éxito
+    btn.disabled = true;
+
+    try {
+        const formData = new FormData(form);
+        const response = await fetch("{{ url_for('add_to_cart') }}", {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.status === 'success') {
+            // Actualizamos el contador del carrito en el header
+            const cartCountEl = document.querySelector('.cart-count');
+            if (cartCountEl) {
+                const currentCount = parseInt(cartCountEl.textContent) || 0;
+                const quantityAdded = parseInt(formData.get('quantity')) || 1;
+                cartCountEl.textContent = currentCount + quantityAdded;
+                cartCountEl.classList.add('animate'); // Animación de pulso
+                setTimeout(() => cartCountEl.classList.remove('animate'), 500);
+            }
+        } else {
+            alert(data.message || 'Hubo un error al añadir el producto.');
+        }
+
+    } catch (error) {
+        console.error('Error al añadir al carrito:', error);
+        alert('Error de conexión. Inténtalo de nuevo.');
+    } finally {
+        // Restauramos el botón después de un par de segundos
+        setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.backgroundColor = originalBg;
+            btn.disabled = false;
+        }, 2000);
+    }
+});
+
+</script>
+{% endblock %}

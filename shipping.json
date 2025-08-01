@@ -1,0 +1,30 @@
+{
+  "promotions": [
+    {
+      "id": "inauguracion_gratis",
+      "name": "¡Envío Gratis por Inauguración!",
+      "active": false,
+      "type": "free_shipping",
+      "conditions": {
+        "min_cart_total": 0
+      }
+    },
+    {
+      "id": "envio_gratis_compras_altas",
+      "name": "Envío Gratis en compras superiores a S/ 200",
+      "active": false,
+      "type": "free_shipping",
+      "conditions": {
+        "min_cart_total": 200
+      }
+    }
+  ],
+  "costs_by_region": {
+    "Lima": 10.00,
+    "Callao": 10.00,
+    "Arequipa": 15.00,
+    "La Libertad": 15.00,
+    "Cusco": 20.00,
+    "default": 20.00
+  }
+}

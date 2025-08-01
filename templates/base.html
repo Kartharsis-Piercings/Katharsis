@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="SameSite" content="Lax">
+    <title>{% block title %}Katharsis{% endblock %}</title>
+    <link rel="icon" href="../static/img/favicon.png" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    {% block extra_head %}{% endblock %}
+        
+        <!--  Facebook Pixel Code -->
+        <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '143310052198622');
+        fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=143310052198622&ev=PageView&noscript=1"
+        /></noscript>
+        <!-- End Facebook Pixel Code -->
+
+        <!-- Google Analytics Manager -->
+
+        <!-- End Google Analytics Manager -->
+    {# Bloque para estilos CSS adicionales de páginas específicas #}
+    {% block extra_css %}{% endblock %}
+    
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('index') }}" class="logo">
+            <img src="../static/img/logo.png" style="height: 135%; max-height: 150px;">
+        </a>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <nav class="nav-links" id="nav-links">
+            <a href="{{ url_for('index') }}">Inicio</a>
+            <a href="{{ url_for('joyas') }}">Joyas</a>
+            <a href="{{ url_for('piercings') }}">Piercings</a>
+            <a href="{{ url_for('servicios') }}">Servicios</a>
+            <a href="{{ url_for('contacto') }}">Contacto</a>
+            <a href="{{ url_for('view_cart') }}" class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">
+                    {% if session.get('cart', {}).get('cart_items') %}
+                        {{ session['cart']['cart_items'] | length }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </span></a>
+        </nav>
+        
+        <!-- Ícono del carrito -->
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Katharsis. Todos los derechos reservados.</p>
+            <div class="social-media">
+                <a href="https://www.facebook.com/profile.php?id=61561851513269" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/your.katharsis/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.link/t83k6w" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <li><a href="{{ url_for('terminos_y_condiciones') }}">Términos y Condiciones</a></li>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

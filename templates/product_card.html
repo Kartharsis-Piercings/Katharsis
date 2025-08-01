@@ -1,0 +1,39 @@
+<div class="product-card">
+    <div class="product-image">
+        <a href="{{ url_for('product_detail', product_id=product.id) }}">
+            <img src="{{ url_for('static', filename=product.images[0].replace('../static/', '')) }}" alt="{{ product.name }}">
+        </a>
+        <div class="product-badges">
+            {% if product.is_new %}<span class="badge-new">Nuevo</span>{% endif %}
+            {% if product.on_sale %}
+                <span class="badge-sale">-{{ ((product.price - product.sale_price) / product.price * 100) | round | int }}%</span>
+            {% endif %}
+        </div>
+        <button class="quick-view" data-product-id="{{ product.id }}">Vista rápida</button>
+    </div>
+    <div class="product-info">
+        <h3><a href="{{ url_for('product_detail', product_id=product.id) }}">{{ product.name }}</a></h3>
+        <p class="product-category">{{ product.category | capitalize }}</p>
+        <div class="product-price">
+            {% if product.on_sale %}
+            <span class="current-price">S/ {{ product.sale_price | number_format }}</span>
+            <span class="old-price">S/ {{ product.price | number_format }}</span>
+            {% else %}
+            <span class="current-price">S/ {{ product.price | number_format }}</span>
+            {% endif %}
+        </div>
+        <div class="product-actions">
+            <form class="add-to-cart-form" method="POST" action="{{ url_for('add_to_cart') }}">
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <select name="size" class="size-select" required>
+                    <option value="" disabled selected>Tamaño</option>
+                    {% for size in product.sizes %}
+                    <option value="{{ size }}">{{ size }}</option>
+                    {% endfor %}
+                </select>
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="btn-add-cart">Añadir</button>
+            </form>
+        </div>
+    </div>
+</div>

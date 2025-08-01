@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %}Contacto | Katharsis{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='contacto.css') }}">
+{% endblock %}
+
+{% block content %}
+    <section class="hero" style="height: 50vh; background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), url('../static/img/hero-background.png') center calc(50% - 95px)/cover;">
+        <div class="hero-content">
+            <h1>Hablemos</h1>
+            <p>Estoy aquí para resolver tus dudas y ayudarte a agendar tu próxima cita.</p>
+        </div>
+    </section>
+
+    <div class="contact-page-container">
+        <div class="contact-form-container">
+            <h2>Envíanos un Mensaje</h2>
+            <p>Completa el formulario y te responderé lo antes posible.</p>
+            
+            <form id="contact-form" novalidate>
+                <div class="form-group">
+                    <label for="name">Nombre Completo</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono de Contacto</label>
+                        {# ¡CAMBIO! Teléfono ahora es requerido #}
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Asunto</label>
+                    {# ¡CAMBIO! Añadido placeholder para guiar al usuario #}
+                    <input type="text" id="subject" name="subject" required placeholder="Ej: Consulta sobre piercing Helix">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Mensaje</label>
+                    {# ¡CAMBIO! Añadido placeholder para guiar al usuario #}
+                    <textarea id="message" name="message" rows="6" required placeholder="Ej: Hola, quisiera saber si tienen disponibilidad esta semana para una perforación Helix y consultar sobre la joyería inicial."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="submit-button">
+                    <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                </button>
+            </form>
+            <div id="form-status" class="form-status"></div>
+        </div>
+
+        <div class="contact-info-container">
+            <h3>Información de Contacto</h3>
+            <ul class="info-list">
+                <li>
+                    <i class="fab fa-whatsapp"></i>
+                    <div>
+                        <strong>WhatsApp</strong>
+                        <a href="https://wa.me/51936215481?text=Hola,%20quisiera%20consultar%20algo." target="_blank">+51 936 215 481</a>
+                    </div>
+                </li>
+                <li>
+                    <i class="far fa-envelope"></i>
+                    <div>
+                        <strong>Email</strong>
+                        <a href="mailto:katharsis.piercings@gmail.com">katharsis.piercings@gmail.com</a>
+                    </div>
+                </li>
+                 <li>
+                    <i class="far fa-clock"></i>
+                    <div>
+                        <strong>Horario de Atención</strong>
+                        <span>Lun - Sáb: 10:00 AM - 8:00 PM</span>
+                    </div>
+                </li>
+            </ul>
+
+            <h3>Encuéntranos en Tarapoto</h3>
+            {# ¡CAMBIO! Mapa de Google Maps funcional incrustado #}
+            <div id="map">
+                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15822.846522519114!2d-76.3708896194458!3d-6.491959918074697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91b7644268e051ab%3A0x53964145396b865!2sPlaza%20de%20Armas%20de%20Tarapoto!5e0!3m2!1ses-419!2spe!4v1721066066265!5m2!1ses-419!2spe" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            
+            <h3>Síguenos</h3>
+            {# ¡CAMBIO! Enlaces funcionales (ajústalos con tus URLs reales) #}
+            <div class="social-links">
+                <a href="https://www.facebook.com/profile.php?id=61561851513269" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/your.katharsis?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://tiktok.com/@tu_usuario" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    {# ¡Añadiremos un nuevo archivo JS para el formulario! #}
+    <script src="{{ url_for('static', filename='contact.js') }}"></script>
+{% endblock %}

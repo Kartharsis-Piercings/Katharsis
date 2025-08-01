@@ -1,0 +1,70 @@
+<!-- checkout.html -->
+{% extends 'base.html' %}
+
+{% block title %}Pago | Katharsis{% endblock %}
+
+{% block content %}
+<section class="checkout-section">
+    <div class="checkout-container">
+        <div class="checkout-header">
+            <h1>Finalizar Compra</h1>
+            <div class="checkout-steps">
+                <div class="step">1. Carrito</div>
+                <div class="step">2. Información</div>
+                    <div class="shipping-form">
+                        <h3>Información de Envío</h3>
+                        <input type="text" placeholder="Nombre completo" required>
+                        <input type="text" placeholder="Dirección" required>
+                        <input type="tel" placeholder="Teléfono" required>
+                        <input type="email" placeholder="Email" required>
+                    </div>
+                
+                <div class="step active">3. Pago</div>
+                <div class="step">4. Confirmación</div>
+            </div>
+        </div>
+        
+        <div class="payment-methods">
+            <h2>Selecciona método de pago</h2>
+            
+            <div class="payment-options">
+                <div class="payment-card active" data-method="yape">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Yape</span>
+                </div>
+                <div class="payment-card" data-method="transferencia">
+                    <i class="fas fa-university"></i>
+                    <span>Transferencia</span>
+                </div>
+                <div class="payment-card" data-method="tarjeta">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Tarjeta</span>
+                </div>
+            </div>
+            
+            <div class="yape-payment active">
+                <div class="yape-instructions">
+                    <h3>Pago con Yape</h3>
+                    <ol>
+                        <li>Escanea el código QR con la aplicación Yape</li>
+                        <li>Ingresa el monto exacto: <strong>S/ {{ total | number_format }}</strong></li>
+                        <li>Agrega tu número de pedido como referencia: <strong>#{{ cart.id[:8] }}</strong></li>
+                        <li>Completa la transacción en la app</li>
+                    </ol>
+                </div>
+                <div class="yape-qr">
+                    <img src="{{ url_for('static', filename='img/yape-qr.png') }}" alt="Código QR de Yape">
+                    <div class="yape-info">
+                        <p>Número asociado: +51 987 654 321</p>
+                        <p>Nombre: Katharsis Piercings</p>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn-confirm-payment">
+                He realizado el pago
+            </button>
+        </div>
+    </div>
+</section>
+{% endblock %}
