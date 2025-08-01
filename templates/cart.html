@@ -119,12 +119,12 @@
                         
                         <div class="form-group">
                             <label for="shipping-name">Nombre Completo</label>
-                            <input type="text" id="shipping-name" name="full_name" placeholder="Ej: Alexia Pérez">
+                            <input type="text" id="shipping-name" name="full_name" placeholder="Ej: Nombre y Apellidos" required>
                         </div>
 
                         <div class="form-group">
                             <label for="shipping-dni">DNI</label>
-                            <input type="text" id="shipping-dni" name="dni" placeholder="Ej: 71234567">
+                            <input type="text" id="shipping-dni" name="dni" placeholder="Ej: 71234567" required>
                         </div>
 
                         <div class="form-group">
@@ -139,12 +139,12 @@
 
                         <div class="form-group">
                             <label for="shipping-city">Ciudad / Provincia</label>
-                            <input type="text" id="shipping-city" name="city" placeholder="Ej: Lima">
+                            <input type="text" id="shipping-city" name="city" placeholder="Ej: Lima" required>
                         </div>
 
                         <div class="form-group">
                             <label for="shipping-address">Dirección de Envío</label>
-                            <input type="text" id="shipping-address" name="address" placeholder="Ej: Av. Principal 123, Dpto. 401">
+                            <input type="text" id="shipping-address" name="address" placeholder="Ej: Av. Principal 123, Dpto. 401"required>
                         </div>
                         
                          <div class="form-group">
@@ -228,7 +228,7 @@
                 <h3>¡Último paso! Paga con Yape</h3>
                 <p>1. Escanea el código QR desde tu app Yape.</p>
                 <p>2. Asegúrate de pagar el monto exacto.</p>
-                <img src="../static/img/yape-QR.jpeg" alt="Código QR de Yape" class="yape-qr-image">
+                <img src="../static/img/yape-QR.webp" alt="Código QR de Yape" class="yape-qr-image">
                 <div class="yape-info">
                     <p>Si no puedes escanear el código, también puedes enviar el pago directamente a:</p>
                     <p>Número: <strong>+51 922 207 389</strong></p> 
@@ -248,7 +248,7 @@
                 <form id="yape-verification-form">
                     <div class="form-group">
                         <label for="yape-code">Código de Operación Yape</label>
-                        <input type="text" id="yape-code" name="yape_code" placeholder="Ej: 1K4F6H8" required>
+                        <input type="text" id="yape-code" name="yape_code" placeholder="Ej: 123" required>
                     </div>
                     <button type="submit" class="btn-confirm-payment">Verificar y Finalizar Compra</button>
                     <div id="verification-status" class="verification-status"></div>

@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    <section class="hero" style="height: 50vh; background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), url('../static/img/hero-background.png') center calc(50% - 95px)/cover;">
+    <section class="hero" style="height: 50vh; background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), url('../static/img/hero-background.webp') center calc(50% - 95px)/cover;">
         <div class="hero-content">
             <h1>Hablemos</h1>
             <p>Estoy aquí para resolver tus dudas y ayudarte a agendar tu próxima cita.</p>
@@ -33,7 +33,10 @@
                     <div class="form-group">
                         <label for="phone">Teléfono de Contacto</label>
                         {# ¡CAMBIO! Teléfono ahora es requerido #}
-                        <input type="tel" id="phone" name="phone" required>
+                        <input type="tel" id="phone" name="phone" required
+                                pattern="\d{9}" 
+                                 title="El número debe contener 9 dígitos."
+                                maxlength="9">
                     </div>
                 </div>
 

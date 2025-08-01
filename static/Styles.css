@@ -15,7 +15,7 @@
         header {
             padding: 0.5rem 5%;
             background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)),
-                        url('../static/img/Background.jpg') center/cover;
+                        url('../static/img/Background.webp') center/cover;
             position: fixed;
             width: 100%;
             top: 0;
@@ -92,7 +92,7 @@
         .hero {
             height: 95vh;
             background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)),
-                        url('../static/img/hero-background.png') center/cover;
+                        url('../static/img/hero-background.webp') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;

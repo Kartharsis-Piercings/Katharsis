@@ -10,8 +10,7 @@
           "name": "Piercing Helix",
           "description": "El piercing Helix se realiza en el cartílago superior externo de la oreja. Es una opción muy versátil que permite usar aros, barbells curvos o labrets con hermosos tops decorativos.",
           "images": [
-            "/static/img/piercings/helix_1.jpg",
-            "/static/img/piercings/helix_2.jpg"
+            "/static/img/piercings/helix/helix-1.webp"
           ],
           "details": {
             "pain_level": "4/10 (Moderado)",
@@ -31,7 +30,7 @@
           "name": "Piercing Lóbulo",
           "description": "El piercing en el lóbulo es el más común y el de más rápida cicatrización. Es ideal para principiantes y permite una gran variedad de joyería casi desde el inicio.",
           "images": [
-            "/static/img/piercings/lobulo_1.jpg"
+            "/static/img/piercings/lobe/lobe-1.webp"
           ],
           "details": {
             "pain_level": "2/10 (Bajo)",
@@ -55,7 +54,9 @@
           "id": "septum",
           "name": "Piercing Septum",
           "description": "Se realiza en el 'punto dulce' del tabique nasal. Su gran ventaja es que puede ocultarse fácilmente girando la joya hacia adentro. La cicatrización suele ser rápida si se realiza correctamente.",
-          "images": [],
+          "images": [
+            "/static/img/piercings/septum/septum-1.webp"
+          ],
           "details": {
             "pain_level": "5/10 (Moderado)",
             "healing_time": "2 a 3 meses",
@@ -66,6 +67,25 @@
             "Tener cuidado al sonarse la nariz."
           ],
           "recommended_product_tags": ["herraduras", "aros", "titanio"]
+        },
+        
+        {
+          "id": "nostril",
+          "name": "Piercing Nostril",
+          "description": "Se realiza en el ala de la fosa nasal nasal. Un piercing con un excelente balance entre elegante y coqueto. La cicatrización suele ser rápida si se cuida y limpia correctamente.",
+          "images": [
+            "/static/img/piercings/nostril/nostril-1.webp"
+          ],
+          "details": {
+            "pain_level": "6/10 (Moderado)",
+            "healing_time": "2 a 3 meses",
+            "initial_jewelry": "Nostril de Titanio"
+          },
+          "aftercare_tips": [
+            "Limpiar la zona con solución salina, evitando mover demasiado la joya.",
+            "Tener cuidado al sonarse la nariz."
+          ],
+          "recommended_product_tags": ["nostril", "aros", "titanio"]
         }
       ]
     }

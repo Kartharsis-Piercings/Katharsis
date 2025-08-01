@@ -10,6 +10,27 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+        
+        // --- NUEVO BLOQUE DE VALIDACIÓN ---
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^\d{9}$/;
+
+        if (!emailRegex.test(emailInput.value)) {
+            formStatus.className = 'form-status error';
+            formStatus.textContent = 'Por favor, ingresa un correo electrónico válido (ej: correo@dominio.com).';
+            formStatus.style.display = 'block';
+            return; // Detiene el envío
+        }
+
+        if (!phoneRegex.test(phoneInput.value)) {
+            formStatus.className = 'form-status error';
+            formStatus.textContent = 'El número de teléfono debe contener exactamente 9 dígitos.';
+            formStatus.style.display = 'block';
+            return; // Detiene el envío
+        }
+
         // Mostrar estado de carga
         submitButton.disabled = true;
         submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
