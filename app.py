@@ -29,7 +29,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=3)
 app.config['SESSION_COOKIE_SECURE'] = False 
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
-
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(days=1)
 # Inicializar Flask-Session
 Session(app)
 
@@ -60,6 +60,7 @@ def save_products(products):
     with open(app.config['PRODUCTS_FILE'], 'w', encoding='utf-8') as f:
         json.dump(products, f, ensure_ascii=False, indent=4)
 
+@lru_cache(maxsize=1)
 def load_coupons():
     try:
         with open(app.config['COUPONS_FILE'], 'r', encoding='utf-8') as f:
@@ -231,7 +232,7 @@ def get_cart_total(cart):
     total = subtotal + cart['shipping_cost']
     
     return total
-
+@lru_cache(maxsize=1)
 def load_shipping_rules():
     """Carga las reglas de envío desde el archivo JSON."""
     try:

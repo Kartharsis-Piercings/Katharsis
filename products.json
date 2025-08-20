@@ -1,15 +1,20 @@
 [
   {
-    "id": 1,
     "name": "Labret Clásico de Titanio",
     "stock": {
-    "1.2mm": 15
+      "12mm": 8,
+      "10mm": 1,
+      "8mm": 7,
+      "7mm": 2,
+      "5mm": 3
     },
     "category": "Labrets",
-    "body_parts": ["oreja", "labios"],
-    "material": "titanio",
-    "price": 65,
-    "sale_price": 59.90,
+    "body_parts": [
+      "oreja",
+      "labios"
+    ],
+    "price": 65.0,
+    "sale_price": 59.9,
     "images": [
       "../static/img/products/labret/perla 3mm/foto 1.webp",
       "../static/img/products/labret/perla 3mm/foto 2.webp",
@@ -18,287 +23,70 @@
     "description": "Un labret versátil y seguro, hecho de Titanio Grado Implante.",
     "is_new": true,
     "on_sale": false,
-    "popularity": 88,
-    "sizes": ["6mm", "8mm", "10mm"],
-    "rosca": "Interna"
+    "material": "titanio",
+    "popularity": 0,
+    "rosca": "interna",
+    "id": 1
   },
-
-{
-    "id": 2,
-    "name": "Labret con Púa de Titanio",
+  {
+    "name": "Labret Corona de Titanio con Zircón Blanco",
     "stock": {
-    "1.2mm": 15
+      "1.2mm": 2
     },
     "category": "Labrets",
-    "body_parts": ["oreja", "labios"],
-    "material": "titanio",
-    "price": 65,
-    "sale_price": 59.90,
-    "images": [
-      "../static/img/products/labret/pua 3mm/foto 1.webp",
-      "../static/img/products/labret/pua 3mm/foto 2.webp",
-      "../static/img/products/labret/pua 3mm/foto 3.webp"
+    "body_parts": [
+      "oreja"
     ],
-    "description": "Un Joya moderna y segura, hecha de Titanio Grado Implante.",
+    "price": 110.0,
+    "sale_price": 105.9,
+    "images": [
+      "../static/img/products/labret/helix/corona/foto 1 - 4.webp",
+      "../static/img/products/labret/helix/corona/foto 1 - 2.webp",
+      "../static/img/products/labret/helix/corona/foto 3 - 1.webp"
+    ],
+    "description": "Joya tipo labret hecha de Titanio Grado Implante de 4 cuerpos con Zirconitas incrustadas.",
     "is_new": true,
     "on_sale": false,
-    "popularity": 88,
-    "sizes": ["8mm"],
-    "rosca": "interna"
+    "material": "titanio",
+    "popularity": 0,
+    "rosca": "interna",
+    "id": 16
   },
-
   {
-    "id": 3,
-    "name": "Labret Titanio con Zircón AB",
+    "name": "Labret Laurel de Titanio con Zircón Blanco",
     "stock": {
-    "1.2mm": 15
+      "1.6mm": 3
     },
     "category": "Labrets",
-    "body_parts": ["oreja", "labios"],
-    "material": "titanio",
-    "price": 80,
-    "sale_price": 75.90,
-    "images": [
-      "../static/img/products/labret/zircon 3mm/ab/foto 1 - 1.webp",
-      "../static/img/products/labret/zircon 3mm/ab/foto 1 - 2.webp",
-      "../static/img/products/labret/zircon 3mm/ab/foto 3 - 1.webp",
-      "../static/img/products/labret/zircon 3mm/ab/foto 3 - 2.webp"
+    "body_parts": [
+      "oreja"
     ],
-    "description": "Joya tipo labret hecho de Titanio Grado Implante con una Zirconita incrustada.",
+    "price": 110.0,
+    "sale_price": 105.9,
+    "images": [
+      "../static/img/products/labret/helix/lateral/foto 1 - 4.webp",
+      "../static/img/products/labret/helix/lateral/foto 1 - 3.webp",
+      "../static/img/products/labret/helix/lateral/foto 3 - 1.webp"
+    ],
+    "description": "Joya tipo labret hecha de Titanio Grado Implante de 4 cuerpos con Zirconitas incrustadas.",
     "is_new": true,
     "on_sale": false,
-    "popularity": 88,
-    "sizes": ["8mm"],
-    "rosca": "interna"
+    "material": "titanio",
+    "popularity": 0,
+    "rosca": "interna",
+    "id": 17
   },
-
   {
-    "id": 4,
-    "name": "Labret de Titanio con Zircón Blanco",
-    "stock": {
-    "1.6mm": 15,
-    "2.0mm": 8
-    },
-    "category": "Labrets",
-    "body_parts": ["oreja", "labios"],
-    "material": "titanio",
-    "price": 80,
-    "sale_price": 75.90,
-    "images": [
-      "../static/img/products/labret/zircon 3mm/blanco/foto 1 - 1.webp",
-      "../static/img/products/labret/zircon 3mm/blanco/foto 3 - 2.webp"
-    ],
-    "description": "Joya labret hecho de Titanio Grado Implante con una Zirconita Blanca incrustada.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 88,
-    "sizes": ["8mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 5,
-    "name": "Labret de Titanio con Obsidiana",
-    "stock": {
-    "1.6mm": 15,
-    "2.0mm": 8
-    },
-    "category": "Labrets",
-    "body_parts": ["oreja", "labios"],
-    "material": "titanio",
-    "price": 80,
-    "sale_price": 75.90,
-    "images": [
-      "../static/img/products/labret/zircon 3mm/obsidiana/foto 1 - 1.webp",
-      "../static/img/products/labret/zircon 3mm/obsidiana/foto 1 - 3.webp",
-      "../static/img/products/labret/zircon 3mm/obsidiana/foto 3 - 2.webp"
-    ],
-    "description": "Joya tipo labret hecho de titanio grado implante con una Obsidiana incrustada.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 88,
-    "sizes": ["8mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 6,
-    "name": "Labret de Titanio con Amatista",
-    "stock": {
-    "1.2mm": 15
-    },
-    "category": "Labrets",
-    "body_parts": ["oreja", "labios"],
-    "material": "titanio",
-    "price": 80,
-    "sale_price": 75.90,
-    "images": [
-      "../static/img/products/labret/zircon 3mm/purpura/foto 1 - 3.webp",
-      "../static/img/products/labret/zircon 3mm/purpura/foto 3 - 2.webp"
-    ],
-    "description": "Joya tipo labret hecho de Titanio Grado Implante con una Amatista incrustada.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 88,
-    "sizes": ["8mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 7,
-    "name": "Labret de Titanio con Zircón Rosa ",
-    "stock": {
-    "1.6mm": 15,
-    "2.0mm": 8
-    },
-    "category": "Labrets",
-    "body_parts": ["oreja", "labios"],
-    "material": "titanio",
-    "price": 80,
-    "sale_price": 75.90,
-    "images": [
-      "../static/img/products/labret/zircon 3mm/rosa/foto 1 - 1.webp",
-      "../static/img/products/labret/zircon 3mm/rosa/foto 3 - 1.webp"
-    ],
-    "description": "Joya tipo labret de Titanio Grado Implante con un Zircón Rosa incrustado.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 88,
-    "sizes": ["8mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 8,
-    "name": "Aro Nostril Clásico de Titanio",
-    "stock": {
-    "1.6mm": 15
-    },
-    "category": "Aros",
-    "body_parts": ["nariz"],
-    "material": "titanio",
-    "price": 65,
-    "sale_price": 59.90,
-    "images": [
-      "../static/img/products/aros/0.8mm/foto 1.webp",
-      "../static/img/products/aros/0.8mm/foto 2.webp",
-      "../static/img/products/aros/0.8mm/foto 3.webp"
-    ],
-    "description": "Un Aro hecho de titanio grado implante versátil y seguro para el Nostril.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 98,
-    "sizes": ["6mm", "8mm", "10mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 9,
-    "name": "Aro Clásico de Titanio",
-    "stock": {
-    "1.6mm": 15
-    },
-    "category": "Aros",
-    "body_parts": ["oreja", "labios", "nariz"],
-    "material": "titanio",
-    "price": 65,
-    "sale_price": 59.90,
-    "images": [
-      "../static/img/products/aros/1.2mm/foto 1.webp",
-      "../static/img/products/aros/1.2mm/foto 2 - 1.webp",
-      "../static/img/products/aros/1.2mm/foto 2 - 2.webp",
-      "../static/img/products/aros/1.2mm/foto 3.webp"
-    ],
-    "description": "Un Aro hecho de titanio grado implante versátil y seguro.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 88,
-    "sizes": ["6mm", "8mm", "10mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 10,
-    "name": "Barbel Banana de Titanio",
-    "stock": {
-    "1.2mm": 15
-    },
-    "category": "Bananas",
-    "body_parts": ["ceja", "labios"],
-    "material": "titanio",
-    "price": 75,
-    "sale_price": 69.90,
-    "images": [
-      "../static/img/products/banana/foto 1 - 2.webp",
-      "../static/img/products/banana/foto 2.webp",
-      "../static/img/products/banana/foto 3.webp"
-    ],
-    "description": "Joya tipo Barbel banana versáti hecha de titanio grado implante.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 88,
-    "sizes": ["8mm", "10mm", "12mm"],
-    "rosca": "interna"
-  },
-  
-    {
-    "id": 11,
-    "name": "Barra recta de Titanio",
-    "stock": {
-    "1.2mm": 15
-    },
-    "category": "Barras",
-    "body_parts": ["oreja", "nariz","pezones"],
-    "material": "titanio",
-    "price": 120,
-    "sale_price": 115.90,
-    "images": [
-      "../static/img/products/barra/foto 1.webp",
-      "../static/img/products/barra/foto 2.webp",
-      "../static/img/products/barra/foto 3.webp"
-    ],
-    "description": "Joya tipo Barbel recto hecha de Titanio Grado Implante.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 88,
-    "sizes": ["14mm", "28mm"],
-    "rosca": "interna"
-  },
-
-{
-    "id": 12,
-    "name": "Barbel Herradura de Titanio",
-    "stock": {
-    "1.2mm": 15
-    },
-    "category": "Herraduras",
-    "body_parts": ["oreja", "labios", "nariz"],
-    "material": "titanio",
-    "price": 80,
-    "sale_price": 75.90,
-    "images": [
-      "../static/img/products/herradura/foto 2.webp",
-      "../static/img/products/herradura/foto 3.webp"
-    ],
-    "description": "Barbel Herradura hecha de Titanio Grado Implante.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 88,
-    "sizes": ["8mm","10mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 13,
     "name": "Labret Titanio 3 cuerpos Zircón Blanco",
     "stock": {
-    "1.2mm": 15
+      "1.2mm": 2
     },
     "category": "Labrets",
-    "body_parts": ["oreja"],
-    "material": "titanio",
-    "price": 90,
-    "sale_price": 85.90,
+    "body_parts": [
+      "oreja"
+    ],
+    "price": 90.0,
+    "sale_price": 85.9,
     "images": [
       "../static/img/products/labret/helix/3 cuerpos/foto 1 - 2.webp",
       "../static/img/products/labret/helix/3 cuerpos/foto 1 - 3.webp",
@@ -308,23 +96,173 @@
     "description": "Joya tipo Labret para piercing Helix hecha de Titanio Grado Implante con tres Zirconitas incrustadas.",
     "is_new": true,
     "on_sale": false,
-    "popularity": 88,
-    "sizes": ["7mm"],
-    "rosca": "interna"
+    "material": "titanio",
+    "popularity": 0,
+    "rosca": "interna",
+    "id": 13
   },
-
   {
-    "id": 14,
-    "name": "Labret de Titanio de 5 cuerpos de Aquamarine",
+    "name": "Labret Titanio con Zircón AB",
     "stock": {
-    "1.6mm": 15,
-    "2.0mm": 8
+      "8mm": 3
     },
     "category": "Labrets",
-    "body_parts": ["oreja"],
+    "body_parts": [
+      "oreja",
+      "labios"
+    ],
+    "price": 80.0,
+    "sale_price": 75.9,
+    "images": [
+      "../static/img/products/labret/zircon 3mm/ab/foto 1 - 1.webp",
+      "../static/img/products/labret/zircon 3mm/ab/foto 1 - 2.webp",
+      "../static/img/products/labret/zircon 3mm/ab/foto 3 - 1.webp",
+      "../static/img/products/labret/zircon 3mm/ab/foto 3 - 2.webp"
+    ],
+    "description": "Joya tipo labret hecho de Titanio Grado Implante con una Zirconita incrustada.",
+    "is_new": true,
+    "on_sale": false,
     "material": "titanio",
-    "price": 120,
-    "sale_price": 115.90,
+    "popularity": 0,
+    "rosca": "interna",
+    "id": 3
+  },
+  {
+    "name": "Labret con Púa de Titanio",
+    "stock": {
+      "12mm": 1,
+      "10mm": 1,
+      "8mm": 1,
+      "7mm": 1
+    },
+    "category": "Labrets",
+    "body_parts": [
+      "oreja",
+      "labios"
+    ],
+    "price": 65.0,
+    "sale_price": 59.9,
+    "images": [
+      "../static/img/products/labret/pua 3mm/foto 1.webp",
+      "../static/img/products/labret/pua 3mm/foto 2.webp",
+      "../static/img/products/labret/pua 3mm/foto 3.webp"
+    ],
+    "description": "Un Joya moderna y segura, hecha de Titanio Grado Implante.",
+    "is_new": true,
+    "on_sale": false,
+    "material": "titanio",
+    "popularity": 0,
+    "rosca": "interna",
+    "id": 2
+  },
+  {
+    "name": "Labret de Titanio con Amatista",
+    "stock": {
+      "8mm": 3
+    },
+    "category": "Labrets",
+    "body_parts": [
+      "oreja",
+      "labios"
+    ],
+    "price": 80.0,
+    "sale_price": 75.9,
+    "images": [
+      "../static/img/products/labret/zircon 3mm/purpura/foto 1 - 3.webp",
+      "../static/img/products/labret/zircon 3mm/purpura/foto 3 - 2.webp"
+    ],
+    "description": "Joya tipo labret hecho de Titanio Grado Implante con una Amatista incrustada.",
+    "is_new": true,
+    "on_sale": false,
+    "material": "titanio",
+    "popularity": 0,
+    "rosca": "interna",
+    "id": 6
+  },
+  {
+    "name": "Labret de Titanio con Obsidiana",
+    "stock": {
+      "8mm": 3
+    },
+    "category": "Labrets",
+    "body_parts": [
+      "oreja",
+      "labios"
+    ],
+    "price": 80.0,
+    "sale_price": 75.9,
+    "images": [
+      "../static/img/products/labret/zircon 3mm/obsidiana/foto 1 - 1.webp",
+      "../static/img/products/labret/zircon 3mm/obsidiana/foto 1 - 3.webp",
+      "../static/img/products/labret/zircon 3mm/obsidiana/foto 3 - 2.webp"
+    ],
+    "description": "Joya tipo labret hecho de titanio grado implante con una Obsidiana incrustada.",
+    "is_new": true,
+    "on_sale": false,
+    "material": "titanio",
+    "popularity": 0,
+    "rosca": "interna",
+    "id": 5
+  },
+  {
+    "name": "Labret de Titanio con Zircón Blanco",
+    "stock": {
+      "8mm": 0
+    },
+    "category": "Labrets",
+    "body_parts": [
+      "oreja",
+      "labios"
+    ],
+    "price": 80.0,
+    "sale_price": 75.9,
+    "images": [
+      "../static/img/products/labret/zircon 3mm/blanco/foto 1 - 1.webp",
+      "../static/img/products/labret/zircon 3mm/blanco/foto 3 - 2.webp"
+    ],
+    "description": "Joya labret hecho de Titanio Grado Implante con una Zirconita Blanca incrustada.",
+    "is_new": true,
+    "on_sale": false,
+    "material": "titanio",
+    "popularity": 0,
+    "rosca": "interna",
+    "id": 4
+  },
+  {
+    "name": "Labret de Titanio con Zircón Rosa",
+    "stock": {
+      "8mm": 1
+    },
+    "category": "Labrets",
+    "body_parts": [
+      "oreja",
+      "labios"
+    ],
+    "price": 80.0,
+    "sale_price": 75.9,
+    "images": [
+      "../static/img/products/labret/zircon 3mm/rosa/foto 1 - 1.webp",
+      "../static/img/products/labret/zircon 3mm/rosa/foto 3 - 1.webp"
+    ],
+    "description": "Joya tipo labret de Titanio Grado Implante con un Zircón Rosa incrustado.",
+    "is_new": true,
+    "on_sale": false,
+    "material": "titanio",
+    "popularity": 0,
+    "rosca": "interna",
+    "id": 7
+  },
+  {
+    "name": "Labret de Titanio de 5 cuerpos de Aquamarine",
+    "stock": {
+      "1.2mm": 1
+    },
+    "category": "Labrets",
+    "body_parts": [
+      "oreja"
+    ],
+    "price": 120.0,
+    "sale_price": 115.9,
     "images": [
       "../static/img/products/labret/helix/5 cuerpos/azul/foto 1 - 4.webp",
       "../static/img/products/labret/helix/5 cuerpos/azul/foto 1 - 2.webp",
@@ -334,22 +272,22 @@
     "description": "Joya tipo Labret para piercing Helix hecha de Titanio Grado Implante con 5 gemas de Aquamarine incrustadas.",
     "is_new": true,
     "on_sale": false,
-    "popularity": 88,
-    "sizes": ["6mm"],
-    "rosca": "interna"
+    "material": "titanio",
+    "popularity": 0,
+    "rosca": "interna",
+    "id": 14
   },
-
   {
-    "id": 15,
     "name": "Labret de Titanio de 5 cuerpos de zircón Blanco",
     "stock": {
-    "1.6mm": 15
+      "1.6mm": 2
     },
     "category": "Labrets",
-    "body_parts": ["oreja"],
-    "material": "titanio",
-    "price": 120,
-    "sale_price": 115.90,
+    "body_parts": [
+      "oreja"
+    ],
+    "price": 120.0,
+    "sale_price": 115.9,
     "images": [
       "../static/img/products/labret/helix/5 cuerpos/blanco/foto 1 - 4.webp",
       "../static/img/products/labret/helix/5 cuerpos/blanco/foto 1 - 3.webp",
@@ -358,315 +296,9 @@
     "description": "Joya tipo Labret para piercing Helix hecha de Titanio Grado Implante con 5 gemas de Zircón Blanco incrustadas.",
     "is_new": true,
     "on_sale": false,
-    "popularity": 88,
-    "sizes": ["6mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 16,
-    "name": "Labret Corona de Titanio con Zircón Blanco",
-    "stock": {
-    "1.2mm": 15
-    },
-    "category": "Labrets",
-    "body_parts": ["oreja"],
     "material": "titanio",
-    "price": 110,
-    "sale_price": 105.90,
-    "images": [
-      "../static/img/products/labret/helix/corona/foto 1 - 4.webp",
-      "../static/img/products/labret/helix/corona/foto 1 - 2.webp",
-      "../static/img/products/labret/helix/corona/foto 3 - 1.webp"
-    ],
-    "description": "Joya tipo labret hecha de Titanio Grado Implante de 4 cuerpos con Zirconitas incrustadas.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 88,
-    "sizes": ["6mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 17,
-    "name": "Labret Laurel de Titanio con Zircón Blanco",
-    "stock": {
-    "1.6mm": 15
-    },
-    "category": "Labrets",
-    "body_parts": ["oreja"],
-    "material": "titanio",
-    "price": 110,
-    "sale_price": 105.90,
-    "images": [
-      "../static/img/products/labret/helix/lateral/foto 1 - 4.webp",
-      "../static/img/products/labret/helix/lateral/foto 1 - 3.webp",
-      "../static/img/products/labret/helix/lateral/foto 3 - 1.webp"
-    ],
-    "description": "Joya tipo labret hecha de Titanio Grado Implante de 4 cuerpos con Zirconitas incrustadas.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 88,
-    "sizes": ["6mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 18,
-    "name": "Nostril de Titanio con Zircón AB 2mm",
-    "stock": {
-    "1.6mm": 15
-    },
-    "category": "Nostril",
-    "body_parts": ["nariz"],
-    "material": "titanio",
-    "price": 65,
-    "sale_price": 59.90,
-    "images": [
-      "../static/img/products/nostril/ab/foto 1 - 1.webp",
-      "../static/img/products/nostril/ab/foto 3 - 2.webp",
-      "../static/img/products/nostril/ab/foto 3 - 1.webp"
-    ],
-    "description": "Una Joya hecha de Titanio Grado Implante versátil y seguro para el Nostril.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 98,
-    "sizes": ["7mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 19,
-    "name": "Nostril de Titanio con Zircón Blanco 2mm",
-    "stock": {
-    "1.6mm": 15
-    },
-    "category": "Nostril",
-    "body_parts": ["nariz"],
-    "material": "titanio",
-    "price": 65,
-    "sale_price": 59.90,
-    "images": [
-      "../static/img/products/nostril/blanco/foto 1 - 1.webp",
-      "../static/img/products/nostril/blanco/foto 3 - 1.webp",
-      "../static/img/products/nostril/blanco/foto 3 - 2.webp"
-    ],
-    "description": "Una Joya hecha de Titanio Grado Implante versátil y seguro para el Nostril.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 98,
-    "sizes": ["7mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 20,
-    "name": "Nostril de Titanio Corazon",
-    "stock": {
-    "1.2mm": 15
-    },
-    "category": "Nostril",
-    "body_parts": ["nariz"],
-    "material": "titanio",
-    "price": 65,
-    "sale_price": 59.90,
-    "images": [
-      "../static/img/products/nostril/corazon/foto 1 - 1.webp",
-      "../static/img/products/nostril/corazon/foto 3 - 1.webp",
-      "../static/img/products/nostril/corazon/foto 3 - 2.webp"
-    ],
-    "description": "Una Joya con forma de Corazon hecha de Titanio grado implante versátil y seguro para el Nostril.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 98,
-    "sizes": ["7mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 21,
-    "name": "Nostril de Titanio Estrella",
-    "stock": {
-    "1.2mm": 15
-    },
-    "category": "Nostril",
-    "body_parts": ["nariz"],
-    "material": "titanio",
-    "price": 65,
-    "sale_price": 59.90,
-    "images": [
-      "../static/img/products/nostril/estrella/foto 1 - 1.webp",
-      "../static/img/products/nostril/estrella/foto 3 - 1.webp"
-    ],
-    "description": "Una Joya con forma de Estrella hecha de Titanio grado implante versátil y seguro para el Nostril.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 98,
-    "sizes": ["7mm"],
-    "rosca": "interna"
-  },
-
-{
-    "id": 22,
-    "name": "Nostril de Titanio Luna",
-    "stock": {
-    "1.2mm": 15
-    },
-    "category": "Nostril",
-    "body_parts": ["nariz"],
-    "material": "titanio",
-    "price": 65,
-    "sale_price": 59.90,
-    "images": [
-      "../static/img/products/nostril/luna/foto 1 - 1.webp",
-      "../static/img/products/nostril/luna/foto 3 - 2.webp",
-      "../static/img/products/nostril/luna/foto 3 - 1.webp"
-    ],
-    "description": "Una Joya con forma de Luna hecha de Titanio grado implante versátil y seguro para el Nostril.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 98,
-    "sizes": ["7mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 23,
-    "name": "Nostril de Titanio con Zircón Blanco 2.5mm",
-    "stock": {
-    "1.2mm": 15
-    },
-    "category": "Nostril",
-    "body_parts": ["nariz"],
-    "material": "titanio",
-    "price": 65,
-    "sale_price": 59.90,
-    "images": [
-      "../static/img/products/nostril/zircon blanco/foto 1 - 2.webp",
-      "../static/img/products/nostril/zircon blanco/foto 1 - 1.webp",
-      "../static/img/products/nostril/zircon blanco/foto 3 - 1.webp"
-    ],
-    "description": "Una Joya hecha de Titanio grado implante con una Zirconita Blanca incrustada para el Nostril.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 98,
-    "sizes": ["7mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 24,
-    "name": "Barbel de Titanio con Zircón Blanco para Ombligo",
-    "stock": {
-    "1.6mm": 15
-    },
-    "category": "Navel",
-    "body_parts": ["ombligo"],
-    "material": "titanio",
-    "price": 140,
-    "sale_price": 134.90,
-    "images": [
-      "../static/img/products/ombligo/zircon blanco/foto 1 - 1.webp",
-      "../static/img/products/ombligo/zircon blanco/foto 3 - 1.webp"
-    ],
-    "description": "Joya tipo labret de Titanio Grado Implante con Zirconitas AB incrustadas.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 88,
-    "sizes": ["10mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 25,
-    "name": "Barbel de Titanio con Zircón AB para Ombligo",
-    "stock": {
-    "1.6mm": 15
-    },
-    "category": "Navel",
-    "body_parts": ["ombligo"],
-    "material": "titanio",
-    "price": 140,
-    "sale_price": 115.90,
-    "images": [
-      "../static/img/products/ombligo/zircon ab/foto 1 - 1.webp",
-      "../static/img/products/ombligo/zircon ab/foto 1 - 2.webp",
-      "../static/img/products/ombligo/zircon ab/foto 3 - 1.webp"
-    ],
-    "description": "Joya tipo labret de Titanio Grado Implante Anodizada en Black Purple con Zirconitas AB incrustadas.",
-    "is_new": true,
-    "on_sale": true,
-    "popularity": 96,
-    "sizes": ["10mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 26,
-    "name": "Barbel redondo de Titanio con Zircón Blanco para Ombligo",
-    "stock": {
-    "1.6mm": 15
-    },
-    "category": "Navel",
-    "body_parts": ["ombligo"],
-    "material": "titanio",
-    "price": 120,
-    "sale_price": 115.90,
-    "images": [
-      "../static/img/products/ombligo/redondo blanco/foto 1 - 1.webp",
-      "../static/img/products/ombligo/redondo blanco/foto 3 - 1.webp"
-    ],
-    "description": "Joya para ombligo tipo barbel de Titanio Grado Implante con Zirconitas Blancas incrustadas.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 88,
-    "sizes": ["10mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 27,
-    "name": "Barbel redondo con Zircón AB para Ombligo",
-    "stock": {
-    "1.6mm": 15
-    },
-    "category": "Navel",
-    "body_parts": ["ombligo"],
-    "material": "titanio",
-    "price": 120,
-    "sale_price": 115.90,
-    "images": [
-      "../static/img/products/ombligo/redondo ab/foto 1 - 1.webp",
-      "../static/img/products/ombligo/redondo ab/foto 3 - 1.webp"
-    ],
-    "description": "Joya tipo barbel de Titanio Grado Implante para ombligo con Zirconitas AB incrustadas.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 96,
-    "sizes": ["10mm"],
-    "rosca": "interna"
-  },
-
-  {
-    "id": 28,
-    "name": "Barbel de Titanio con Aquamarine para Ombligo",
-    "stock": {
-    "1.6mm": 15
-    },
-    "category": "Navel",
-    "body_parts": ["ombligo"],
-    "material": "titanio",
-    "price": 130,
-    "sale_price": 134.90,
-    "images": [
-      "../static/img/products/ombligo/celeste/foto 1 - 1.webp",
-      "../static/img/products/ombligo/celeste/foto 3 - 1.webp"
-    ],
-    "description": "Joya tipo barbel de Titanio Grado Implante para ombligo con Aquamarine incrustadas.",
-    "is_new": true,
-    "on_sale": false,
-    "popularity": 96,
-    "sizes": ["10mm"],
-    "rosca": "interna"
+    "popularity": 0,
+    "rosca": "interna",
+    "id": 15
   }
 ]

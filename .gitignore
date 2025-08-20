@@ -8,3 +8,12 @@ __pycache__/
 
 # Archivos de sesión de Flask
 session_data/
+
+# Archivos del GUI
+favicon.ico
+manager.py
+manager.spec
+manager.exe
+manager_config.json
+manager copy.py
+build/

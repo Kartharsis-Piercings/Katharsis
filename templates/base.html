@@ -33,7 +33,15 @@
         <!-- End Facebook Pixel Code -->
 
         <!-- Google Analytics Manager -->
+        <!-- Google tag -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMHJ9GR417"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
+        gtag('config', 'G-TMHJ9GR417');
+        </script>
         <!-- End Google Analytics Manager -->
     {# Bloque para estilos CSS adicionales de páginas específicas #}
     {% block extra_css %}{% endblock %}

@@ -8,7 +8,7 @@
         {
           "id": "helix",
           "name": "Piercing Helix",
-          "description": "El piercing Helix se realiza en el cartílago superior externo de la oreja. Es una opción muy versátil que permite usar aros, barbells curvos o labrets con hermosos tops decorativos.",
+          "description": "El piercing Helix se realiza en el cartílago superior externo de la oreja. Es una opción muy versátil que permite usar aros, barbels curvos o labrets con hermosos tops decorativos.",
           "images": [
             "/static/img/piercings/helix/helix-1.webp"
           ],
@@ -23,7 +23,11 @@
             "Evitar el contacto con productos para el cabello y cosméticos.",
             "No girar ni mover la joya intencionadamente."
           ],
-          "recommended_product_tags": ["labrets", "titanio", "aros"]
+          "recommended_product_tags": [
+            "labrets",
+            "titanio",
+            "aros"
+          ]
         },
         {
           "id": "lobulo",
@@ -41,7 +45,10 @@
             "Limpiar una o dos veces al día con solución salina.",
             "Asegurarse de que los cierres de las joyas no estén demasiado apretados."
           ],
-          "recommended_product_tags": ["labrets", "titanio"]
+          "recommended_product_tags": [
+            "labrets",
+            "titanio"
+          ]
         }
       ]
     },
@@ -66,9 +73,12 @@
             "Limpiar la zona con solución salina, evitando mover demasiado la joya.",
             "Tener cuidado al sonarse la nariz."
           ],
-          "recommended_product_tags": ["herraduras", "aros", "titanio"]
+          "recommended_product_tags": [
+            "herraduras",
+            "aros",
+            "titanio"
+          ]
         },
-        
         {
           "id": "nostril",
           "name": "Piercing Nostril",
@@ -85,7 +95,67 @@
             "Limpiar la zona con solución salina, evitando mover demasiado la joya.",
             "Tener cuidado al sonarse la nariz."
           ],
-          "recommended_product_tags": ["nostril", "aros", "titanio"]
+          "recommended_product_tags": [
+            "nostril",
+            "aros",
+            "titanio"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_id": "ombligo",
+      "zone_name": "Ombligo",
+      "piercings": [
+        {
+          "id": "navel_piercing",
+          "name": "Navel Piercing",
+          "description": "Un piercing bonito y coqueto",
+          "images": [
+            "/static/img/piercings/ombligo/navel_piercing/navel_piercing-1.jpeg"
+          ],
+          "details": {
+            "pain_level": "4/10 Bajo",
+            "healing_time": "2 a 4 Meses",
+            "initial_jewelry": "Navel"
+          },
+          "aftercare_tips": [
+            "No correr",
+            "No ejercicio",
+            "Bajar de peso"
+          ],
+          "recommended_product_tags": [
+            "ombligo",
+            "navel",
+            "titanio"
+          ]
+        }
+      ]
+    },
+    {
+      "zone_id": "ceja",
+      "zone_name": "Ceja",
+      "piercings": [
+        {
+          "id": "eyebrow",
+          "name": "Eyebrow",
+          "description": "El eyebrow es un piercing que se realiza en la esquina exterior de la ceja",
+          "images": [
+            "/static/img/piercings/ceja/eyebrow/eyebrow-1.png"
+          ],
+          "details": {
+            "pain_level": "4/10",
+            "healing_time": "2 a 3 meses",
+            "initial_jewelry": "Banana"
+          },
+          "aftercare_tips": [
+            "Evitar el contacto directo del piercing con las manos",
+            "Evitar golpes directos en la zona",
+            "Evitar dormirse encima del piercing"
+          ],
+          "recommended_product_tags": [
+            "bananas"
+          ]
         }
       ]
     }
