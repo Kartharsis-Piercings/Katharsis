@@ -4,7 +4,7 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Bienvenidos a Katharsis</h1>
-            <p class="sub-hero">En Katharsis, creemos que el body art debe ser seguro. Por eso todas nuestras joyas son de Titanio grado Implante hipoalergénico. ¡Porque tu estilo no debe comprometer tu salud!</p>
+            <p class="sub-hero">En Katharsis, creemos que el body piercing debe ser seguro. Por eso todas nuestras joyas son de Titanio grado Implante hipoalergénico. ¡Porque tu estilo no debe comprometer tu salud!</p>
             <div class="cta-buttons">
                 <a href="{{ url_for('joyas') }}" class="btn btn-primary">Ver Catálogo</a>
                 <a href="{{ url_for('contacto') }}" class="btn btn-secondary">¿Necesitas ayuda? Contactanos</a>
@@ -12,20 +12,14 @@
         </div>
     </section>
 
-    <section>
-        <div class="carousel-section" style="display: flex; align-items: center; gap: 2rem;">
-            <div class="carousel-text" style="flex: 1;">
+    <section class="carousel-section">
+        <div class="carousel-wrapper">
+            <div class="carousel-text">
                 <h2>Galería de Trabajos</h2>
-                <p>Explora algunos de nuestros piercings y trabajos recientes. Cada imagen muestra la dedicación y profesionalismo de nuestro equipo.</p>
+                <p>Explora algunos de nuestros piercings y trabajos recientes. La dedicación y profesionalismo de nuestro equipo.</p>
             </div>
-            <div class="carousel-container" style="flex: 2;">
-                <div class="carousel-slide">
-                    <div class="slide"><img src="../static/img/catalog-1.webp" alt="Imagen 1"></div>
-                    <div class="slide"><img src="../static/img/catalog-2.webp" alt="Imagen 2"></div>
-                    <div class="slide"><img src="../static/img/catalog-3.webp" alt="Imagen 3"></div>
-                    <div class="slide"><img src="../static/img/catalog-4.webp" alt="Imagen 4"></div>
-                    <div class="slide"><img src="../static/img/catalog-5.webp" alt="Imagen 5"></div>
-                </div>
+            <div class="carousel-container">
+                <div class="carousel-slide"></div>
                 <button class="carousel-btn prev-btn">&#10094;</button>
                 <button class="carousel-btn next-btn">&#10095;</button>
             </div>
@@ -74,9 +68,9 @@
             </div>
 
             <!-- Categoría 3: Aros -->
-            <div class="category-card" style="background-image: url('{{ url_for('static', filename='img/products/aros/0.8mm/foto 1.webp') }}');">
+            <div class="category-card" style="background-image: url('{{ url_for('static', filename='img/products/aros/basico/0.8mm/foto 1.webp') }}');">
                 <div class="category-info" style="padding: 1.5rem;">
-                    <h3>Gemas y flats</h3>
+                    <h3>Aros Clicker</h3>
                     <p>Adórnate con hermosas joyas de titanio rosca interna</p>
                     <a href="{{ url_for('joyas', category='Aros') }}" class="btn btn-category">Ver en tienda</a>
                 </div>

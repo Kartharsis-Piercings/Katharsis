@@ -1,73 +1,92 @@
 // static/app.js
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- LÓGICA DEL CARRUSEL ---
-    const carouselSlide = document.querySelector('.carousel-slide');
-    if (carouselSlide) {
-        const slides = document.querySelectorAll('.slide');
-        const prevBtn = document.querySelector('.prev-btn');
-        const nextBtn = document.querySelector('.next-btn');
+    // --- LÓGICA DEL CARRUSEL MEJORADA ---
+    const carouselContainer = document.querySelector('.carousel-container');
+    if (carouselContainer) {
+        const carouselSlide = carouselContainer.querySelector('.carousel-slide');
+        const prevBtn = carouselContainer.querySelector('.prev-btn');
+        const nextBtn = carouselContainer.querySelector('.next-btn');
         
-        let currentIndex = 1;
-        const totalSlides = slides.length;
-        let slideWidth = slides.length > 0 ? slides[0].clientWidth : 0;
+        let currentIndex = 0;
+        let slides = [];
         let autoSlideInterval;
-        let isTransitioning = false;
-
-        if (slides.length > 1) {
-            const firstClone = slides[0].cloneNode(true);
-            const lastClone = slides[totalSlides - 1].cloneNode(true);
-            carouselSlide.insertBefore(lastClone, carouselSlide.firstChild);
-            carouselSlide.appendChild(firstClone);
-            carouselSlide.style.transform = `translateX(-${slideWidth}px)`;
-        }
 
         function moveToSlide(index) {
-            if (isTransitioning || slides.length <= 1) return;
-            isTransitioning = true;
-            carouselSlide.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-            carouselSlide.style.transform = `translateX(-${index * slideWidth}px)`;
-            currentIndex = index;
+            carouselSlide.style.transition = 'transform 0.5s ease-in-out';
+            carouselSlide.style.transform = `translateX(-${index * 100}%)`;
         }
 
-        function handleTransitionEnd() {
-            isTransitioning = false;
-            if (currentIndex === 0) {
-                carouselSlide.style.transition = 'none';
-                carouselSlide.style.transform = `translateX(-${totalSlides * slideWidth}px)`;
-                currentIndex = totalSlides;
-            } else if (currentIndex === totalSlides + 1) {
-                carouselSlide.style.transition = 'none';
-                carouselSlide.style.transform = `translateX(-${slideWidth}px)`;
-                currentIndex = 1;
+        function handleLoop() {
+            if (currentIndex === slides.length - 1) { // Si es el último slide (clon del primero)
+                setTimeout(() => {
+                    carouselSlide.style.transition = 'none';
+                    currentIndex = 1;
+                    carouselSlide.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }, 500);
+            }
+            if (currentIndex === 0) { // Si es el primer slide (clon del último)
+                setTimeout(() => {
+                    carouselSlide.style.transition = 'none';
+                    currentIndex = slides.length - 2;
+                    carouselSlide.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }, 500);
             }
         }
+        
+        function nextSlide() {
+            if (currentIndex >= slides.length - 1) return;
+            currentIndex++;
+            moveToSlide(currentIndex);
+        }
 
-        function nextSlide() { moveToSlide(currentIndex + 1); }
-        function prevSlide() { moveToSlide(currentIndex - 1); }
+        function prevSlide() {
+            if (currentIndex <= 0) return;
+            currentIndex--;
+            moveToSlide(currentIndex);
+        }
 
         function startAutoSlide() {
             clearInterval(autoSlideInterval);
-            autoSlideInterval = setInterval(() => { if (!isTransitioning) nextSlide(); }, 5000);
+            autoSlideInterval = setInterval(nextSlide, 5000);
         }
 
-        nextBtn.addEventListener('click', () => { if (!isTransitioning) { clearInterval(autoSlideInterval); nextSlide(); startAutoSlide(); } });
-        prevBtn.addEventListener('click', () => { if (!isTransitioning) { clearInterval(autoSlideInterval); prevSlide(); startAutoSlide(); } });
-        carouselSlide.addEventListener('transitionend', handleTransitionEnd);
-        
-        const container = carouselSlide.parentElement;
-        container.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
-        container.addEventListener('mouseleave', startAutoSlide);
+        // Cargar imágenes dinámicamente
+        fetch('/api/carousel_images')
+            .then(response => response.json())
+            .then(imageUrls => {
+                if (imageUrls.length === 0) return;
 
-        window.addEventListener('resize', () => {
-            slideWidth = slides[0].clientWidth;
-            carouselSlide.style.transition = 'none';
-            carouselSlide.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-        });
+                // Crear los slides
+                imageUrls.forEach(url => {
+                    const slide = document.createElement('div');
+                    slide.className = 'slide';
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.alt = 'Trabajo de piercing';
+                    slide.appendChild(img);
+                    carouselSlide.appendChild(slide);
+                });
 
-        if (slides.length > 1) {
-            startAutoSlide();
-        }
+                // Configurar el bucle infinito
+                slides = document.querySelectorAll('.slide');
+                const firstClone = slides[0].cloneNode(true);
+                const lastClone = slides[slides.length - 1].cloneNode(true);
+                carouselSlide.appendChild(firstClone);
+                carouselSlide.insertBefore(lastClone, slides[0]);
+                
+                slides = document.querySelectorAll('.slide'); // Actualizar la lista de slides
+                currentIndex = 1;
+                carouselSlide.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                // Añadir eventos
+                nextBtn.addEventListener('click', () => { nextSlide(); startAutoSlide(); });
+                prevBtn.addEventListener('click', () => { prevSlide(); startAutoSlide(); });
+                carouselSlide.addEventListener('transitionend', handleLoop);
+                carouselContainer.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+                carouselContainer.addEventListener('mouseleave', startAutoSlide);
+                startAutoSlide();
+            });
     }
 
     // --- LÓGICA DEL MENÚ MÓVIL ---

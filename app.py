@@ -892,6 +892,23 @@ def check_session():
     print(f"--- /check-session: El valor de session['test_value'] es: {test_value} ---")
     return f"El valor de 'test_value' en la sesión es: {test_value}"
 
+@app.route('/api/carousel_images')
+def carousel_images():
+    """
+    Endpoint para obtener la lista de imágenes para el carrusel de la página de inicio.
+    ¡Ahora puedes añadir o quitar imágenes fácilmente desde aquí!
+    """
+    images = [
+        "../static/img/catalog-1.webp",
+        "../static/img/catalog-2.webp",
+        "../static/img/catalog-3.webp",
+        "../static/img/catalog-4.webp",
+        "../static/img/catalog-5.webp",
+        # --- ¡Añade nuevas imágenes aquí! ---
+        # Por ejemplo: "../static/img/nueva-foto-carrusel.webp",
+    ]
+    return jsonify(images)
+
 # --- 4. PUNTO DE ENTRADA DE LA APLICACIÓN ---
 
 if __name__ == '__main__':

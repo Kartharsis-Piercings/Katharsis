@@ -251,6 +251,23 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+     // Logica para el filtro en vista móvil
+    const filterToggleBtn = document.getElementById('filter-toggle-btn');
+    const catalogFilters = document.querySelector('.catalog-filters');
+
+    if (filterToggleBtn && catalogFilters) {
+        filterToggleBtn.addEventListener('click', () => {
+            catalogFilters.classList.toggle('filters-active');
+            
+            // Cambia el texto del botón
+            const isVisible = catalogFilters.classList.contains('filters-active');
+            filterToggleBtn.innerHTML = isVisible 
+                ? '<i class="fas fa-times"></i> Ocultar Filtros' 
+                : '<i class="fas fa-filter"></i> Mostrar Filtros';
+        });
+    }
+
      // 2. Lógica para WISHLIST
         document.querySelectorAll('.btn-wishlist').forEach(btn => {
             btn.addEventListener('click', async function() {
