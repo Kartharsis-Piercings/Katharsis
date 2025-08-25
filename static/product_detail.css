@@ -249,11 +249,20 @@
         top: auto;
     }
 
+    .product-info h1 {
+    margin-top: -5rem;
+    }
+    .current-price {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+
     .main-image {
         /* El contenedor de la imagen se hace flexible y se ajusta */
         width: 100%;
         height: auto;
         max-height: 450px; /* Limita la altura para no ser excesiva */
+        margin-top: 2.5rem;
     }
 
     .product-info h1 {
@@ -261,6 +270,18 @@
         font-size: 2rem;
     }
 
+    .product-info h3 a {
+        margin-top: 1rem;
+    }
+
+    .product-card .product-info {
+        margin-top: -0.2rem;
+        margin-bottom: -2.2rem;
+    }
+
+    .btn-add-cart {
+    margin-left: -0.3rem;
+    }
     .product-specs,
     .related-products {
         /* Añade más espacio superior en móvil para mejor separación */

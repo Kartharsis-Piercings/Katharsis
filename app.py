@@ -457,10 +457,14 @@ def joyas():
 @app.route('/api/filter_products')
 def api_filter_products():
     """
-    Endpoint API para obtener productos filtrados y ordenados sin recargar la página.
-    Devuelve los productos en formato JSON.
+    Endpoint API que ahora soporta paginación.
+    Devuelve los productos para una página específica y el total de páginas.
     """
     all_products = load_products_cached()
+    
+    # Recolecta los filtros, incluyendo el número de página
+    page = request.args.get('page', 1, type=int)
+    per_page = app.config['PRODUCTS_PER_PAGE']
     
     filters = {
         'category': request.args.get('category', 'all'),
@@ -471,14 +475,24 @@ def api_filter_products():
         'sort_by': request.args.get('sort_by', 'popular')
     }
 
-    # 1. Filtrar productos
+    # 1. Filtrar y ordenar productos (sin cambios)
     filtered_products = get_filtered_products(all_products, filters)
-    
-    # 2. Ordenar productos (usando la lógica ya corregida)
     sorted_products = sort_products(filtered_products, filters['sort_by'])
     
-    # 3. Devolver como JSON
-    return jsonify(sorted_products)
+    # 2. Lógica de paginación
+    total_products = len(sorted_products)
+    total_pages = (total_products + per_page - 1) // per_page
+    
+    start_idx = (page - 1) * per_page
+    end_idx = start_idx + per_page
+    products_for_page = sorted_products[start_idx:end_idx]
+    
+    # 3. Devolver un objeto JSON con los productos Y la información de paginación
+    return jsonify({
+        'products': products_for_page,
+        'total_pages': total_pages,
+        'current_page': page
+    })
 
 @app.route('/api/product/<int:product_id>')
 def api_get_product(product_id):

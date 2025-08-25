@@ -191,45 +191,7 @@
             </div>
             
             <!-- Paginación -->
-            {% if total_pages > 1 %}
-            <div class="pagination">
-                {# Botón 'Anterior' #}
-                {% if page > 1 %}
-                <a href="{{ url_for('joyas', 
-                    page=page-1, 
-                    category=current_filters.category, 
-                    body_part=current_filters.body_part,
-                    material=current_filters.material, 
-                    max_price=current_filters.max_price, 
-                    sort_by=current_filters.sort_by) }}" 
-                class="prev"><i class="fas fa-chevron-left"></i></a>
-                {% endif %}
-                
-                {# Números de página #}
-                {% for p in range(1, total_pages + 1) %}
-                <a href="{{ url_for('joyas', 
-                    page=p, 
-                    category=current_filters.category, 
-                    body_part=current_filters.body_part,
-                    material=current_filters.material, 
-                    max_price=current_filters.max_price, 
-                    sort_by=current_filters.sort_by) }}" 
-                class="page {% if p == page %}active{% endif %}">{{ p }}</a>
-                {% endfor %}
-                
-                {# Botón 'Siguiente' #}
-                {% if page < total_pages %}
-                <a href="{{ url_for('joyas', 
-                    page=page+1, 
-                    category=current_filters.category, 
-                    body_part=current_filters.body_part,
-                    material=current_filters.material, 
-                    max_price=current_filters.max_price, 
-                    sort_by=current_filters.sort_by) }}" 
-                class="next"><i class="fas fa-chevron-right"></i></a>
-                {% endif %}
-            </div>
-            {% endif %}
+            <div id="pagination-container" class="pagination"></div>
         </main>
     </div>
 

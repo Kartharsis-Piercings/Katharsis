@@ -381,32 +381,27 @@ document.addEventListener('DOMContentLoaded', function() {
         setupProductCardListeners();
     }
     /**
-     * Función principal para obtener y mostrar los productos dinámicamente.
+     * Función MODIFICADA para obtener y mostrar productos.
      */
-    async function fetchAndUpdateProducts() {
+    async function fetchAndUpdateProducts(page = 1) {
         const productsGrid = document.querySelector('.products-grid');
         if (!productsGrid) return;
-
-        // Mostramos un indicador de carga
         productsGrid.innerHTML = '<p style="text-align: center; font-size: 1.2rem;">Cargando productos...</p>';
 
-        // 1. Recolectar todos los filtros activos de la página
-        const filters = getActiveFilters();
+        const filters = getActiveFilters(page);
         
-        // 2. Construir la URL para nuestra API con todos los filtros
         const url = new URL('/api/filter_products', window.location.origin);
         Object.keys(filters).forEach(key => url.searchParams.append(key, filters[key]));
         
         try {
-            // 3. Realizar la petición fetch
             const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`Error del servidor: ${response.statusText}`);
-            }
-            const products = await response.json();
+            if (!response.ok) throw new Error(`Error del servidor: ${response.statusText}`);
             
-            // 4. Renderizar los productos en la página
-            renderProducts(products);
+            // La API ahora devuelve un objeto con productos e info de paginación
+            const data = await response.json();
+            
+            renderProducts(data.products);
+            renderPagination(data.total_pages, data.current_page);
 
         } catch (error) {
             console.error('Error al cargar los productos:', error);
@@ -415,17 +410,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /**
-     * Recolecta los valores de todos los filtros en la página.
-     * @returns {object} Un objeto con todos los filtros activos.
+     * Función MODIFICADA para recolectar filtros, incluyendo la página.
      */
-    function getActiveFilters() {
-        // Obtenemos los filtros de la URL actual para mantener el estado
+    function getActiveFilters(page = 1) {
         const params = new URLSearchParams(window.location.search);
         
         const priceSlider = document.getElementById('price-slider');
         const sortSelect = document.getElementById('sort-select');
 
         return {
+            page: page, // Añade el número de página a los filtros
             category: params.get('category') || 'all',
             body_part: params.get('body_part') || 'all',
             material: params.get('material') || 'all',
@@ -433,6 +427,49 @@ document.addEventListener('DOMContentLoaded', function() {
             sort_by: sortSelect ? sortSelect.value : 'popular'
         };
     }
+
+    /**
+     * ¡NUEVA FUNCIÓN!
+     * Dibuja los controles de paginación dinámicamente.
+     */
+    function renderPagination(totalPages, currentPage) {
+        const container = document.getElementById('pagination-container');
+        if (!container) return;
+        container.innerHTML = ''; // Limpia la paginación anterior
+
+        if (totalPages <= 1) return; // No muestra nada si solo hay una página
+
+        // Botón 'Anterior'
+        if (currentPage > 1) {
+            const prevLink = document.createElement('a');
+            prevLink.href = "#";
+            prevLink.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            prevLink.dataset.page = currentPage - 1;
+            container.appendChild(prevLink);
+        }
+
+        // Números de página
+        for (let i = 1; i <= totalPages; i++) {
+            const pageLink = document.createElement('a');
+            pageLink.href = "#";
+            pageLink.textContent = i;
+            pageLink.dataset.page = i;
+            if (i === currentPage) {
+                pageLink.classList.add('active');
+            }
+            container.appendChild(pageLink);
+        }
+
+        // Botón 'Siguiente'
+        if (currentPage < totalPages) {
+            const nextLink = document.createElement('a');
+            nextLink.href = "#";
+            nextLink.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            nextLink.dataset.page = currentPage + 1;
+            container.appendChild(nextLink);
+        }
+    }
+
 
     /**
      * Limpia el grid y renderiza la lista de productos.
@@ -463,7 +500,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 : `<span class="current-price">${formatPrice(product.price)}</span>`;
 
             // Lógica para las opciones de tamaño
-            const sizesOptions = product.sizes.map(size => `<option value="${size}">${size}</option>`).join('');
+            const sizesOptions = Object.keys(product.stock || {}).map(size => `<option value="${size}">${size}</option>`).join('');
 
              const saleBadgeHTML = product.on_sale 
                 ? `<span class="badge-sale">-${Math.round(((product.price - product.sale_price) / product.price) * 100)}%</span>` 
@@ -491,7 +528,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             <input type="hidden" name="product_id" value="${product.id}">
                             <select name="size" class="size-select" required>
                                 <option value="" disabled selected>Selecciona tamaño</option>
-                                ${sizesOptions}
+                                ${Object.keys(product.stock || {}).map(size => `
+                                    <option value="${size}">${size}</option>
+                                `).join('')}
                             </select>
                             <input type="hidden" name="quantity" value="1">
                             <button type="submit" class="btn-add-cart">Añadir al carrito</button>
@@ -507,41 +546,17 @@ document.addEventListener('DOMContentLoaded', function() {
          setupProductCardListeners();
     }
     
-    
-    /**
-     * Recolecta los valores de todos los filtros en la página.
-     */
-    function getActiveFilters() {
-        const params = new URLSearchParams(window.location.search);
-        return {
-            category: params.get('category') || 'all',
-            body_part: params.get('body_part') || 'all',
-            material: params.get('material') || 'all',
-            max_price: priceSlider ? priceSlider.value : '300',
-            sort_by: sortSelect ? sortSelect.value : 'popular'
-        };
-    }
-
-    /**
-     * Función principal para obtener y mostrar los productos dinámicamente.
-     */
-    async function fetchAndUpdateProducts() {
-        if (!productsGrid) return;
-        productsGrid.innerHTML = '<p style="text-align: center; font-size: 1.2rem;">Cargando productos...</p>';
-
-        const filters = getActiveFilters();
-        const url = new URL('/api/filter_products', window.location.origin);
-        Object.keys(filters).forEach(key => url.searchParams.append(key, filters[key]));
-
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`Error del servidor: ${response.statusText}`);
-            const products = await response.json();
-            renderProducts(products);
-        } catch (error) {
-            console.error('Error al cargar los productos:', error);
-            productsGrid.innerHTML = '<p style="text-align: center; color: red;">No se pudieron cargar los productos. Inténtalo de nuevo.</p>';
-        }
+    // AÑADE este listener para los clics en la paginación dinámica
+    const paginationContainer = document.getElementById('pagination-container');
+    if (paginationContainer) {
+        paginationContainer.addEventListener('click', function(e) {
+            e.preventDefault();
+            const link = e.target.closest('a');
+            if (link && link.dataset.page) {
+                const pageNum = parseInt(link.dataset.page, 10);
+                fetchAndUpdateProducts(pageNum);
+            }
+        });
     }
 
     // =========================================================================
