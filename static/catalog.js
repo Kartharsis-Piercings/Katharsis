@@ -398,6 +398,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+        // Función que se ejecuta cuando toda la página está lista
+    function initializeCatalog() {
+        // 1. Inicia la paginación de la carga inicial
+        const paginationContainer = document.getElementById('pagination-container');
+        if (paginationContainer) {
+            const totalPages = parseInt(paginationContainer.dataset.totalPages, 10);
+            const currentPage = parseInt(paginationContainer.dataset.currentPage, 10);
+            
+            if (totalPages > 1) {
+                renderPagination(totalPages, currentPage);
+            }
+        }
+
+        // 2. Añade los listeners a los filtros de precio y orden
+        const sortSelect = document.getElementById('sort-select');
+        if (sortSelect) {
+            sortSelect.addEventListener('change', () => fetchAndUpdateProducts(1));
+        }
+
+        const priceFilterForm = document.getElementById('price-filter-form');
+        if (priceFilterForm) {
+            priceFilterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                fetchAndUpdateProducts(1);
+            });
+        }
+    }
+
     /**
      * Función MODIFICADA para recolectar filtros, incluyendo la página.
      */
@@ -548,6 +576,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+
     // =========================================================================
     // ASIGNACIÓN DE EVENTOS INICIALES (SOLO PARA ELEMENTOS QUE NO CAMBIAN)
     // =========================================================================
@@ -596,6 +625,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    
+    // Llama a la función de inicialización cuando el DOM esté listo
+    initializeCatalog();
     // Llamada inicial para los productos que cargan con la página
     setupProductCardListeners();
 });

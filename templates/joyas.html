@@ -190,8 +190,11 @@
                 {% endif %}
             </div>
             
-            <!-- Paginación -->
-            <div id="pagination-container" class="pagination"></div>
+            <div id="pagination-container" 
+            class="pagination"
+            data-total-pages="{{ total_pages }}"
+            data-current-page="{{ page }}">
+            </div>
         </main>
     </div>
 
