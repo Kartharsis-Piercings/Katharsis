@@ -45,10 +45,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                     <div class="thumbnails">
                         ${product.images.map((image, index) => `
-                            <img src="${image}" 
+                            <img src="${image.replace('../', '')}" 
                                  alt="Miniatura ${index+1}" 
                                  class="${index === 0 ? 'active' : ''}" 
-                                 data-index="${index}">
+                                 data-src="${image.replace('../', '')}">
                         `).join('')}
                     </div>
                 </div>
@@ -56,9 +56,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h2>${product.name}</h2>
 
                     <div class="product-badges" style="margin-bottom: 1rem;">
-                                ${newBadgeHTML}
-                                ${saleBadgeHTML}
-                        </div>
+                        ${newBadgeHTML}
+                        ${saleBadgeHTML}
+                    </div>
 
                     <p class="product-category">${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</p>
                     <div class="modal-product-price">
@@ -73,27 +73,17 @@ document.addEventListener('DOMContentLoaded', function() {
                         ${product.description}
                     </p>
                     <div class="modal-product-actions">
-                            <form method="POST" action="/add_to_cart">
-                                <input type="hidden" name="product_id" value="${product.id}">
-                                <select name="size" class="size-select" required>
-                                    <option value="" disabled selected>Selecciona tamaño</option>
-                                    ${product.sizes.map(size => `
-                                        <option value="${size}">${size}</option>
-                                    `).join('')}
-                                </select>
-                                <input type="number" name="quantity" min="1" max="10" value="1" class="quantity-input">
-                                <button type="submit" class="btn-add-cart">Añadir al carrito</button>
-                            </form>
-                        <script>
-                        function validateSize(form) {
-                            const sizeSelect = form.querySelector('select[name="size"]');
-                            if (!sizeSelect.value) {
-                                alert("Por favor selecciona un tamaño");
-                                return false;
-                            }
-                            return true;
-                        }
-                        </script>
+                        <form method="POST" action="/add_to_cart" class="add-to-cart-form">
+                            <input type="hidden" name="product_id" value="${product.id}">
+                            <select name="size" class="size-select" required>
+                                <option value="" disabled selected>Selecciona tamaño</option>
+                                ${Object.keys(product.stock || {}).map(size => `
+                                    <option value="${size}">${size}</option>
+                                `).join('')}
+                            </select>
+                            <input type="number" name="quantity" min="1" max="10" value="1" class="quantity-input">
+                            <button type="submit" class="btn-add-cart">Añadir al carrito</button>
+                        </form>
                         <a href="/producto/${product.id}" class="btn-view-details">Ver detalles completos</a>
                     </div>
                     <div class="modal-product-details">
@@ -116,7 +106,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
 
-            
                 // Agregar event listener al nuevo formulario del modal
                     const quickViewForm = modalProduct.querySelector('form[action="/add_to_cart"]');
                     if (quickViewForm) {

@@ -224,7 +224,8 @@
     "name": "Aro Clásico de Titanio",
     "stock": {
       "8mm": 20,
-      "10mm": 22
+      "10mm": 22,
+      "6mm": 10
     },
     "category": "Aros",
     "body_parts": [
