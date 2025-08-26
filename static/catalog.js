@@ -399,7 +399,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
         // Función que se ejecuta cuando toda la página está lista
-    function initializeCatalog() {
+function initializeCatalog() {
         // 1. Inicia la paginación de la carga inicial
         const paginationContainer = document.getElementById('pagination-container');
         if (paginationContainer) {
