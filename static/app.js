@@ -58,12 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (imageUrls.length === 0) return;
 
                 // Crear los slides
-                imageUrls.forEach(url => {
+                imageUrls.forEach(imageData => { // Nos aseguramos de que el parámetro se llame 'imageData'
                     const slide = document.createElement('div');
                     slide.className = 'slide';
                     const img = document.createElement('img');
-                    img.src = url;
+                    
+                    // Usamos consistentemente 'imageData.path' y 'imageData.position'
+                    img.src = imageData.path; 
                     img.alt = 'Trabajo de piercing';
+                    img.style.objectPosition = imageData.position;
+                    
                     slide.appendChild(img);
                     carouselSlide.appendChild(slide);
                 });

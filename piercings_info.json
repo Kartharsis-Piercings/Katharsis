@@ -1,8 +1,9 @@
 {
-  "body_zones": [
+  "guides": [
     {
-      "zone_id": "oreja",
-      "zone_name": "Oreja",
+      "id": "oreja",
+      "title": "Oreja",
+      "type": "zone",
       "zone_description": "Los piercings en la oreja son de los más populares y ofrecen una amplia variedad de estilos, desde el clásico lóbulo hasta opciones más audaces en el cartílago.",
       "piercings": [
         {
@@ -50,12 +51,16 @@
             "titanio"
           ]
         }
+      ],
+      "images": [
+        "/static/img/piercings/Whisk_1d882cd457.webp"
       ]
     },
     {
-      "zone_id": "nariz",
-      "zone_name": "Nariz",
-      "zone_description": "Los piercings en la nariz, como el nostril o el septum, son una forma elegante de acentuar los rasgos faciales. Requieren un cuidado meticuloso para una buena cicatrización.",
+      "id": "nariz",
+      "title": "Nariz",
+      "type": "zone",
+      "zone_description": "Los piercings en la nariz, como el nostril o el septum, son una forma elegante de acentuarlos rasgos faciales. Requieren un cuidado meticuloso para una buena cicatrización.",
       "piercings": [
         {
           "id": "septum",
@@ -101,11 +106,16 @@
             "titanio"
           ]
         }
+      ],
+      "images": [
+        "/static/img/piercings/Whisk_1d882cd457.webp"
       ]
     },
     {
-      "zone_id": "ombligo",
-      "zone_name": "Ombligo",
+      "id": "ombligo",
+      "title": "Ombligo",
+      "type": "zone",
+      "zone_description": "",
       "piercings": [
         {
           "id": "navel_piercing",
@@ -130,11 +140,16 @@
             "titanio"
           ]
         }
+      ],
+      "images": [
+        "/static/img/piercings/Whisk_1d882cd457.webp"
       ]
     },
     {
-      "zone_id": "ceja",
-      "zone_name": "Ceja",
+      "id": "ceja",
+      "title": "Ceja",
+      "type": "zone",
+      "zone_description": "",
       "piercings": [
         {
           "id": "eyebrow",
@@ -157,19 +172,24 @@
             "bananas"
           ]
         }
+      ],
+      "images": [
+        "/static/img/piercings/Whisk_1d882cd457.webp"
       ]
-    }
-  ],
-  "important_info": [
+    },
     {
       "id": "cuidados_generales",
       "title": "Cuidados Generales Post-Perforación",
-      "content": "El cuidado posterior es crucial para una cicatrización exitosa. Lava siempre tus manos antes de tocar el piercing. Usa únicamente solución salina estéril para la limpieza. Nunca uses alcohol, agua oxigenada o cremas antibióticas, ya que pueden irritar la herida y retrasar la cicatrización..."
+      "type": "info",
+      "content": "El cuidado posterior es crucial para una cicatrización exitosa. Lava siempre tus manos antes de tocar el piercing. Usa únicamente solución salina estéril para la limpieza. Nunca uses alcohol, agua oxigenada o cremas antibióticas, ya que pueden irritar la herida y retrasar la cicatrización...",
+      "images": []
     },
     {
       "id": "materiales_seguros",
       "title": "La Importancia de los Materiales Seguros",
-      "content": "El material de tu joya inicial es fundamental. El titanio de grado implante (ASTM F-136) es la mejor opción, ya que es hipoalergénico y biocompatible, minimizando el riesgo de reacciones alérgicas e infecciones. El acero quirúrgico puede contener níquel, un alérgeno común..."
+      "type": "info",
+      "content": "El material de tu joya inicial es fundamental. El titanio de grado implante (ASTM F-136) es la mejor opción, ya que es hipoalergénico y biocompatible, minimizando el riesgo de reacciones alérgicas e infecciones. El acero quirúrgico puede contener níquel, un alérgeno común...",
+      "images": []
     }
   ]
 }

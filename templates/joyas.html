@@ -18,14 +18,14 @@
                 <h3>Categorías</h3>
                 <ul class="filter-list">
                     <li>
-                        <a href="{{ url_for('joyas', category='all', body_part=current_filters.body_part, material=current_filters.material, max_price=current_filters.max_price, sort_by=current_filters.sort_by) }}"
+                        <a href="{{ url_for('joyas', category='all', body_part='all', material=current_filters.material, max_price=current_filters.max_price, sort_by=current_filters.sort_by) }}"
                         class="{% if current_filters.category == 'all' %}filter-active{% endif %}">
                             Todos
                         </a>
                     </li>
                     {% for cat in categories %}
                     <li>
-                        <a href="{{ url_for('joyas', category=cat.id, body_part=current_filters.body_part, material=current_filters.material, max_price=current_filters.max_price, sort_by=current_filters.sort_by) }}"
+                        <a href="{{ url_for('joyas', category=cat.id, body_part='all', material=current_filters.material, max_price=current_filters.max_price, sort_by=current_filters.sort_by) }}"
                         class="{% if current_filters.category == cat.id|string %}filter-active{% endif %}">
                             {{ cat.name }}
                         </a>
@@ -38,14 +38,14 @@
                 <h3>Zona del cuerpo</h3>
                 <ul class="filter-list">
                     <li>
-                        <a href="{{ url_for('joyas', body_part='all', category=current_filters.category, material=current_filters.material, max_price=current_filters.max_price, sort_by=current_filters.sort_by) }}"
+                        <a href="{{ url_for('joyas', body_part='all', category='all', material=current_filters.material, max_price=current_filters.max_price, sort_by=current_filters.sort_by) }}"
                         class="{% if current_filters.body_part == 'all' %}filter-active{% endif %}">
                             Todos
                         </a>
                     </li>
                     {% for part in body_parts %}
                     <li>
-                        <a href="{{ url_for('joyas', body_part=part.id, category=current_filters.category, material=current_filters.material, max_price=current_filters.max_price, sort_by=current_filters.sort_by) }}"
+                        <a href="{{ url_for('joyas', body_part=part.id, category='all', material=current_filters.material, max_price=current_filters.max_price, sort_by=current_filters.sort_by) }}"
                         class="{% if current_filters.body_part == part.id %}filter-active{% endif %}">
                             {{ part.name }}
                         </a>
@@ -164,7 +164,8 @@
                                     <input type="hidden" name="product_id" value="{{ product.id }}">
                                     <select name="size" class="size-select" required>
                                         <option value="" disabled selected>Selecciona tamaño</option>
-                                        {% for size in product.sizes %}
+                                        {# ¡CORRECCIÓN! Iteramos sobre las claves del diccionario 'stock' #}
+                                        {% for size in product.stock.keys() %}
                                         <option value="{{ size }}">{{ size }}</option>
                                         {% endfor %}
                                     </select>

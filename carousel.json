@@ -1,0 +1,32 @@
+{
+  "images": [
+    {
+      "path": "../static/img/catalog-1.webp",
+      "position": "50% 50%"
+    },
+    {
+      "path": "../static/img/catalog-2.webp",
+      "position": "50% 50%"
+    },
+    {
+      "path": "../static/img/catalog-3.webp",
+      "position": "50% 50%"
+    },
+    {
+      "path": "../static/img/catalog-4.webp",
+      "position": "50% 50%"
+    },
+    {
+      "path": "../static/img/catalog-5.webp",
+      "position": "50% 50%"
+    },
+    {
+      "path": "../static/img/Whisk_23bfb75835.webp",
+      "position": "50% 50%"
+    },
+    {
+      "path": "../static/img/carousel_20250903_025045_Whisk_1d882cd457.jpg",
+      "position": "50% 50%"
+    }
+  ]
+}

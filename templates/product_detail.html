@@ -12,8 +12,16 @@
         <div class="product-detail-container">
             <!-- Galería de imágenes -->
             <div class="product-gallery">
-                <div class="main-image">
-                    <img src="{{ url_for('static', filename=product.images[0]) }}" alt="{{ product.name }}" id="main-product-image">
+                <div class="main-image-carousel">
+                    <div class="carousel-track-main">
+                        {% for image in product.images %}
+                        <div class="carousel-slide-main">
+                            <img src="{{ url_for('static', filename=image) }}" alt="{{ product.name }} vista {{ loop.index }}" id="main-product-image">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-button-main prev">&#10094;</button>
+                    <button class="carousel-button-main next">&#10095;</button>
                 </div>
                 <div class="thumbnails">
                     {% for image in product.images %}
@@ -25,6 +33,7 @@
                 </div>
             </div>
             
+
             <!-- Información del producto -->
             <div class="product-info">
                 <h1>{{ product.name }}</h1>
@@ -56,7 +65,7 @@
                         <label for="size">Tamaño:</label>
                         <select name="size" id="size" required>
                             <option value="" disabled selected>Selecciona tamaño</option>
-                            {% for size in product.sizes %}
+                            {% for size in product.stock.keys() %}
                             <option value="{{ size }}">{{ size }}</option>
                             {% endfor %}
                         </select>
@@ -74,13 +83,52 @@
                     <button type="submit" class="btn-add-cart">Añadir al carrito</button>
                 </form>
                 
-                <div class="product-specs">
-                    <h3>Especificaciones</h3>
-                    <ul>
-                        <li><strong>Material:</strong> {{ product.material | capitalize }}</li>
-                        <li><strong>Rosca:</strong> Interna</li>
-                        <li><strong>Garantía:</strong> 1 año contra defectos de fabricación</li>
-                    </ul>
+                <div class="info-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span><i class="fas fa-gem"></i> Beneficios</span>
+                            <i class="fas fa-chevron-down arrow-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <ul>
+                                <li>Material Titanio ASTM F-136 Grado Implante</li>
+                                <li>Resistente al agua y al sudor</li>
+                                <li>Garantía contra defectos de fábrica</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span><i class="fas fa-ruler-combined"></i> Especificaciones</span>
+                            <i class="fas fa-chevron-down arrow-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            {% if product.details %}
+                            <ul>
+                                {% if product.details.gauge %}<li><strong>Grosor:</strong> {{ product.details.gauge }}</li>{% endif %}
+                                {% if product.details.closure_type %}<li><strong>Tipo de cierre:</strong> {{ product.details.closure_type }}</li>{% endif %}
+                                {% if product.details.anodization %}<li><strong>Anodización:</strong> {{ product.details.anodization }}</li>{% endif %}
+                                {% if product.details.material %}<li><strong>Material:</strong> {{ product.details.material }}</li>{% endif %}
+                                {% if product.details.stone_type %}<li><strong>Tipo de Gema:</strong> {{ product.details.stone_type }}</li>{% endif %}
+                                {% if product.details.dimensions %}<li><strong>Dimensiones:</strong> {{ product.details.dimensions }}</li>{% endif %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span><i class="fas fa-truck"></i> Envíos y Plazos de Entrega</span>
+                            <i class="fas fa-chevron-down arrow-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <ul>
+                                <li><strong>Tarapoto, Morales, La Banda:</strong> 1 día hábil.</li>
+                                <li><strong>Provincias y otros distritos:</strong> 3 a 4 días hábiles.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -124,19 +172,54 @@
 
 {% block extra_js %}
 <script>
-// Galería de imágenes
-document.querySelectorAll('.thumbnails img').forEach(thumb => {
-    thumb.addEventListener('click', function() {
-        const mainImage = document.getElementById('main-product-image');
-        mainImage.src = this.getAttribute('data-image');
-        
-        // Actualizar clase activa
-        document.querySelectorAll('.thumbnails img').forEach(img => {
-            img.classList.remove('active');
+// --- LÓGICA MEJORADA DE LA GALERÍA DE IMÁGENES ---
+const track = document.querySelector('.carousel-track-main');
+// Solo activar si hay imágenes y más de una
+if (track && track.children.length > 0) {
+    const slides = Array.from(track.children);
+    const thumbnails = document.querySelectorAll('.thumbnails img');
+    let currentIndex = 0;
+
+    // Función central para mover el carrusel y actualizar las miniaturas
+    const moveToSlide = (newIndex) => {
+        // Mueve el track del carrusel
+        track.style.transform = `translateX(-${100 * newIndex}%)`;
+
+        // Actualiza la clase 'active' en la miniatura correspondiente
+        thumbnails[currentIndex].classList.remove('active');
+        thumbnails[newIndex].classList.add('active');
+
+        currentIndex = newIndex;
+    };
+
+    // Event listeners para los botones del carrusel (solo si hay más de una imagen)
+    if (slides.length > 1) {
+        const nextButton = document.querySelector('.carousel-button-main.next');
+        const prevButton = document.querySelector('.carousel-button-main.prev');
+
+        nextButton.addEventListener('click', () => {
+            const nextIndex = (currentIndex + 1) % slides.length; // Bucle hacia adelante
+            moveToSlide(nextIndex);
         });
-        this.classList.add('active');
+
+        prevButton.addEventListener('click', () => {
+            const prevIndex = (currentIndex - 1 + slides.length) % slides.length; // Bucle hacia atrás
+            moveToSlide(prevIndex);
+        });
+    } else {
+        // Oculta los botones si solo hay una imagen
+        document.querySelector('.carousel-button-main.next').style.display = 'none';
+        document.querySelector('.carousel-button-main.prev').style.display = 'none';
+    }
+
+
+    // Event listeners para las miniaturas
+    thumbnails.forEach((thumb, index) => {
+        thumb.addEventListener('click', () => {
+            moveToSlide(index);
+        });
     });
-});
+}
 
 // Controles de cantidad
 document.querySelector('.quantity-btn.plus').addEventListener('click', () => {
@@ -208,6 +291,31 @@ document.querySelector('.add-to-cart-form').addEventListener('submit', async fun
             btn.disabled = false;
         }, 2000);
     }
+});
+
+// --- LÓGICA DEL ACORDEÓN ---
+const accordionHeaders = document.querySelectorAll('.accordion-header');
+accordionHeaders.forEach(header => {
+    header.addEventListener('click', () => {
+        const accordionItem = header.parentElement;
+        const accordionContent = header.nextElementSibling;
+        
+        // Cierra otros acordeones abiertos para que solo uno esté abierto a la vez
+        document.querySelectorAll('.accordion-item').forEach(item => {
+            if (item !== accordionItem && item.classList.contains('active')) {
+                item.classList.remove('active');
+                item.querySelector('.accordion-content').style.maxHeight = null;
+            }
+        });
+
+        // Abre o cierra el acordeón clickeado
+        accordionItem.classList.toggle('active');
+        if (accordionItem.classList.contains('active')) {
+            accordionContent.style.maxHeight = accordionContent.scrollHeight + "px";
+        } else {
+            accordionContent.style.maxHeight = null;
+        }
+    });
 });
 
 </script>

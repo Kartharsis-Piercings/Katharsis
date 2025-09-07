@@ -16,6 +16,24 @@ from copy import deepcopy # deepcopy puede ser útil en algunas actualizaciones 
 
 # --- 1. INICIALIZACIÓN Y CONFIGURACIÓN ---
 
+
+# Añadimos las definiciones que faltaban
+load_dotenv()
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CAROUSEL_FILE = os.path.join(BASE_DIR, 'carousel.json')
+
+def load_json_data(filepath, default_value=None):
+    """Carga datos desde un archivo JSON de forma segura."""
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        # CORRECCIÓN: Si no se especifica un valor por defecto, devolvemos una LISTA vacía,
+        # que es lo que la mayoría de las funciones esperan.
+        return default_value if default_value is not None else []
+# --- FIN DE LA CORRECCIÓN ---
+
+
 app = Flask(__name__)
 
 # Configuración SEGURA y PERSISTENTE de sesiones (Flask-Session)
@@ -167,17 +185,50 @@ def get_materials(products):
     return [{"id": mat, "name": mat.capitalize()} for mat in materials]
 
 def get_filtered_products(products, filters):
-    filtered = products
-    if filters.get('category') and filters['category'] != 'all':
-        filtered = [p for p in filtered if p['category'] == filters['category']]
-    if filters.get('body_part') and filters['body_part'] != 'all':
-        filtered = [p for p in filtered if filters['body_part'] in p.get('body_parts', [])]
-    if filters.get('material') and filters['material'] != 'all':
-        filtered = [p for p in filtered if p['material'] == filters['material']]
+    """
+    Filtra los productos y maneja inteligentemente las incompatibilidades de filtros.
+    """
+    # 1. Aplicar todos los filtros iniciales
+    filtered = list(products) # Usamos una copia para no modificar la lista original
+    
+    # Filtrar por precio primero, ya que siempre se aplica
     min_price = float(filters.get('min_price', 0))
     max_price = float(filters.get('max_price', 300))
-    # Asegúrate que el precio a comparar exista
     filtered = [p for p in filtered if min_price <= p.get('sale_price', p.get('price', 0)) <= max_price]
+    
+    # Aplicar filtro de categoría
+    category_filter = filters.get('category')
+    if category_filter and category_filter != 'all':
+        filtered = [p for p in filtered if p['category'] == category_filter]
+        
+    # Aplicar filtro de zona del cuerpo
+    body_part_filter = filters.get('body_part')
+    if body_part_filter and body_part_filter != 'all':
+        # Guardamos los resultados con el filtro de categoría antes de aplicar el de zona
+        results_before_body_part = list(filtered) 
+        
+        filtered = [p for p in filtered if body_part_filter in p.get('body_parts', [])]
+        
+        # --- ¡AQUÍ ESTÁ LA LÓGICA INTELIGENTE! ---
+        # Si después de aplicar el filtro de zona no hay resultados,
+        # y antes sí los había, asumimos una incompatibilidad.
+        if not filtered and results_before_body_part:
+            # Anulamos el filtro de categoría y volvemos a filtrar desde el principio
+            # solo por la zona del cuerpo (la última selección del usuario).
+            temp_filtered = list(products) # Empezamos de nuevo con todos los productos
+            temp_filtered = [p for p in temp_filtered if min_price <= p.get('sale_price', p.get('price', 0)) <= max_price]
+            filtered = [p for p in temp_filtered if body_part_filter in p.get('body_parts', [])]
+            
+            # Actualizamos el diccionario de filtros para que el frontend sepa del cambio
+            filters['category'] = 'all'
+
+    # (Puedes aplicar la misma lógica inversa si filtras primero por zona y luego por categoría)
+    
+    # Aplicar filtro de material
+    material_filter = filters.get('material')
+    if material_filter and material_filter != 'all':
+        filtered = [p for p in filtered if p['material'] == material_filter]
+
     return filtered
 
 def sort_products(products, sort_by):
@@ -906,22 +957,15 @@ def check_session():
     print(f"--- /check-session: El valor de session['test_value'] es: {test_value} ---")
     return f"El valor de 'test_value' en la sesión es: {test_value}"
 
+# --- REEMPLAZA LA RUTA DEL CARRUSEL EXISTENTE POR ESTA ---
 @app.route('/api/carousel_images')
 def carousel_images():
     """
-    Endpoint para obtener la lista de imágenes para el carrusel de la página de inicio.
-    ¡Ahora puedes añadir o quitar imágenes fácilmente desde aquí!
+    Endpoint para obtener la lista de imágenes para el carrusel.
+    Ahora lee los datos desde carousel.json.
     """
-    images = [
-        "../static/img/catalog-1.webp",
-        "../static/img/catalog-2.webp",
-        "../static/img/catalog-3.webp",
-        "../static/img/catalog-4.webp",
-        "../static/img/catalog-5.webp",
-        # --- ¡Añade nuevas imágenes aquí! ---
-        # Por ejemplo: "../static/img/nueva-foto-carrusel.webp",
-    ]
-    return jsonify(images)
+    carousel_data = load_json_data(CAROUSEL_FILE, {"images": []})
+    return jsonify(carousel_data.get("images", []))
 
 # --- 4. PUNTO DE ENTRADA DE LA APLICACIÓN ---
 

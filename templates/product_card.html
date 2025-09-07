@@ -27,7 +27,7 @@
                 <input type="hidden" name="product_id" value="{{ product.id }}">
                 <select name="size" class="size-select" required>
                     <option value="" disabled selected>Tamaño</option>
-                    {% for size in product.sizes %}
+                    {% for size in product.stock.keys() %}
                     <option value="{{ size }}">{{ size }}</option>
                     {% endfor %}
                 </select>
