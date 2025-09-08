@@ -1604,6 +1604,11 @@
     .categories-grid {
         flex-direction: column;
     }
+    .btn.btn-category {
+        margin-top: auto;
+        transform: translateY(0); /* Quita la transformación */
+        width: auto;
+    }
 
     /* --- Página de Catálogo --- */
     .catalog-container {
