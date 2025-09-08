@@ -376,6 +376,9 @@
         margin-top: -0.2rem;
         margin-bottom: -1.2rem;
     }
+    .product-price {
+    margin-bottom: 1.5rem;
+    }
 
     .btn-add-cart {
     margin-left: -0.3rem;
