@@ -949,7 +949,6 @@
             gap: 0.5rem;
         }
         .size-select {
-            display: flex;
             gap: 0.5rem;
             margin-bottom: 1rem;
             background-color: #431f54;

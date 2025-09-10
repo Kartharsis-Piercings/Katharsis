@@ -380,14 +380,19 @@ def piercings():
     all_products = load_products_cached()
 
     # 2. Enriquecer los datos de piercings con productos recomendados
-    for zone in piercings_data.get('body_zones', []):
-        for piercing in zone.get('piercings', []):
-            tags = piercing.get('recommended_product_tags', [])
-            # Llama a la función para encontrar productos y los añade al diccionario del piercing
-            piercing['recommended_products'] = find_recommended_products(tags, all_products)
+    # Se itera sobre 'guides' (la clave correcta) en lugar de 'body_zones'
+    for guide in piercings_data.get('guides', []):
+        # Se comprueba que la guía sea de tipo 'zone' antes de buscar piercings
+        if guide.get('type') == 'zone':
+            for piercing in guide.get('piercings', []):
+                tags = piercing.get('recommended_product_tags', [])
+                # Llama a la función para encontrar productos y los añade al diccionario del piercing
+                piercing['recommended_products'] = find_recommended_products(tags, all_products)
 
     # 3. Enviar los datos completos a la plantilla
     return render_template('piercings.html', piercings_data=piercings_data)
+
+
 
 @app.route('/servicios')
 def servicios():
