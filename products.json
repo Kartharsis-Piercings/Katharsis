@@ -20,12 +20,21 @@
       "../static/img/products/labret/perla 3mm/foto 2.webp",
       "../static/img/products/labret/perla 3mm/foto 3.webp"
     ],
-    "description": "Un labret versátil y seguro, hecho de Titanio Grado Implante.",
+    "description": "Un labret versátil y seguro, hecho de Titanio Grado Implante. Joya inicial por excelencia. Se puede usar en la Oreja, Labios, Nariz.",
     "is_new": true,
     "on_sale": false,
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "16G (1.2mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Ninguna",
+      "dimensions": "Top: 3mm"
+    },
     "id": 1
   },
   {
@@ -53,6 +62,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "16G (1.2mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Ninguna ",
+      "dimensions": "Top: 3mm"
+    },
     "id": 2
   },
   {
@@ -79,6 +97,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "16G (1.2mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Zircon Ab",
+      "dimensions": "4mm"
+    },
     "id": 3
   },
   {
@@ -103,6 +130,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "16G (1.2mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Zircon Blanco",
+      "dimensions": "4mm"
+    },
     "id": 4
   },
   {
@@ -128,6 +164,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "16G (1.2mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Obsidiana",
+      "dimensions": "4mm"
+    },
     "id": 5
   },
   {
@@ -152,6 +197,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "16G (1.2mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Amatista",
+      "dimensions": "4mm y 2.5mm"
+    },
     "id": 6
   },
   {
@@ -176,6 +230,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "16G (1.2mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand ",
+      "stone_type": "Zircon Rosa",
+      "dimensions": "4mm"
+    },
     "id": 7
   },
   {
@@ -202,6 +265,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "20G (0.8mm)",
+      "closure_type": "Clicker",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM -F136",
+      "brand": "Right Grand",
+      "stone_type": "Ninguna",
+      "dimensions": "-"
+    },
     "id": 8
   },
   {
@@ -232,7 +304,7 @@
     "popularity": 0,
     "rosca": "interna",
     "details": {
-      "gauge": "16G",
+      "gauge": "16G (1.2mm)",
       "closure_type": "Clicker",
       "anodization": "Compatible",
       "material": "Titanio ASTM -F136",
@@ -260,12 +332,21 @@
       "../static/img/products/banana/foto 2.webp",
       "../static/img/products/banana/foto 3.webp"
     ],
-    "description": "Joya tipo Barbel banana versáti hecha de titanio grado implante.",
-    "is_new": false,
+    "description": "Joya tipo Barbel \"banana\" versátil hecha de Titanio Grado Implante. Excelente para Piercings de ceja, Daith, Labret Vertical y otros.",
+    "is_new": true,
     "on_sale": false,
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "16G (1.2mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM -F136",
+      "brand": "Right Grand",
+      "stone_type": "Top de Titanio",
+      "dimensions": "Disponible 3mm y 4mm"
+    },
     "id": 10
   },
   {
@@ -287,12 +368,21 @@
       "../static/img/products/barra/foto 2.webp",
       "../static/img/products/barra/foto 3.webp"
     ],
-    "description": "Joya tipo Barbel recto hecha de Titanio Grado Implante.",
+    "description": "Joya tipo Barbel recto hecha de Titanio Grado Implante. Ideal para piercing de Industrial, pezon y Brige",
     "is_new": true,
     "on_sale": false,
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "14G (1.6mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Ninguna",
+      "dimensions": "Top de Titanio: 4mm"
+    },
     "id": 11
   },
   {
@@ -313,12 +403,21 @@
       "../static/img/products/herradura/foto 2.webp",
       "../static/img/products/herradura/foto 3.webp"
     ],
-    "description": "Barbel Herradura hecha de Titanio Grado Implante.",
+    "description": "Barbel Herradura hecho de Titanio Grado Implante. Excelente para usar en la oreja, nariz y labios.",
     "is_new": true,
     "on_sale": false,
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "16G (1.2mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM -F136",
+      "brand": "Right Grand",
+      "stone_type": "Top de Titanio ",
+      "dimensions": "3mm"
+    },
     "id": 12
   },
   {
@@ -344,6 +443,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "16G (1.2mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Zircon",
+      "dimensions": "-"
+    },
     "id": 13
   },
   {
@@ -369,6 +477,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "16G (1.2mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Aquamarine",
+      "dimensions": "-"
+    },
     "id": 14
   },
   {
@@ -393,6 +510,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "16G (1.2mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand ",
+      "stone_type": "Zircón",
+      "dimensions": "-"
+    },
     "id": 15
   },
   {
@@ -417,6 +543,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "16G (1.2mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Zircon White",
+      "dimensions": "-"
+    },
     "id": 16
   },
   {
@@ -441,6 +576,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "16G (1.2mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Zircon",
+      "dimensions": "-"
+    },
     "id": 17
   },
   {
@@ -465,6 +609,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "20G (0.8mm)",
+      "closure_type": "-",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Zircón AB",
+      "dimensions": "2mm"
+    },
     "id": 18
   },
   {
@@ -489,6 +642,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "20G (0.8mm)",
+      "closure_type": "-",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Zircon Blanco",
+      "dimensions": "2mm"
+    },
     "id": 19
   },
   {
@@ -513,6 +675,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "20G (0.8mm)",
+      "closure_type": "-",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Ninguna",
+      "dimensions": "3mm"
+    },
     "id": 20
   },
   {
@@ -536,6 +707,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "20G (1.2mm)",
+      "closure_type": "-",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Ninguna",
+      "dimensions": "2.7mm"
+    },
     "id": 21
   },
   {
@@ -560,6 +740,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "20G (0.8mm)",
+      "closure_type": "-",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Ninguna",
+      "dimensions": "2.5mm"
+    },
     "id": 22
   },
   {
@@ -584,6 +773,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "20G (0.8mm)",
+      "closure_type": "-",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Zircón White",
+      "dimensions": "2.5mm"
+    },
     "id": 23
   },
   {
@@ -607,6 +805,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "14G (1.6mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Zircon Blanco",
+      "dimensions": "Top: 4mm Body: 6mm"
+    },
     "id": 24
   },
   {
@@ -631,6 +838,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "14G (1.6mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Zirconias AB",
+      "dimensions": "Top: 5mm Body: 10x8mm"
+    },
     "id": 25
   },
   {
@@ -654,6 +870,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "14G (1.6mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Zircon Blanco",
+      "dimensions": "Top: 5mm Body: 8mm"
+    },
     "id": 26
   },
   {
@@ -677,6 +902,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "14G (1.6mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Zircon AB",
+      "dimensions": "Top: 5mm Body: 8mm"
+    },
     "id": 27
   },
   {
@@ -694,12 +928,21 @@
       "../static/img/products/ombligo/celeste/foto 1 - 1.webp",
       "../static/img/products/ombligo/celeste/foto 3 - 1.webp"
     ],
-    "description": "Joya tipo barbel de Titanio Grado Implante para ombligo con Aquamarine incrustadas.",
+    "description": "Joya Barbel de Titanio Grado Implante para ombligo con Aquamarine incrustadas.",
     "is_new": true,
     "on_sale": false,
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "14G (1.6mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM -F136",
+      "brand": "Right Grand",
+      "stone_type": "Aquamarine",
+      "dimensions": "Top: 4mm Body: 6mm"
+    },
     "id": 28
   },
   {
@@ -708,7 +951,10 @@
       "8mm": 10
     },
     "category": "Labrets",
-    "body_parts": [],
+    "body_parts": [
+      "oreja",
+      "labios"
+    ],
     "price": 75.0,
     "sale_price": 69.9,
     "images": [
@@ -720,6 +966,15 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
+    "details": {
+      "gauge": "16G (1.2mm)",
+      "closure_type": "Rosca Interna",
+      "anodization": "Compatible",
+      "material": "Titanio ASTM F-136",
+      "brand": "Right Grand",
+      "stone_type": "Ninguna",
+      "dimensions": "Top: 4mm"
+    },
     "id": 29
   }
 ]
