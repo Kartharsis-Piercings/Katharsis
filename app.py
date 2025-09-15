@@ -260,6 +260,43 @@ def initialize_cart():
         }
     return session['cart']
 
+@app.route('/apply_coupon', methods=['POST'])
+def apply_coupon():
+    cart = initialize_cart()
+    data = request.get_json()
+    coupon_code = data.get('coupon_code', '').upper() # Convertimos a mayúsculas
+
+    if not coupon_code:
+        return jsonify({'error': 'Por favor, introduce un código de cupón.'}), 400
+
+    all_coupons = load_coupons()
+    coupon_to_apply = next((c for c in all_coupons if c['code'].upper() == coupon_code), None)
+
+    # --- Validaciones del cupón ---
+    if not coupon_to_apply:
+        flash('El código del cupón no es válido.', 'danger')
+        return jsonify({'error': 'Cupón no válido'}), 404
+
+    if not coupon_to_apply.get('active', False):
+        flash('Este cupón ya no está activo.', 'danger')
+        return jsonify({'error': 'Cupón inactivo'}), 403
+
+    if 'expiration' in coupon_to_apply:
+        try:
+            expiration_date = datetime.strptime(coupon_to_apply['expiration'], '%Y-%m-%d').date()
+            if expiration_date < datetime.now().date():
+                flash('Este cupón ha expirado.', 'danger')
+                return jsonify({'error': 'Cupón expirado'}), 403
+        except ValueError:
+            pass # Ignora si el formato de fecha es incorrecto
+
+    # Si pasa todas las validaciones, lo guardamos en la sesión
+    cart['coupon'] = coupon_to_apply['code']
+    session.modified = True
+    flash(f"¡Cupón '{coupon_to_apply['code']}' aplicado con éxito!", 'success')
+    
+    return jsonify({'status': 'success'})
+
 def get_cart_total(cart):
     # 1. Calcula el subtotal inicial
     subtotal = sum(item.get('price', 0) * item.get('quantity', 0) for item in cart.get('cart_items', []))

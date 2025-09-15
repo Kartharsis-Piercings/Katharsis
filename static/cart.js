@@ -302,23 +302,34 @@ function updateSummaryTotals(subtotal, total, shippingCost, promoMessage) {
     const applyCouponBtn = document.getElementById('apply-coupon');
     if (applyCouponBtn) {
         applyCouponBtn.addEventListener('click', async () => {
-            const couponCode = document.getElementById('coupon-input')?.value?.trim();
-            if (!couponCode) return;
+            const couponInput = document.getElementById('coupon-input');
+            const couponCode = couponInput.value.trim();
             
-            const response = await fetch('/apply_coupon', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': getCSRFToken()
-                },
-                body: JSON.stringify({ coupon_code: couponCode })
-            });
-            
-            if (response.ok) {
-                location.reload();
-            } else {
-                const error = await response.json();
-                alert(error.error || 'Error al aplicar el cupón');
+            if (!couponCode) {
+                alert('Por favor, introduce un código de cupón.');
+                return;
+            }
+
+            try {
+                const response = await fetch('/apply_coupon', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ coupon_code: couponCode })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Si el cupón se aplica correctamente, recargamos la página
+                    // para que el servidor muestre los nuevos totales y el mensaje flash.
+                    location.reload();
+                } else {
+                    // Si hay un error, lo mostramos en un alert.
+                    alert(data.error || 'Ocurrió un error al aplicar el cupón.');
+                }
+            } catch (error) {
+                console.error('Error de red:', error);
+                alert('No se pudo conectar con el servidor. Inténtalo de nuevo.');
             }
         });
     }
