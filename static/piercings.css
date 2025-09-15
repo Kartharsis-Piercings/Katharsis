@@ -2,7 +2,7 @@
 .piercing-guide-container {
     display: flex;
     gap: 2.5rem;
-    padding: 3rem 5%;
+    padding: 2rem 5%;
     max-width: 1400px;
     margin: 0 auto;
     align-items: flex-start;
@@ -18,6 +18,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.product-info {
+    padding: 0.5rem 1rem 0.1rem;
 }
 
 .guide-main-image img {
@@ -100,8 +104,12 @@
     background: #151515;
     padding: 2rem;
     border-radius: 8px;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     border: 1px solid #2a2a2a;
+}
+
+.product-category {
+    margin-bottom: 0.5rem;
 }
 
 .piercing-article h3 {

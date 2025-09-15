@@ -864,7 +864,9 @@ def process_order():
     items_text = ""
     for item in cart['cart_items']:
         items_text += f"- {item['name']} (Tamaño: {item['size']}, Cant: {item['quantity']}) - S/ {item['price'] * item['quantity']}\n"
-
+        # Si el ítem tiene un mensaje, lo añadimos
+        if item.get('message'):
+            items_text += f"  📝 Mensaje: {item['message']}\n"
     # URL-encode para el mensaje de Telegram
     message_to_owner = (f"""
 
@@ -946,7 +948,25 @@ Fecha del Pedido: {order_timestamp}
         'redirect_url': url_for('index') # O una página de "gracias por tu compra"
     })
 
-# ... (y así sucesivamente para apply_coupon, update_shipping, etc.)
+# --- RUTA PARA GUARDAR MENSAJES PERSONALIZADOS EN EL CARRITO ---
+@app.route('/update_cart_message', methods=['POST'])
+def update_cart_message():
+    cart = initialize_cart()
+    data = request.get_json()
+    
+    product_id = data.get('product_id')
+    size = data.get('size')
+    message = data.get('message', '')
+
+    # Buscamos el ítem en el carrito y le añadimos/actualizamos el mensaje
+    for item in cart.get('cart_items', []):
+        if item['product_id'] == product_id and item['size'] == size:
+            item['message'] = message
+            session.modified = True
+            return jsonify({'status': 'success', 'message': 'Mensaje guardado.'})
+            
+    return jsonify({'status': 'error', 'message': 'Ítem no encontrado.'}), 404
+
 
 # --- RUTAS DE PRUEBA DE SESIÓN ---
 

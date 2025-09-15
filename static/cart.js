@@ -111,6 +111,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
+    // Función para actualizar el mensaje personalizado de un ítem
+    async function updateCartItemMessage(itemId, message) {
+        const [productId, size] = itemId.split('-');
+        try {
+            const response = await fetch('/update_cart_message', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    product_id: productId,
+                    size: size,
+                    message: message
+                })
+            });
+            if (!response.ok) {
+                console.error('Error al guardar el mensaje del producto.');
+            }
+        } catch (error) {
+            console.error('Error de conexión al guardar el mensaje:', error);
+        }
+    }
+
     // Función para actualizar ítem (CORREGIDA)
     async function updateCartItem(itemId, quantity) {
         const [productId, size] = itemId.split('-');
@@ -259,6 +280,20 @@ function updateSummaryTotals(subtotal, total, shippingCost, promoMessage) {
                 if (confirm('¿Eliminar este producto del carrito?')) {
                     removeCartItem(itemId);
                 }
+            });
+        });
+
+        document.querySelectorAll('.item-message-input').forEach(textarea => {
+            let debounceTimer;
+            textarea.addEventListener('input', function() {
+                clearTimeout(debounceTimer);
+                const itemId = this.dataset.id;
+                const message = this.value;
+
+                // Usamos un 'debounce' para no enviar una petición por cada letra tecleada
+                debounceTimer = setTimeout(() => {
+                    updateCartItemMessage(itemId, message);
+                }, 500); // Espera medio segundo después de que el usuario deja de escribir
             });
         });
     }
