@@ -24,7 +24,7 @@
     "is_new": true,
     "on_sale": false,
     "material": "titanio",
-    "popularity": 0,
+    "popularity": 10,
     "rosca": "interna",
     "details": {
       "gauge": "16G (1.2mm)",
@@ -301,7 +301,7 @@
     "is_new": true,
     "on_sale": false,
     "material": "titanio",
-    "popularity": 0,
+    "popularity": 10,
     "rosca": "interna",
     "details": {
       "gauge": "16G (1.2mm)",
@@ -336,7 +336,7 @@
     "is_new": true,
     "on_sale": false,
     "material": "titanio",
-    "popularity": 0,
+    "popularity": 10,
     "rosca": "interna",
     "details": {
       "gauge": "16G (1.2mm)",
@@ -372,7 +372,7 @@
     "is_new": true,
     "on_sale": false,
     "material": "titanio",
-    "popularity": 0,
+    "popularity": 10,
     "rosca": "interna",
     "details": {
       "gauge": "14G (1.6mm)",
@@ -407,7 +407,7 @@
     "is_new": true,
     "on_sale": false,
     "material": "titanio",
-    "popularity": 0,
+    "popularity": 10,
     "rosca": "interna",
     "details": {
       "gauge": "16G (1.2mm)",
@@ -607,7 +607,7 @@
     "is_new": true,
     "on_sale": false,
     "material": "titanio",
-    "popularity": 0,
+    "popularity": 10,
     "rosca": "interna",
     "details": {
       "gauge": "20G (0.8mm)",
@@ -803,7 +803,7 @@
     "is_new": true,
     "on_sale": false,
     "material": "titanio",
-    "popularity": 0,
+    "popularity": 10,
     "rosca": "interna",
     "details": {
       "gauge": "14G (1.6mm)",

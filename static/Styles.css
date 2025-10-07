@@ -18,6 +18,7 @@
                         url('../static/img/Background.webp') center/cover;
             position: fixed;
             width: 100%;
+            height: 60px;
             top: 0;
             z-index: 1000;
             display: flex;
@@ -90,38 +91,38 @@
 
         /* Hero Section */
         .hero {
-            height: 95vh;
+            height: 85vh;
             background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)),
                         url('../static/img/hero-background.webp') center/cover;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
             text-align: center;
-            padding: 0 10%;
+            padding: 15vh 10% 0 10%;
             margin-top: -0px;
         }
 
         .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 0.8rem;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
             text-shadow: #000000 0px 0px 6px;
             font-family: "quicksand", sans-serif;
             font-style: normal;
         }
 
         .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
             max-width: 800px;
             text-shadow: #000000 1.2px 1.12px 0px;
             font-family: "quicksand", sans-serif;
         }
 
         .hero-content .sub-hero {
-            font-size: 1.3rem;
+            font-size: 1rem;
             font-weight: 500;
             max-width: 60ch; /* Limita el ancho para mejor legibilidad */
-            margin: 0 auto 2rem auto;
+            margin: 0 auto 1rem auto;
             color: #ddd;
         }
 
@@ -133,11 +134,12 @@
         }
 
         .btn {
-            padding: 1rem 2rem;
+            padding: 0.7rem 1.5rem;
             border-radius: 25px;
             text-decoration: none;
             font-weight: bold;
             margin-bottom: 5rem;
+            font-size: 1rem;
         }
 
         .btn-primary {
@@ -165,42 +167,273 @@
             color: #0a0a0a;
         }
 
-        /* Texto a lado del carrusel */
+        /* ============================================= */
+        /* SECCIÓN 1: GALERÍA DE TRABAJOS (CARRUSEL)       */
+        /* ============================================= */
         .carousel-section {
-            background: #0f0f0f;
+            background: #0a0a0a;
+            padding: 4rem 0;
         }
-        /* Contenedor para texto y carrusel en fila */
         .carousel-wrapper {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 2rem;
-            margin: 0rem 0;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
         }
-
-        /* Texto a la izquierda */
         .carousel-text {
-            text-align: left;
-            font-size: 1.2rem;
-            color: #f5f5f5;
-            font-family: "quicksand", sans-serif;
-            max-width: 849px;
-            margin: 0;
-            margin-left: 2.2rem;
-            margin-right: 1.5rem;
-            line-height: 1.5;
+            flex-basis: 40%;
+            flex-shrink: 0;
         }
         .carousel-text h2 {
             font-size: 2.5rem;
             color: #84529C;
-            margin-bottom: -0.4rem;
-            font-family: "quicksand", sans-serif;
+            margin-bottom: 1rem;
+            font-family: "Quicksand", sans-serif;
         }
         .carousel-text p {
-            font-size: 1.2rem;
+            color: #bbb;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        .btn-instagram {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 1px solid #84529C;
+            color: #84529C;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .btn-instagram:hover {
+            background: #84529C;
+            color: white;
+        }
+
+        .gallery-carousel-container {
+            flex-grow: 1;
+            position: relative;
+            overflow: hidden;
+            height: 450px;
+        }
+        .gallery-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+        .gallery-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .gallery-slide img, .gallery-slide video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 1.5rem 1rem 1rem 1rem;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        .prev-btn-gallery, .next-btn-gallery {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .prev-btn-gallery { left: 15px; }
+        .next-btn-gallery { right: 15px; }
+
+        /* ============================================= */
+        /* SECCIÓN 2: PILARES DE CONFIANZA (FEATURES)    */
+        /* ============================================= */
+        .features-section {
+            padding: 4rem 5%;
+            background: #151515;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .feature-card {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(132, 82, 156, 0.3); /* Borde iluminado */
+            border-color: #84529C;
+        }
+        .feature-card i {
+            font-size: 2.5rem;
+            color: #84529C;
+            margin-bottom: 1.5rem;
+        }
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        .feature-card p {
+            color: #bbb;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .btn-link.read-more-feature {
+            color: #84529C;
+            background: none;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-link.read-more-feature:hover {
+            text-decoration: underline;
+        }
+
+        /* ============================================= */
+        /* SECCIÓN 3: CATEGORÍAS DESTACADAS (CARRUSEL)   */
+        /* ============================================= */
+        .product-categories {
+            padding: 4rem 0;
+        }
+
+        .category-carousel-container {
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 0;
+            overflow: hidden; /* Oculta el desbordamiento para el efecto de difuminado */
+        }
+
+        /* ¡NUEVO! Pseudo-elementos para el difuminado */
+        .category-carousel-container::before,
+        .category-carousel-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100px; /* Ancho del difuminado */
+            height: 100%;
+            z-index: 2; /* Por encima de las tarjetas */
+            pointer-events: none; /* Permite hacer clic a través de ellos */
+        }
+
+        .category-carousel-container::before {
+            left: 0;
+            background: linear-gradient(to right, #212121, transparent); /* Usa el color de fondo de tu página */
+        }
+
+        .category-carousel-container::after {
+            right: 0;
+            background: linear-gradient(to left, #212121, transparent); /* Usa el color de fondo de tu página */
+        }
+        .category-track {
+            display: flex;
+            align-items: center; /* Clave para el efecto de escala */
+            gap: 2rem;
+            transition: transform 0.5s ease-in-out;
+            padding: 0 5%;
+        }
+        .category-card-wrapper {
+            flex-shrink: 0;
+            width: 23%; /* Ajustado para 4 tarjetas */
+            transition: width 0.5s ease;
+        }
+        .category-card {
+            height: 380px;
+            border-radius: 15px;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+        .category-card.center {
+            transform: scale(1.1); /* Tarjeta del centro es más grande */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .category-info {
+            justify-content: flex-end;
+        }
+        .price-range {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #ccc;
             margin-top: 0.5rem;
-            color: #f5f5f5;
-            font-family: "quicksand", sans-serif;
+        }
+        .prev-btn-category, .next-btn-category {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .prev-btn-category { left: 2%; }
+        .next-btn-category { right: 2%; }
+
+
+        /* ============================================= */
+        /* MODAL PARA "FEATURES"                         */
+        /* ============================================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            border-top: 5px solid #84529C;
+        }
+        .close-modal-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #777;
+            cursor: pointer;
+        }
+        .modal-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        .modal-content p {
+            color: #bbb;
+            line-height: 1.7;
         }
 
         /* Estilos del carrusel */
@@ -227,67 +460,6 @@
             border-color: #84529C;
         }
 
-        .prev-btn { left: 15px; }
-        .next-btn { right: 15px; }
-
-        /* Carrusel a la derecha */
-        .carousel-container {
-            position: relative;
-            position: left;
-            display: flex;
-            max-width: 350px;
-            height: 370px;
-            margin:auto;
-            overflow: hidden;
-        }
-
-        .carousel-slide {
-            display: flex;
-            position: central;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .slide {
-            min-width: 100%;
-            box-sizing: border-box;
-        }
-
-        /* Permite ajustar la posición de cada imagen individualmente */
-        .slide img {
-            width: 100%;
-            height: auto;
-            display: block;
-            /* Por defecto sin desplazamiento */
-            position: relative;
-            left: 0;
-            top: 0;
-        }
-
-        /* Ajusta la posición de la primera imagen */
-        .slide-1 img {
-            left: 0px; /* Cambia este valor para mover en X */
-            top: 0px;  /* Cambia este valor para mover en Y */
-        }
-        /* Ajusta la posición de la segunda imagen */
-        .slide-2 img {
-            left: 10px;
-            top: 10px;
-        }
-        /* Ajusta la posición de la tercera imagen */
-        .slide-3 img {
-            left: -10px;
-            top: 15px;
-        }
-        /* Ajusta la posición de la cuarta imagen */
-        .slide-4 img {
-            left: 0px;
-            top: 10px;
-        }
-        /* Ajusta la posición de la quinta imagen */
-        .slide-5 img {
-            left: 5px;
-            top: 10px;
-        }
 
         .carousel-btn {
             position: absolute;
@@ -351,7 +523,6 @@
 
         /* Sección de Categorías de Productos */
         .product-categories {
-            padding: 2rem 5%;
             background: #212121;
         }
 
@@ -414,14 +585,22 @@
             z-index: 2;
             padding: 1.5rem;
             color: #fff;
+            text-decoration: none; /* Asegura que el texto no tenga subrayado */
+        }
+
+        a.category-card {
+            text-decoration: none; /* <-- AÑADE O VERIFICA ESTA LÍNEA */
+        
         }
 
         .category-info {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-end; /* Alinea todo el contenido hacia abajo */
             height: 100%;
             padding: 1.5rem;
+            position: relative; /* Añadido para el z-index */
+            z-index: 2;
         }
 
         .category-info h3,
@@ -456,59 +635,10 @@
             display: inline-block;
             font-family: "quicksand", sans-serif;
             font-size: 0.8rem;
-            transform: translateY(80px);
         }
 
         .btn-category:hover {
             background: #6a3d7f;
-        }
-
-        /* Sección de Testimonios */
-        .testimonials {
-            padding: 3rem 5%;
-            background: #0f0f0f;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .testimonial-card {
-            background: #1a1a1a;
-            padding: 2rem;
-            border-radius: 10px;
-            border-left: 5px solid #84529C;
-        }
-
-        .testimonial-card p {
-            font-style: italic;
-            color: #ccc;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        /* Icono de comillas para decorar */
-        .testimonial-card p::before {
-            content: '\f10d'; /* Ícono de comillas de Font Awesome */
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            color: #84529C;
-            font-size: 2rem;
-            position: absolute;
-            top: -1.5rem;
-            left: -1rem;
-            opacity: 0.2;
-        }
-
-        .testimonial-author {
-            font-weight: bold;
-            color: #fff;
-            text-align: right;
         }
 
 
@@ -1463,8 +1593,117 @@
             display: none;
         }
         
+/* ====================================================== */
+/* ESTILOS PARA LA NUEVA SECCIÓN DE TARJETAS GUÍA         */
+/* ====================================================== */
+.guide-cards-section {
+    background: transparent; /* Fondo transparente */
+    padding-top: 35px;
+    padding-bottom: 35px;
+    overflow: hidden;
+    position: relative; /* Necesario para el z-index */
+    z-index: 5; /* Asegura que esté por encima del hero */
+    margin-top: -32vh; /* ¡LA CLAVE! Mueve toda la sección hacia arriba */
+}
 
-        /* ==========================================================================
+.guide-cards-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.guide-cards-track {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0 5%; /* Padding lateral para que no se pegue a los bordes */
+    transition: transform 0.5s ease-in-out;
+}
+
+.guide-card-wrapper {
+    flex-shrink: 0;
+    width: calc( (100% / 4) - 1.2rem ); /* Muestra 4 tarjetas en escritorio */
+}
+
+/* Estilo de la tarjeta individual */
+a.guide-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Alinea el contenido abajo */
+    height: 260px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    text-decoration: none;
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto de superposición oscura para legibilidad del texto */
+a.guide-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0.1) 60%);
+    z-index: 1;
+}
+
+/* Efectos hover de agrandar e iluminar */
+a.guide-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(132, 82, 156, 0.5); /* Iluminación */
+}
+
+.card-content {
+    position: relative;
+    z-index: 2;
+    padding: 1.5rem;
+}
+
+.card-content h3 {
+    font-size: 1.3rem;
+    font-family: 'Quicksand', sans-serif;
+    margin-bottom: 0.3rem;
+}
+
+.card-content p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+    margin-bottom: 0.8rem;
+}
+
+.btn-card {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background: #84529C;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    transition: background-color 0.3s;
+}
+
+a.guide-card:hover .btn-card {
+    background: #6a3d7f;
+}
+
+/* Estilo de los botones de navegación */
+.prev-btn-guide, .next-btn-guide {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+.prev-btn-guide { left: 2%; }
+.next-btn-guide { right: 2%; }
+
+
+
+/* ==========================================================================
    INICIO DE ESTILOS RESPONSIVE PARA MÓVILES
    ========================================================================== */
 
@@ -1523,6 +1762,27 @@
     .main-image {
         height: 350px; /* Ajusta la altura de la imagen principal */
     }
+    .guide-card-wrapper {
+        width: calc( (100% / 3) - 1.1rem ); /* Muestra 3 tarjetas en tablets */
+    }
+
+    a.guide-card {
+    height: 270px;
+    }
+
+        .carousel-wrapper {
+        flex-direction: column;
+    }
+    .gallery-carousel-container {
+        width: 100%;
+        height: 400px;
+    }
+    .category-track {
+        padding: 0 15%;
+    }
+    .category-card-wrapper {
+        width: 70%;
+    }
 }
 
    @media (max-width: 768px) {
@@ -1537,7 +1797,7 @@
     .nav-links {
         display: none; /* Oculto por defecto */
         position: fixed;
-        top: 65px; /* Altura del header */
+        top: 59px; /* Altura del header */
         left: 0;
         width: 250px;
         height: calc(100vh - 65px);
@@ -1562,8 +1822,15 @@
     .hero {
         padding: 0 5%;
     }
+    .hero-content {
+        margin-top: 100px;
+    }
     .hero-content h1 {
-        font-size: 2.5rem;
+        font-size: 1.5rem;
+    }
+    .hero-content .sub-hero {
+    font-size: 1rem;
+    font-weight: 500;
     }
     .cta-buttons {
         flex-direction: column;
@@ -1573,8 +1840,15 @@
     .btn {
         width: 80%;
         max-width: 300px;
-        margin-bottom: 0.5rem;  
+        margin-bottom: 0.5rem;
+        font-size: 0.8rem;
+        padding: 0.7rem 1rem;
     }
+
+    a.guide-card {
+    height: 270px;
+    }
+
     .carousel-wrapper {
         flex-direction: column; /* Apila el texto y el carrusel */
         padding: 2rem 5%;
@@ -1607,6 +1881,14 @@
         margin-top: auto;
         transform: translateY(0); /* Quita la transformación */
         width: auto;
+        font-size: 0.8rem;
+    }
+
+        .guide-card-wrapper {
+        width: calc( (100% / 2) - 1rem ); /* Muestra 2 tarjetas */
+    }
+    .guide-cards-track {
+        padding: 0 10%; /* Aumenta el padding para centrar mejor */
     }
 
     /* --- Página de Catálogo --- */
@@ -1638,14 +1920,19 @@
     }
 }
 
+@media (max-width: 600px) {
+    .guide-card-wrapper {
+        width: 80%; /* Muestra 1 tarjeta a la vez */
+    }
+}
 
 /* --- Para Celulares Pequeños (480px o menos) --- */
 @media (max-width: 480px) {
     .hero-content h1 {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
     .hero-content p.sub-hero {
-        font-size: 1rem;
+        font-size: 0.8rem;
     }
     .section-title,
     .carousel-text h2 {
@@ -1667,6 +1954,8 @@
     }
     .btn {
     margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    padding: 0.7rem 2rem;
     }
 }
 

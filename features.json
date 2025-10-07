@@ -1,0 +1,22 @@
+{
+  "features": [
+    {
+      "icon": "fas fa-shield-alt",
+      "title": "Máxima Higiene",
+      "short_description": "Protocolos de asepsia y esterilización en autoclave para tu total tranquilidad.",
+      "full_description": "Tu seguridad no es negociable. Utilizamos un autoclave para esterilizar todas nuestras joyas y herramientas, siguiendo protocolos clínicos. Cada procedimiento se realiza en un ambiente controlado para eliminar cualquier riesgo y asegurar una experiencia impecable."
+    },
+    {
+      "icon": "fas fa-certificate",
+      "title": "Materiales Premium",
+      "short_description": "Solo utilizamos Titanio Grado Implante (ASTM F-136), el estándar de oro en la industria.",
+      "full_description": "El material de tu joya inicial es crucial. A diferencia del acero quirúrgico, el titanio de grado implante es 100% hipoalergénico y biocompatible. Esto significa menos irritación, cero alergias al níquel y una cicatrización mucho más rápida y segura para tu cuerpo."
+    },
+    {
+      "icon": "fas fa-user-md",
+      "title": "Asesoramiento Profesional",
+      "short_description": "Desde la elección de la joya hasta el cuidado post-piercing, estamos contigo.",
+      "full_description": "Cada cuerpo es único. Te ofrecemos una asesoría personalizada para elegir la joya y la ubicación perfecta según tu anatomía y estilo. Resolvemos todas tus dudas antes, durante y después del procedimiento para que te sientas en total confianza."
+    }
+  ]
+}

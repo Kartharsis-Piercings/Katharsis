@@ -85,18 +85,32 @@
                     {% elif guide.type == 'info' %}
                         <article class="piercing-article">
                             <h3>{{ guide.title }}</h3>
-                            {% if guide.images %}
-                                <div class="info-guide-images">
-                                {% for image in guide.images %}
-                                    <img src="{{ url_for('static', filename=image.replace('../', '')) }}" alt="{{ guide.title }}">
+                            
+                            <div class="info-content-constructor">
+                                {% for block in guide.content_blocks %}
+                                    {# Usamos una clase CSS dinámica basada en el tipo de bloque #}
+                                    <div class="info-block block-{{ block.type }}">
+                                        
+                                        {# Condición para mostrar la imagen (si el bloque la tiene) #}
+                                        {% if 'image' in block.type %}
+                                        <div class="info-block-image">
+                                            <img src="{{ url_for('static', filename=block.image.lstrip('/')) }}" alt="{{ guide.title }}">
+                                        </div>
+                                        {% endif %}
+
+                                        {# Condición para mostrar el texto (si el bloque lo tiene) #}
+                                        {% if 'text' in block.type or block.type in ['image_left', 'image_right'] %}
+                                        <div class="info-block-text">
+                                            {{ block.text | format_text | safe }}
+                                        </div>
+                                        {% endif %}
+
+                                    </div>
                                 {% endfor %}
-                                </div>
-                            {% endif %}
-                            <div class="info-guide-content">
-                                {{ guide.content | safe }}
                             </div>
                         </article>
                     {% endif %}
+
                 </section>
             {% endfor %}
         </main>

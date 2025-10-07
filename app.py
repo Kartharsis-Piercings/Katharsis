@@ -5,6 +5,7 @@ import webbrowser
 import os
 import urllib.parse
 import uuid
+import re
 import hashlib
 import time
 import requests
@@ -12,15 +13,46 @@ from dotenv import load_dotenv
 load_dotenv()
 from datetime import datetime, timedelta
 from functools import lru_cache
+import random
 from copy import deepcopy # deepcopy puede ser útil en algunas actualizaciones complejas
 
 # --- 1. INICIALIZACIÓN Y CONFIGURACIÓN ---
 
+def format_content_text(text):
+    """
+    Convierte un bloque de texto con una notación simple a HTML.
+    - Las líneas que empiezan con '## ' se convierten en subtítulos (<h4>).
+    - El resto de líneas se envuelven en párrafos (<p>).
+    """
+    if not text:
+        return ""
+        
+    html_output = []
+    # Divide el texto en párrafos separados por una o más líneas en blanco
+    paragraphs = re.split(r'\n\s*\n', text.strip())
+    
+    for para in paragraphs:
+        # Elimina espacios extra al principio/final de cada párrafo
+        clean_para = para.strip()
+        if clean_para.startswith('## '):
+            # Es un subtítulo. Le quitamos el '## ' y lo envolvemos en <h4>
+            subtitle_text = clean_para[3:]
+            html_output.append(f'<h4>{subtitle_text}</h4>')
+        elif clean_para:
+            # Es un párrafo normal. Lo envolvemos en <p>
+            # Reemplazamos los saltos de línea simples por <br> para mantenerlos
+            paragraph_html = clean_para.replace('\n', '<br>')
+            html_output.append(f'<p>{paragraph_html}</p>')
+            
+    return "\n".join(html_output)
 
 # Añadimos las definiciones que faltaban
 load_dotenv()
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CAROUSEL_FILE = os.path.join(BASE_DIR, 'carousel.json')
+GUIDE_CARDS_FILE = os.path.join(BASE_DIR, 'guide_cards.json')
+PORTFOLIO_FILE = os.path.join(BASE_DIR, 'portfolio.json') # <-- NUEVO
+FEATURES_FILE = os.path.join(BASE_DIR, 'features.json')   # <-- NUEVO
 
 def load_json_data(filepath, default_value=None):
     """Carga datos desde un archivo JSON de forma segura."""
@@ -55,8 +87,10 @@ Session(app)
 app.config['PRODUCTS_PER_PAGE'] = 12
 app.config['PRODUCTS_FILE'] = 'products.json'
 app.config['COUPONS_FILE'] = 'coupons.json'
+app.jinja_env.filters['format_text'] = format_content_text
 
 # --- 2. FILTROS Y FUNCIONES DE AYUDA ---
+
 
 @app.template_filter('number_format')
 def number_format(value):
@@ -401,11 +435,77 @@ def find_recommended_products(tags, all_products, limit=3):
     # Devolver solo los diccionarios de productos, hasta el límite especificado
     return [item['product'] for item in scored_products[:limit]]
 
+# --- ¡NUEVA FUNCIÓN PARA CATEGORÍAS DESTACADAS! ---
+def get_featured_categories(all_products, num_categories=7):
+    """
+    Selecciona las categorías más populares basadas en la popularidad de sus productos.
+    """
+    category_popularity = {}
+    category_info = {}
+
+    for product in all_products:
+        category = product.get('category')
+        if not category:
+            continue
+
+        popularity = product.get('popularity', 0)
+        category_popularity[category] = category_popularity.get(category, 0) + popularity
+
+        # Guardar info de la categoría (nombre, primera imagen encontrada, producto más popular)
+        if category not in category_info:
+            category_info[category] = {
+                'name': category,
+                'image': product.get('images', [''])[0],
+                'most_popular_product_image': product.get('images', [''])[0],
+                'max_popularity': popularity,
+                'price_range': [product.get('price')]
+            }
+        else:
+            category_info[category]['price_range'].append(product.get('price'))
+            if popularity > category_info[category]['max_popularity']:
+                category_info[category]['max_popularity'] = popularity
+                category_info[category]['most_popular_product_image'] = product.get('images', [''])[0]
+
+    # Ordenar categorías por popularidad total
+    sorted_categories = sorted(category_popularity.items(), key=lambda item: item[1], reverse=True)
+    
+    featured = []
+    for category_name, _ in sorted_categories[:num_categories]:
+        info = category_info[category_name]
+        # Calcular rango de precios
+        prices = [p for p in info['price_range'] if p is not None]
+        if prices:
+            min_price = min(prices)
+            info['price_string'] = f"Desde S/{min_price:.2f}"
+        else:
+            info['price_string'] = ""
+        
+        featured.append(info)
+
+    return featured
+
 # --- 3. RUTAS DE LA APLICACIÓN ---
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    # Cargar todos los datos necesarios para la página de inicio
+    all_products = load_products_cached()
+    guide_cards_data = load_json_data(GUIDE_CARDS_FILE, {"cards": []})
+    portfolio_data = load_json_data(PORTFOLIO_FILE, {"gallery_items": []})
+    features_data = load_json_data(FEATURES_FILE, {"features": []})
+
+    # Seleccionar las categorías destacadas dinámicamente
+    featured_categories = get_featured_categories(all_products, num_categories=7)
+
+    # Aleatorizar la galería de trabajos
+    gallery_items = portfolio_data.get('gallery_items', [])
+    random.shuffle(gallery_items)
+    
+    return render_template('index.html', 
+                           guide_cards=guide_cards_data.get('cards', []),
+                           gallery_items=gallery_items,
+                           features=features_data.get('features', []),
+                           featured_categories=featured_categories)
 
 @app.route('/piercings')
 def piercings():
@@ -428,6 +528,35 @@ def piercings():
 
     # 3. Enviar los datos completos a la plantilla
     return render_template('piercings.html', piercings_data=piercings_data)
+
+def format_content_text(text):
+    """
+    Convierte un bloque de texto con una notación simple a HTML.
+    - Las líneas que empiezan con '## ' se convierten en subtítulos (<h4>).
+    - El resto de líneas se envuelven en párrafos (<p>).
+    """
+    if not text:
+        return ""
+        
+    html_output = []
+    # Divide el texto en párrafos separados por una o más líneas en blanco
+    paragraphs = re.split(r'\n\s*\n', text.strip())
+    
+    for para in paragraphs:
+        # Elimina espacios extra al principio/final de cada párrafo
+        clean_para = para.strip()
+        if clean_para.startswith('## '):
+            # Es un subtítulo. Le quitamos el '## ' y lo envolvemos en <h4>
+            subtitle_text = clean_para[3:]
+            html_output.append(f'<h4>{subtitle_text}</h4>')
+        elif clean_para:
+            # Es un párrafo normal. Lo envolvemos en <p>
+            # Reemplazamos los saltos de línea simples por <br> para mantenerlos
+            paragraph_html = clean_para.replace('\n', '<br>')
+            html_output.append(f'<p>{paragraph_html}</p>')
+            
+    return "\n".join(html_output)
+
 
 
 

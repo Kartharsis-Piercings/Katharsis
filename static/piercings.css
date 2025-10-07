@@ -80,6 +80,10 @@
     width: 75%;
 }
 
+.piercing-info-text p {
+    line-height: 1.5;
+}
+
 .content-section {
     margin-bottom: 4rem;
     /* Evita que el título quede oculto bajo el header al navegar desde el índice */
@@ -135,11 +139,25 @@
     min-width: 300px;
 }
 
+.info-block-text h4 {
+    color: #84529C; /* Color púrpura característico */
+    font-size: 1.3rem;
+    margin-top: 1.5rem; /* Espacio antes del subtítulo */
+    margin-bottom: 0.75rem; /* Espacio después del subtítulo */
+    border-left: 3px solid #84529C;
+    padding-left: 0.75rem;
+}
+
+/* Evita un margen superior extra si el subtítulo es el primer elemento */
+.info-block-text h4:first-child {
+    margin-top: 0;
+}
+
 .piercing-images {
     flex: 1;
     display: flex;
     gap: 1rem;
-    min-width: 200px;
+    min-width: 300px;
 }
 
 .piercing-images img {
@@ -172,6 +190,58 @@
 /* Ocultamos el botón de toggle en escritorio */
 #nav-toggle-btn {
     display: none;
+}
+
+
+/* ===================================================
+   ESTILOS PARA EL CONSTRUCTOR DE CONTENIDO DINÁMICO
+   =================================================== */
+
+.info-content-constructor {
+    margin-top: 1.5rem;
+}
+
+.info-block {
+    margin-bottom: 2.5rem; /* Espacio entre bloques de contenido */
+}
+
+/* --- Estilos para los bloques con imagen y texto --- */
+.info-block.block-image_left,
+.info-block.block-image_right {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+    gap: 2rem;
+    align-items: center;
+}
+
+/* Invierte el orden para el bloque con imagen a la derecha */
+.info-block.block-image_right .info-block-image {
+    order: 2;
+}
+.info-block.block-image_right .info-block-text {
+    order: 1;
+}
+
+/* --- Estilos para los componentes internos --- */
+.info-block-image img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+}
+
+.info-block-text {
+    line-height: 1.8;
+    color: #ccc;
+}
+
+/* Los párrafos dentro de los bloques de texto tienen un margen inferior */
+.info-block-text p {
+    margin-bottom: 1em;
+}
+
+/* Elimina el margen del último párrafo para un espaciado limpio */
+.info-block-text p:last-child {
+    margin-bottom: 0;
 }
 
 
@@ -295,5 +365,16 @@
     }
     .recommended-product-price {
         font-size: 0.85rem;
+    }
+        .info-block.block-image_left,
+    .info-block.block-image_right {
+        /* En pantallas pequeñas, pasa a una sola columna */
+        grid-template-columns: 1fr;
+    }
+
+    /* En modo responsivo, el orden ya no importa */
+    .info-block.block-image_right .info-block-image,
+    .info-block.block-image_right .info-block-text {
+        order: initial;
     }
 }

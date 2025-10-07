@@ -9,20 +9,21 @@
         {
           "id": "helix",
           "name": "Piercing Helix",
-          "description": "El piercing Helix se realiza en el cartílago superior externo de la oreja. Es una opción muy versátil que permite usar aros, barbels curvos o labrets con hermosos tops decorativos.",
+          "description": "El piercing Hélix es uno de los más populares y versátiles en la oreja. Se ubica en la parte superior del cartílago, en el borde exterior, lo que permite una amplia variedad de joyas y estilos. Estéticamente, puede ser minimalista con una sola pieza discreta o un punto de partida para una combinación más elaborada de múltiples piercings.",
           "images": [
             "/static/img/piercings/helix/helix-1.webp"
           ],
           "details": {
             "pain_level": "4/10 (Moderado)",
             "healing_time": "6 a 12 meses",
-            "initial_jewelry": "Labret de titanio, Barbell recto"
+            "initial_jewelry": "Labret o barra recta de Titanio ASTM-F136 16G (1.2mm)"
           },
           "aftercare_tips": [
-            "Limpiar dos veces al día con solución salina estéril.",
-            "No dormir sobre el piercing durante la cicatrización inicial.",
-            "Evitar el contacto con productos para el cabello y cosméticos.",
-            "No girar ni mover la joya intencionadamente."
+            "Evita dormir sobre la oreja recién perforada para no ejercer presión y retrasar la curación.",
+            "Ten cuidado al cepillarte el cabello o al usar audífonos para no enganchar la joya.",
+            "Limpia tu piercing con una solución salina estéril dos veces al día.",
+            "Sé paciente con el proceso de curación; el cartílago tarda más en sanar que el lóbulo.",
+            "No manipules la joya ni la retires antes de que el piercing esté completamente curado."
           ],
           "recommended_product_tags": [
             "labrets",
@@ -32,19 +33,21 @@
         },
         {
           "id": "lobulo",
-          "name": "Piercing Lóbulo",
-          "description": "El piercing en el lóbulo es el más común y el de más rápida cicatrización. Es ideal para principiantes y permite una gran variedad de joyería casi desde el inicio.",
+          "name": "Piercings de Lóbulo",
+          "description": "El piercing en el lóbulo es, sin duda, el más clásico y universal. Se realiza en la parte blanda y carnosa inferior de la oreja, lo que lo hace ideal para la primera perforación. Por su parte, el \"Upper Lobe\" es un segundo o tercer piercing que se coloca ligeramente más arriba en la misma zona. Ambos son perfectos para empezar en el mundo de los piercings debido a su fácil cicatrización y baja incomodidad.",
           "images": [
             "/static/img/piercings/lobe/lobe-1.webp"
           ],
           "details": {
             "pain_level": "2/10 (Bajo)",
-            "healing_time": "6 a 8 semanas",
-            "initial_jewelry": "Cualquier joya de titanio de calibre adecuado"
+            "healing_time": "2-4 meses",
+            "initial_jewelry": "Labret o arete de barra de Titanio ASTM-F136 16G(1.2mm)"
           },
           "aftercare_tips": [
-            "Limpiar una o dos veces al día con solución salina.",
-            "Asegurarse de que los cierres de las joyas no estén demasiado apretados."
+            "Realiza la limpieza dos veces al día con solución salina estéril para evitar infecciones.",
+            "Evita tocar o girar la joya; esto solo irrita el tejido en curación.",
+            "Cambia la joya solo una vez que el piercing esté completamente curado para no dañar el conducto.",
+            "Procura no aplicar productos como perfumes o geles de cabello cerca de la zona."
           ],
           "recommended_product_tags": [
             "labrets",
@@ -65,18 +68,20 @@
         {
           "id": "septum",
           "name": "Piercing Septum",
-          "description": "Se realiza en el 'punto dulce' del tabique nasal. Su gran ventaja es que puede ocultarse fácilmente girando la joya hacia adentro. La cicatrización suele ser rápida si se realiza correctamente.",
+          "description": "El piercing Septum se realiza en el \"punto dulce\" de la nariz, una pequeña y delgada membrana de piel y cartílago entre las fosas nasales, justo por debajo del tabique nasal. Se ha convertido en un piercing muy popular gracias a su capacidad de ser discreto (se puede voltear hacia arriba para esconderlo) o ser un punto focal audaz con la joyería adecuada.",
           "images": [
             "/static/img/piercings/septum/septum-1.webp"
           ],
           "details": {
-            "pain_level": "5/10 (Moderado)",
+            "pain_level": "3/10 (Bajo)",
             "healing_time": "2 a 3 meses",
-            "initial_jewelry": "Circular barbell (herradura), Clicker de titanio"
+            "initial_jewelry": "Aro circular o Barbel Herradura de Titanio ASTM-F136 de 16G o 14G"
           },
           "aftercare_tips": [
-            "Limpiar la zona con solución salina, evitando mover demasiado la joya.",
-            "Tener cuidado al sonarse la nariz."
+            "Evita tocar el piercing, especialmente cuando te suenas la nariz, para no irritar la zona.",
+            "Limpia con solución salina estéril dos veces al día sin mover la joya.",
+            "Sé paciente con el tiempo de curación, ya que es una zona con constante movimiento.",
+            "No gires la joya, esto puede introducir bacterias en el canal de perforación."
           ],
           "recommended_product_tags": [
             "herraduras",
@@ -87,18 +92,21 @@
         {
           "id": "nostril",
           "name": "Piercing Nostril",
-          "description": "Se realiza en el ala de la fosa nasal nasal. Un piercing con un excelente balance entre elegante y coqueto. La cicatrización suele ser rápida si se cuida y limpia correctamente.",
+          "description": "El piercing Nostril se realiza en el cartílago de una de las fosas nasales, en la curvatura exterior. Es uno de los piercings faciales más populares y versátiles, ya que puede llevarse con una joya discreta (un pequeño brillante) o con un aro más llamativo. Su posición lo convierte en un punto de acento que resalta la forma de la nariz y aporta un toque de estilo personal.",
           "images": [
             "/static/img/piercings/nostril/nostril-1.webp"
           ],
           "details": {
-            "pain_level": "6/10 (Moderado)",
-            "healing_time": "2 a 3 meses",
-            "initial_jewelry": "Nostril de Titanio"
+            "pain_level": "5/10 (Moderado)",
+            "healing_time": "3 a 6 meses",
+            "initial_jewelry": "Joyas Nostril o Labret de Titanio ASTM-F136"
           },
           "aftercare_tips": [
-            "Limpiar la zona con solución salina, evitando mover demasiado la joya.",
-            "Tener cuidado al sonarse la nariz."
+            "Evita el maquillaje y cremas cerca del piercing para no irritar la zona.",
+            "Ten mucho cuidado al secarte la cara o al usar toallas, ya que la joya podría engancharse.",
+            "Limpia suavemente la zona con solución salina estéril dos veces al día.",
+            "Evita tocar o girar la joya, esto puede causar la formación de queloides.",
+            "No cambies la joya antes de que el piercing esté completamente curado para evitar daños"
           ],
           "recommended_product_tags": [
             "nostril",
@@ -120,19 +128,21 @@
         {
           "id": "navel_piercing",
           "name": "Navel Piercing",
-          "description": "Un piercing bonito y coqueto",
+          "description": "El piercing Navel, o de ombligo, es un clásico atemporal y uno de los piercings más deseados. Se realiza en el pliegue de piel justo encima del ombligo. Es una joya que realza la silueta, especialmente popular en verano, y ofrece una gran variedad de estilos, desde piezas sencillas con un pequeño brillante hasta colgantes más elaborados y llamativos.",
           "images": [
             "/static/img/piercings/ombligo/navel_piercing/navel_piercing-1.jpeg"
           ],
           "details": {
-            "pain_level": "4/10 Bajo",
+            "pain_level": "4/10 (Bajo-Moderado)",
             "healing_time": "2 a 4 Meses",
-            "initial_jewelry": "Navel"
+            "initial_jewelry": "Barra curva de Titanio ASTM-F136 14G(1.6mm) "
           },
           "aftercare_tips": [
-            "No correr",
-            "No ejercicio",
-            "Bajar de peso"
+            "Evita la ropa ajustada o con cinturones que puedan rozar el piercing y causar irritación.",
+            "Al limpiar la zona, ten cuidado de no girar ni mover la joya en exceso.",
+            "Durante la curación, protege el piercing al hacer ejercicio para evitar enganches.",
+            "Mantén el área del ombligo limpia y seca; la humedad puede favorecer la proliferación de bacterias.",
+            "Sé muy paciente con el proceso de curación, ya que puede tardar varios meses en sanar por completo."
           ],
           "recommended_product_tags": [
             "ombligo",
@@ -153,20 +163,22 @@
       "piercings": [
         {
           "id": "eyebrow",
-          "name": "Eyebrow",
-          "description": "El eyebrow es un piercing que se realiza en la esquina exterior de la ceja",
+          "name": "Eyebrow Piercing",
+          "description": "El piercing de ceja es una perforación que se realiza vertical u horizontalmente a través de la piel en la cresta de la ceja. Este piercing es una forma llamativa de expresión personal que enmarca el ojo y añade un toque de audacia al rostro. Se puede adaptar a diferentes estilos según la joya elegida, desde una barra discreta hasta un aro que siga la forma del ojo.",
           "images": [
             "/static/img/piercings/ceja/eyebrow/eyebrow-1.png"
           ],
           "details": {
-            "pain_level": "4/10",
+            "pain_level": "3/10 (Bajo)",
             "healing_time": "2 a 3 meses",
-            "initial_jewelry": "Banana"
+            "initial_jewelry": "Barra curva de Titanio ASTM-F136"
           },
           "aftercare_tips": [
-            "Evitar el contacto directo del piercing con las manos",
-            "Evitar golpes directos en la zona",
-            "Evitar dormirse encima del piercing"
+            "Evita el maquillaje o cremas en la zona para prevenir irritaciones o infecciones.",
+            "Ten cuidado al vestirte o al secarte con una toalla para no enganchar la joya.",
+            "La curación es relativamente sencilla, pero sé constante con la limpieza diaria.",
+            "Protege tu piercing del sol directo y de productos químicos fuertes como el cloro de las piscinas.",
+            "No toques la joya innecesariamente; el movimiento constante puede provocar cicatrices o rechazo del cuerpo."
           ],
           "recommended_product_tags": [
             "bananas"
@@ -178,18 +190,120 @@
       ]
     },
     {
-      "id": "cuidados_generales",
-      "title": "Cuidados Generales Post-Perforación",
-      "type": "info",
-      "content": "El cuidado posterior es crucial para una cicatrización exitosa. Lava siempre tus manos antes de tocar el piercing. Usa únicamente solución salina estéril para la limpieza. Nunca uses alcohol, agua oxigenada o cremas antibióticas, ya que pueden irritar la herida y retrasar la cicatrización...",
-      "images": []
+      "id": "labios",
+      "title": "Labios",
+      "type": "zone",
+      "zone_description": "Son perforaciones que se realizan tanto en el labio superior como inferior.",
+      "piercings": [
+        {
+          "id": "snake-bites",
+          "name": "Snake-Bites",
+          "description": "Los Snake Bites son un par de piercings simétricos colocados a cada lado del labio inferior, imitando la mordida de una serpiente, de ahí su nombre. Son una forma de expresión audaz y popular, que permite una gran versatilidad en el estilo, ya que se pueden usar con aros, labrets o una combinación de ambos para un look único.\n\n",
+          "images": [],
+          "details": {
+            "pain_level": "5/10 (Moderado)",
+            "healing_time": "3-6 meses",
+            "initial_jewelry": "Labrets de Titanio ASTM-F136 16G de 10 a 12mm"
+          },
+          "aftercare_tips": [
+            "Realiza enjuagues bucales con una solución salina sin alcohol después de cada comida.",
+            "Evita alimentos picantes, ácidos o muy calientes durante las primeras semanas.",
+            "La higiene bucal es crucial; cepíllate los dientes con cuidado después de cada comida.",
+            "Evita jugar con las joyas con la lengua o los dientes, ya que esto puede dañar las encías y los dientes.",
+            "No retires las joyas hasta que el piercing esté completamente curado."
+          ],
+          "recommended_product_tags": [
+            "labrets",
+            "aros",
+            "herraduras"
+          ]
+        }
+      ]
     },
     {
       "id": "materiales_seguros",
-      "title": "La Importancia de los Materiales Seguros",
+      "title": "Cuidados para tu nuevo piercing",
       "type": "info",
-      "content": "El material de tu joya inicial es fundamental. El titanio de grado implante (ASTM F-136) es la mejor opción, ya que es hipoalergénico y biocompatible, minimizando el riesgo de reacciones alérgicas e infecciones. El acero quirúrgico puede contener níquel, un alérgeno común...",
-      "images": []
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "¡Felicidades por tu nuevo piercing! El proceso de curación es una de las etapas más importantes para que luzca perfecto y sano. Una higiene adecuada es la clave para evitar infecciones y asegurar una curación exitosa. Sigue estos sencillos pasos y tu nuevo piercing sanará sin problemas."
+        },
+        {
+          "type": "image_left",
+          "text": "El cuidado de tu piercing debe ser suave pero constante. La regla de oro es no tocarlo con las manos sucias. Lávate las manos a fondo con jabón antibacterial antes de tocar la zona. No gires la joya ni la manipules innecesariamente. Este movimiento puede irritar el canal de la perforación, introducir bacterias y retrasar la curación. La única vez que debes tocarlo es durante la limpieza.",
+          "image": ""
+        },
+        {
+          "type": "image_right",
+          "text": "Para la limpieza, te recomendamos usar una solución salina estéril. Puedes comprarla en cualquier farmacia o tienda especializada. Aplica la solución con una gasa estéril o un bastoncillo de algodón suavemente alrededor de la joya, eliminando cualquier residuo o costra. Hazlo dos veces al día: una por la mañana y otra por la noche. Si el piercing está en la boca, usa un enjuague bucal sin alcohol.",
+          "image": ""
+        },
+        {
+          "type": "text",
+          "text": "Recuerda que la paciencia es tu mejor aliada. El tiempo de curación varía según la zona del cuerpo, y forzar el cambio de joya antes de tiempo puede causar daños severos. Si notas enrojecimiento excesivo, dolor, hinchazón o secreción de color amarillo o verde, consulta a tu piercer profesional. Ellos te darán la orientación adecuada y te ayudarán a resolver cualquier inconveniente para que disfrutes al máximo de tu nuevo piercing."
+        }
+      ]
+    },
+    {
+      "id": "anodización",
+      "title": "El Color de tu piercing: ¿Qué es la Anodización?\n",
+      "type": "info",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "La anodización es un proceso electroquímico que permite colorear las joyas de titanio de manera segura, sin usar pigmentos o tintes. No se trata de un recubrimiento o una pintura, sino de una capa de óxido que se crea en la superficie del metal. Esta capa es biocompatible, duradera y no se desprende, lo que la hace perfecta para piercings."
+        },
+        {
+          "type": "image_right",
+          "text": "El proceso es fascinante. Se sumerge la joya de titanio en una solución electrolítica y se le aplica una corriente eléctrica. Al variar el voltaje, se puede controlar el grosor de la capa de óxido. Lo curioso es que el color que vemos no es un pigmento, sino el resultado de cómo la luz se refracta y se refleja en esa capa. Diferentes grosores producen diferentes colores, creando un espectro que va desde el bronce hasta el azul, el morado y el rosa.",
+          "image": ""
+        },
+        {
+          "type": "image_only",
+          "image": ""
+        },
+        {
+          "type": "image_left",
+          "text": "La anodización no solo tiene un fin estético, sino también funcional. Al crear esa capa de óxido, se incrementa la resistencia del material a la corrosión, haciendo que la joya sea aún más segura y duradera. Es una excelente alternativa para quienes desean un piercing colorido, ya que es mucho más seguro que los recubrimientos de otros materiales que pueden desprenderse y causar irritación o alergias.",
+          "image": ""
+        },
+        {
+          "type": "text",
+          "text": "Si te interesa tener un piercing de color, la anodización del titanio es la mejor opción. Contactanos para darle a tu joya el color que deseas."
+        }
+      ]
+    },
+    {
+      "id": "¿cuál_elegir?",
+      "title": "Acero, Titanio y Fantasia ¿Cuál elegir?",
+      "type": "info",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "Elegir el material correcto para tu piercing es tan importante como la perforación misma. El contacto constante con la piel y los tejidos requiere de un material que sea biocompatible, seguro y que no cause reacciones adversas. A continuación, te explicamos las diferencias entre los materiales más comunes y por qué algunos son la mejor opción."
+        },
+        {
+          "type": "image_left",
+          "text": "## Titanio ASTM-F136 (Grado de implante)\n\nConsiderado el estándar de oro en la industria de los piercings. El titanio de grado de implante es un material totalmente hipoalergénico, ligero y biocompatible. Es la mejor opción para perforaciones iniciales por su excelente capacidad de curación. Su principal ventaja es que no contiene níquel, un metal que a menudo causa alergias. Además, puede ser anodizado en una amplia gama de colores.",
+          "image": ""
+        },
+        {
+          "type": "image_right",
+          "text": "## Oro de 18k\n\nEl oro de 18k es una excelente opción para piercings, siempre y cuando sea de alta calidad. Es hipoalergénico y muy durable. La pureza de 18 quilates asegura que el contenido de oro es alto (75%) y la cantidad de otros metales (como el cobre o la plata) es menor, reduciendo el riesgo de irritación. ¡Importante! Evita el oro laminado o chapado, ya que el recubrimiento puede desprenderse.",
+          "image": ""
+        },
+        {
+          "type": "image_left",
+          "text": "## Acero Inoxidable Quirúrgico (316L)\n\nEs una opción popular y económica. Es resistente y fácil de limpiar. Sin embargo, no es 100% libre de níquel. Aunque el níquel está firmemente ligado al acero, una pequeña cantidad puede liberarse y causar una reacción alérgica en personas sensibles. Por eso, no se considera la mejor opción para perforaciones iniciales, especialmente en áreas de cartílago.",
+          "image": ""
+        },
+        {
+          "type": "image_right",
+          "text": "## Joyería de Fantasía\n\nEste grupo incluye materiales como la plata esterlina, aleaciones de metales o bisutería. ¡Bajo ninguna circunstancia deben usarse para un piercing inicial! Contienen altos niveles de níquel, zinc y otros metales que pueden causar reacciones alérgicas severas, infecciones y cicatrizaciones queloides. Este tipo de joyería no es apta para el uso interno en el cuerpo y solo debe ser considerada para un uso externo en joyería de moda, nunca en perforaciones.",
+          "image": ""
+        }
+      ]
     }
   ]
 }

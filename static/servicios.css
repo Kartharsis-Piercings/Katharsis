@@ -1,11 +1,40 @@
-/* static/servicios.css */
+/* static/servicios.css (Versión Mejorada y Completa) */
+
+/* --- Estilos Generales de Sección --- */
+.why-us-section, .services-section, .portfolio-section, .faq-section, .promo-section {
+    padding: 4rem 5%;
+}
 
 .services-section {
-    padding: 3rem 5%;
-    max-width: 1400px;
+    background-color: #151515; /* Un fondo ligeramente distinto para variar */
+}
+
+.container {
+    max-width: 1200px;
     margin: 0 auto;
 }
 
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #84529C;
+    margin-bottom: 1rem;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.section-subtitle {
+    text-align: center;
+    max-width: 70ch;
+    margin: 0 auto 3rem auto;
+    color: #bbb;
+    line-height: 1.7;
+}
+
+/* --- Sección "Why Us" --- */
+/* (Hereda los estilos de .section-subtitle, por lo que no necesita CSS adicional por ahora) */
+
+
+/* --- Sección de Servicios --- */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -28,7 +57,6 @@
     border-color: #84529C;
 }
 
-/* Tarjeta destacada para el paquete */
 .service-card.featured {
     background: linear-gradient(145deg, #2c1a3a, #1a1a1a);
     border-color: #84529C;
@@ -38,62 +66,149 @@
     transform: scale(1.05) translateY(-8px);
 }
 
-
-.service-card i {
+.service-card i.fas { /* Icono principal */
     font-size: 2.5rem;
     color: #84529C;
     margin-bottom: 1.5rem;
     width: fit-content;
-    transition: transform 0.3s ease;
-}
-
-.service-card i:hover {
-    transform: scale(1.1);
-    color: #f5f5f5; /* Cambia el color al pasar el mouse */
 }
 
 .service-card h3 {
     font-size: 1.6rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     color: #f5f5f5;
+}
+
+.price-tag {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #84529C;
+    margin-bottom: 1rem;
 }
 
 .service-card p {
     color: #bbb;
     line-height: 1.6;
     margin-bottom: 1.5rem;
-    flex-grow: 1; /* Hace que el p ocupe el espacio para alinear botones */
+    flex-grow: 1; /* Empuja el contenido hacia abajo */
 }
 
 .service-card ul {
     list-style: none;
-    padding-left: 0;
     color: #ccc;
+    margin-top: auto; /* Alinea la lista al final si hay espacio */
 }
 
 .service-card ul li {
     margin-bottom: 0.75rem;
-    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
 }
 
-.service-card ul li i.fa-check {
+.service-card ul li i.fas {
     color: #4CAF50;
-    margin-right: 0.5rem;
+    margin: 0;
+    font-size: 1rem;
+    margin-top: 0.25rem; /* Alinea el check con el texto */
 }
 
-/* Tarjetas más pequeñas para info rápida */
-.service-card.small-card {
-    text-align: center;
-    align-items: center;
-}
-
-.proximamente {
-    background: #84529C;
-    color: white;
-    padding: 0.2rem 0.6rem;
-    border-radius: 10px;
-    font-size: 0.8rem;
+.service-card .card-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #84529C;
+    text-decoration: none;
     font-weight: bold;
+    transition: color 0.3s;
+}
+.service-card .card-link:hover {
+    color: #a372c2;
+    text-decoration: underline;
+}
+
+/* --- Sección Galería / Portfolio --- */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.portfolio-item {
+    overflow: hidden;
+    border-radius: 8px;
+    height: 300px;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease-in-out;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.1);
+}
+
+/* --- Sección de Promoción --- */
+.promo-section {
+    background: linear-gradient(45deg, #84529C, #6a3d7f);
+    color: white;
+    text-align: center;
+    padding: 3rem 5%;
+}
+.promo-section i.fas {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.promo-section h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Quicksand', sans-serif;
+}
+.promo-section p {
+    opacity: 0.9;
+}
+
+/* --- Sección de FAQ --- */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.faq-item {
+    background: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-top: 3px solid #84529C;
+}
+
+.faq-item h4 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #f5f5f5;
+}
+
+.faq-item p {
+    color: #bbb;
+    line-height: 1.6;
+}
+
+
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .services-grid, .faq-grid {
+        grid-template-columns: 1fr;
+    }
+    .service-card.featured {
+        transform: none; /* Resetea el zoom en móvil para mejor layout */
+    }
+    .section-title {
+        font-size: 2rem;
+    }
 }
 
 /* Contenedor de Llamada a la Acción (CTA) */

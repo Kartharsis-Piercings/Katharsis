@@ -12,87 +12,102 @@
         </div>
     </section>
 
+    <section class="guide-cards-section">
+        <div class="guide-cards-container">
+            <div class="guide-cards-track">
+                
+                {% for card in guide_cards %}
+                <div class="guide-card-wrapper">
+                    <a href="{{ card.link_url }}" class="guide-card" style="background-image: url('{{ card.image_url }}');">
+                        <div class="card-content">
+                            <h3>{{ card.title }}</h3>
+                            <p>{{ card.description }}</p>
+                            <span class="btn-card">Descubrir Más</span>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+
+            </div>
+            <button class="carousel-btn prev-btn-guide">&#10094;</button>
+            <button class="carousel-btn next-btn-guide">&#10095;</button>
+        </div>
+    </section>
+
     <section class="carousel-section">
         <div class="carousel-wrapper">
             <div class="carousel-text">
-                <h2>Galería de Trabajos</h2>
-                <p>Explora algunos de nuestros piercings y trabajos recientes. La dedicación y profesionalismo de nuestro equipo.</p>
+                <h2>Resultados que Enamoran</h2>
+                <p>Calidad y precisión en cada piercing. Explora algunos de nuestros trabajos y visualiza tu próximo estilo.</p>
+                <a href="https://www.instagram.com/tu-usuario/" class="btn-instagram" target="_blank"><i class="fab fa-instagram"></i> Ver más en Instagram</a>
             </div>
-            <div class="carousel-container">
-                <div class="carousel-slide"></div>
-                <button class="carousel-btn prev-btn">&#10094;</button>
-                <button class="carousel-btn next-btn">&#10095;</button>
+            <div class="gallery-carousel-container">
+                <div class="gallery-track">
+                    {% for item in gallery_items %}
+                    <div class="gallery-slide">
+                        {% if item.type == 'video' %}
+                            <video src="{{ url_for('static', filename=item.url.replace('../static/', '')) }}" autoplay muted loop playsinline></video>
+                        {% else %}
+                            <img src="{{ url_for('static', filename=item.url.replace('../static/', '')) }}" alt="{{ item.caption }}" style="object-position: {{ item.position | default('50% 50%') }};">
+                        {% endif %}
+                        <div class="slide-caption">{{ item.caption }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-btn prev-btn-gallery">&#10094;</button>
+                <button class="carousel-btn next-btn-gallery">&#10095;</button>
             </div>
         </div>
     </section>
     
-    <section class="features">
-        <div class="features-grid">
-            <article class="feature-card">
-                <i class="fas fa-certificate"></i>
-                <h3>Materiales Premium</h3>
-                <p>Titanio Grado Implante hipoalergénico</p>
-            </article>
-            <article class="feature-card">
-                <i class="fas fa-user-md"></i>
-                <h3>Asesoramiento</h3>
-                <p>Expertos a su disposición para resolver sus dudas y problemas</p>
-            </article>
-            <article class="feature-card">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Máxima Higiene</h3>
-                <p>Protocolos sanitarios certificados internacionalmente</p>
-            </article>
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Tu Seguridad, Nuestra Prioridad</h2>
+            <div class="features-grid">
+                {% for feature in features %}
+                <article class="feature-card">
+                    <i class="{{ feature.icon }}"></i>
+                    <h3>{{ feature.title }}</h3>
+                    <p>{{ feature.short_description }}</p>
+                    <button class="btn-link read-more-feature" data-title="{{ feature.title }}" data-content="{{ feature.full_description }}">Leer más</button>
+                </article>
+                {% endfor %}
+            </div>
         </div>
     </section>
 
     <section class="product-categories">
-        <h2 class="section-title">Categorías Destacadas</h2>
-        <div class="categories-grid">
-            <!-- Categoría 1: labrets -->
-            <div class="category-card" style="background-image: url('{{ url_for('static', filename='img/products/labret/zircon 3mm/ab/foto 1 - 1.webp') }}');">
-            <div class="category-info" style="padding: 1.5rem;">
-                <h3>Labrets</h3>
-                <p>Adórnate con hermosos Labrets de Titanio rosca interna</p>
-                <a href="{{ url_for('joyas', category='Labrets') }}" class="btn btn-category">Ver en tienda</a>
-            </div>
-            </div>
-
-            <!-- Categoría 2: Nostrils -->
-            <div class="category-card" style="background-image: url('{{ url_for('static', filename='img/products/nostril/luna/foto 1 - 1.webp') }}');">
-                <div class="category-info" style="padding: 1.5rem;">
-                    <h3>Nostrils</h3>
-                    <p>Adórnate con un hermoso Nostril de Titanio</p>
-                    <a href="{{ url_for('joyas', category='Nostril') }}" class="btn btn-category">Ver en tienda</a>
+        <div class="container">
+            <h2 class="section-title">Encuentra tu Próxima Joya Favorita</h2>
+            <div class="category-carousel-container">
+                <div class="category-track">
+                    {% for category in featured_categories %}
+                    <div class="category-card-wrapper">
+                        <a href="{{ url_for('joyas', category=category.name) }}" class="category-card"
+                           style="background-image: url('{{ url_for('static', filename=category.image.replace('../static/', '')) }}');"
+                           data-hover-image="{{ url_for('static', filename=category.most_popular_product_image.replace('../static/', '')) }}">
+                            <div class="category-info">
+                                <div class="category-text">
+                                    <h3>{{ category.name }}</h3>
+                                    <span class="price-range">{{ category.price_string }}</span>
+                                </div>
+                                <span class="btn-category">Explorar Diseños</span>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
                 </div>
-            </div>
-
-            <!-- Categoría 3: Aros -->
-            <div class="category-card" style="background-image: url('{{ url_for('static', filename='img/products/aros/basico/0.8mm/foto 1.webp') }}');">
-                <div class="category-info" style="padding: 1.5rem;">
-                    <h3>Aros Clicker</h3>
-                    <p>Adórnate con hermosas joyas de Titanio rosca interna</p>
-                    <a href="{{ url_for('joyas', category='Aros') }}" class="btn btn-category">Ver en tienda</a>
-                </div>
+                <button class="carousel-btn prev-btn-category">&#10094;</button>
+                <button class="carousel-btn next-btn-category">&#10095;</button>
             </div>
         </div>
     </section>
 
-    <section class="testimonials">
-        <h2 class="section-title">Lo que dicen nuestros clientes</h2>
-        <div class="testimonials-grid">
-            <article class="testimonial-card">
-                <p>"¡La mejor experiencia! Súper profesional, todo muy limpio y la joya de Titanio es hermosa. Cero problemas con la cicatrización. ¡Totalmente recomendado!"</p>
-                <footer class="testimonial-author">- Camila R.</footer>
-            </article>
-            <article class="testimonial-card">
-                <p>"Tenía muchas dudas sobre mi primer piercing en el cartílago, pero aquí me asesoraron con paciencia y me explicaron todo el proceso. Me sentí muy seguro."</p>
-                <footer class="testimonial-author">- Javier M.</footer>
-            </article>
-            <article class="testimonial-card">
-                <p>"La calidad de las joyas es increíble. Compré un labret anodizado y el color es espectacular. Se nota la diferencia del Titanio grado implante."</p>
-                <footer class="testimonial-author">- Sofia L.</footer>
-            </article>
+    <div id="feature-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="close-feature-modal" class="close-modal-btn">&times;</button>
+            <h3 id="modal-title"></h3>
+            <p id="modal-content"></p>
         </div>
-    </section>
+    </div>    
 {% endblock %}
