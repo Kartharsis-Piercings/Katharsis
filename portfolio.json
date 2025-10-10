@@ -3,37 +3,37 @@
     {
       "type": "image",
       "url": "../static/img/portfolio/catalog-1.webp",
-      "caption": "Nueva Imagen",
+      "caption": "Piercing de Ceja",
       "position": "50% 40%"
     },
     {
       "type": "image",
       "url": "../static/img/portfolio/carousel_20250903_025045_Whisk_1d882cd457.jpg",
-      "caption": "Nueva Imagen",
+      "caption": "Piercing Helix",
       "position": "50% 25%"
     },
     {
       "type": "image",
       "url": "../static/img/portfolio/catalog-2.webp",
-      "caption": "Nueva Imagen",
+      "caption": "Piercing Helix",
       "position": "50% 50%"
     },
     {
       "type": "image",
       "url": "../static/img/portfolio/catalog-3.webp",
-      "caption": "Nueva Imagen",
+      "caption": "Piercing de Ombligo",
       "position": "50% 55%"
     },
     {
       "type": "image",
       "url": "../static/img/portfolio/catalog-4.webp",
-      "caption": "Nueva Imagen",
+      "caption": "Piercing Septum",
       "position": "50% 55%"
     },
     {
       "type": "image",
       "url": "../static/img/portfolio/catalog-5.webp",
-      "caption": "Nueva Imagen",
+      "caption": "Piercing Nostril",
       "position": "50% 55%"
     }
   ]

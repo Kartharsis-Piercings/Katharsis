@@ -1,4 +1,33 @@
 /* Estructura principal de la guía de piercings */
+.hero {
+    min-height: 300px;
+    height: 60vh;
+    background: url('../static/img/Guia.webp') center center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+/* Responsive: ajusta la altura y posición en pantallas pequeñas */
+@media (max-width: 900px) {
+    .hero {
+        height: 35vh;
+        min-height: 180px;
+        background-position: center top;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero {
+        height: 22vh;
+        min-height: 120px;
+        background-position: center top;
+    }
+}
+
 .piercing-guide-container {
     display: flex;
     gap: 2.5rem;

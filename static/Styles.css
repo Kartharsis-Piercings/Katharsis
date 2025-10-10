@@ -92,8 +92,8 @@
         /* Hero Section */
         .hero {
             height: 85vh;
-            background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)),
-                        url('../static/img/hero-background.webp') center/cover;
+            background:
+                        url('../static/img/Lluvia de joyas.webp') center/cover;
             display: flex;
             align-items: flex-start;
             justify-content: center;
@@ -114,7 +114,7 @@
             font-size: 1rem;
             margin-bottom: 1rem;
             max-width: 800px;
-            text-shadow: #000000 1.2px 1.12px 0px;
+            text-shadow: #000000 1.5px 1.15px 0px;
             font-family: "quicksand", sans-serif;
         }
 
@@ -167,6 +167,58 @@
             color: #0a0a0a;
         }
 
+        /* Piercings Page Layout */
+        .hero-joyas {
+            height: 50vh;
+            background: url('../static/img/Catalogo.webp');
+            background-size: cover;
+            background-position: 50% 50%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            text-align: center;
+            padding: 10vh 10% 0 10%;
+            margin-top: 0;
+        }
+
+        .hero-content-joyas h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: #000000 0px 0px 6px;
+            font-family: "quicksand", sans-serif;
+            font-style: normal;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .hero-joyas {
+                height: 35vh;
+                padding: 7vh 5% 0 5%;
+            }
+            .hero-content-joyas h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-joyas {
+                height: 25vh;
+                padding: 5vh 3% 0 3%;
+            }
+            .hero-content-joyas h1 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-joyas {
+                height: 18vh;
+                padding: 3vh 2% 0 2%;
+            }
+            .hero-content-joyas h1 {
+                font-size: 1rem;
+            }
+        }
         /* ============================================= */
         /* SECCIÓN 1: GALERÍA DE TRABAJOS (CARRUSEL)       */
         /* ============================================= */
@@ -1770,7 +1822,7 @@ a.guide-card:hover .btn-card {
     height: 270px;
     }
 
-        .carousel-wrapper {
+    .carousel-wrapper {
         flex-direction: column;
     }
     .gallery-carousel-container {
@@ -1782,6 +1834,15 @@ a.guide-card:hover .btn-card {
     }
     .category-card-wrapper {
         width: 70%;
+    }
+        .category-track {
+        /* Se añade padding horizontal para que las tarjetas de los lados se vean */
+        padding: 0 15%; 
+    }
+
+    .category-card-wrapper {
+        /* La tarjeta ocupa el 70% del ancho, dejando espacio a los lados */
+        width: 70%; 
     }
 }
 
