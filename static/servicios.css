@@ -2,9 +2,12 @@
 
 /* --- Estilos Generales de Sección --- */
 .why-us-section, .services-section, .portfolio-section, .faq-section, .promo-section {
-    padding: 4rem 5%;
+    padding: 3rem 5%;
 }
-
+.why-us-section {
+    margin-top: 3rem;
+    margin-bottom: -1.5rem;
+}
 .services-section {
     background-color: #151515; /* Un fondo ligeramente distinto para variar */
 }
@@ -18,7 +21,8 @@
     text-align: center;
     font-size: 2.5rem;
     color: #84529C;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+    margin-top: 0rem;
     font-family: 'Quicksand', sans-serif;
 }
 
@@ -28,6 +32,8 @@
     margin: 0 auto 3rem auto;
     color: #bbb;
     line-height: 1.7;
+    margin-bottom: -0.5rem;
+    margin-top: -0.8rem;
 }
 
 /* --- Sección "Why Us" --- */
@@ -196,6 +202,11 @@
     line-height: 1.6;
 }
 
+.cta-container {
+    text-align: center;
+    margin-top: -5rem;
+    margin-bottom: 2rem;
+}
 
 
 /* --- Responsive --- */

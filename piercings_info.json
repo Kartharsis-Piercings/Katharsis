@@ -56,7 +56,7 @@
         }
       ],
       "images": [
-        "/static/img/piercings/Whisk_1d882cd457.webp"
+        "/static/img/piercings/Mesa de trabajo 1Oreja.webp"
       ]
     },
     {
@@ -116,7 +116,7 @@
         }
       ],
       "images": [
-        "/static/img/piercings/Whisk_1d882cd457.webp"
+        "/static/img/piercings/Mesa de trabajo 1Nariz.webp"
       ]
     },
     {
@@ -152,7 +152,7 @@
         }
       ],
       "images": [
-        "/static/img/piercings/Whisk_1d882cd457.webp"
+        "/static/img/piercings/Mesa de trabajo 1ombligo.webp"
       ]
     },
     {
@@ -257,16 +257,16 @@
         {
           "type": "image_right",
           "text": "El proceso es fascinante. Se sumerge la joya de titanio en una solución electrolítica y se le aplica una corriente eléctrica. Al variar el voltaje, se puede controlar el grosor de la capa de óxido. Lo curioso es que el color que vemos no es un pigmento, sino el resultado de cómo la luz se refracta y se refleja en esa capa. Diferentes grosores producen diferentes colores, creando un espectro que va desde el bronce hasta el azul, el morado y el rosa.",
-          "image": ""
+          "image": "/img/piercings/info/AnodizadosAnodizados 2.webp"
         },
         {
           "type": "image_only",
-          "image": ""
+          "image": "/img/piercings/info/Tabla de anodiazciónChat 2.webp"
         },
         {
           "type": "image_left",
           "text": "La anodización no solo tiene un fin estético, sino también funcional. Al crear esa capa de óxido, se incrementa la resistencia del material a la corrosión, haciendo que la joya sea aún más segura y duradera. Es una excelente alternativa para quienes desean un piercing colorido, ya que es mucho más seguro que los recubrimientos de otros materiales que pueden desprenderse y causar irritación o alergias.",
-          "image": ""
+          "image": "/img/piercings/info/Mesa de trabajo 1Anodizados.webp"
         },
         {
           "type": "text",
