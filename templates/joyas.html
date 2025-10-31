@@ -124,64 +124,8 @@
             
             <div class="products-grid">
                 {% if products %}
-                    {% for product in products %}
-                    <div class="product-card">
-                        <div class="product-image">
-                            <a href="{{ url_for('product_detail', product_id=product.id) }}">
-                                <img src="{{ url_for('static', filename=product.images[0]) }}" alt="{{ product.name }}">
-                                {% if product.images|length > 1 %}
-                                <div class="additional-images">
-                                    {% for i in range(1, product.images|length) %}
-                                        {% if i <= 2 %} {# Mostrar hasta 2 imágenes adicionales #}
-                                        <img src="{{ url_for('static', filename=product.images[i]) }}" alt="{{ product.name }} vista {{ i+1 }}">
-                                        {% endif %}
-                                    {% endfor %}
-                                    {% if product.images|length > 3 %}
-                                    <span class="more-images">+{{ product.images|length - 3 }}</span>
-                                    {% endif %}
-                                </div>
-                                {% endif %}
-                            </a>
-                            <div class="product-badges">
-                                {% if product.is_new %}<span class="badge-new">Nuevo</span>{% endif %}
-                                {% if product.on_sale %}<span class="badge-sale">-{{ ((product.price - product.sale_price) / product.price * 100) | round | int }}%</span>{% endif %}
-                            </div>
-                            <button class="quick-view" data-product-id="{{ product.id }}">Vista rápida</button>
-                        </div>
-                        <div class="product-info">
-                            <h3><a href="{{ url_for('product_detail', product_id=product.id) }}">{{ product.name }}</a></h3>
-                            <p class="product-category">{{ product.category | capitalize }}</p>
-                            <div class="product-price">
-                                {% if product.on_sale %}
-                                <span class="current-price">S/ {{ product.sale_price | number_format }}</span>
-                                <span class="old-price">S/ {{ product.price | number_format }}</span>
-                                {% else %}
-                                <span class="current-price">S/ {{ product.price | number_format }}</span>
-                                {% endif %}
-                            </div>
-                            <div class="product-actions">
-                                <form method="POST" action="{{ url_for('add_to_cart') }}">
-                                    <input type="hidden" name="product_id" value="{{ product.id }}">
-                                    <select name="size" class="size-select" required>
-                                        <option value="" disabled selected>Selecciona tamaño</option>
-                                        {# ¡CORRECCIÓN! Iteramos sobre las claves del diccionario 'stock' #}
-                                        {% for size in product.stock.keys() %}
-                                        <option value="{{ size }}">{{ size }}</option>
-                                        {% endfor %}
-                                    </select>
-                                    <input type="hidden" name="quantity" value="1">
-                                    <button type="submit" class="btn-add-cart">Añadir al carrito</button>
-                                </form>
-                                <button class="btn-wishlist" data-product-id="{{ product.id }}">
-                                    {% if product.id in wishlist %}
-                                        <i class="fas fa-heart" style="color: #ff5252;"></i>
-                                    {% else %}
-                                        <i class="far fa-heart"></i>
-                                    {% endif %}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    {% for product in products %} {# o related_products #}
+                        {% include 'product_card.html' %}
                     {% endfor %}
                 {% else %}
                 <div class="no-products">

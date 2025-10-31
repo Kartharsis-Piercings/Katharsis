@@ -136,13 +136,12 @@ document.addEventListener('DOMContentLoaded', function() {
                                 if (response.ok) {
                                     // Actualizar contador del header
                                     const data = await response.json();
-                                    const cartCount = document.querySelector('.cart-count');
-                                    if (cartCount) {
-                                        const count = parseInt(cartCount.textContent) || 0;
-                                        const quantity = parseInt(formData.get('quantity')) || 1;
-                                        cartCount.textContent = data.cart_count; // Aumentar por la cantidad añadida
-                                        cartCount.classList.add('animate');
-                                        setTimeout(() => cartCount.classList.remove('animate'), 500);
+                                    const cartCountEl = document.querySelector('.cart-count');
+                                    if (cartCountEl) {
+                                        cartCountEl.textContent = data.cart_count; // Actualiza el número
+                                        // La animación que ya tienes funcionará perfecto aquí
+                                        cartCountEl.classList.add('animate');
+                                        setTimeout(() => cartCountEl.classList.remove('animate'), 500);
                                     }
                                 } else {
                                     alert('Error al agregar al carrito');

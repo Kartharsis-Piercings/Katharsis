@@ -36,12 +36,14 @@
                     
                     {% if guide.type == 'zone' %}
                         <h2>{{ guide.title }}</h2>
-                        <p class="zone-description">{{ guide.zone_description }}</p>
-                        {% if guide.images %}
-                            <div class="guide-main-image">
-                                <img src="{{ url_for('static', filename=guide.images[0].replace('/static/', '')) }}" alt="{{ guide.title }}">
-                            </div>
-                        {% endif %}
+                        <div class="zone-description">{{ guide.zone_description | format_text | safe }}</div>
+                    {% if guide.images %}
+                        <div class="guide-main-image">
+                            {# CORRECCIÓN: Quitamos replace(), pasamos la ruta SIN el /static/ inicial #}
+                            {% set image_path = guide.images[0].replace('/static/', '', 1) %}
+                            <img src="{{ url_for('static', filename=image_path) }}" alt="{{ guide.title }}">
+                        </div>
+                    {% endif %}
                         
                         {% for piercing in guide.piercings %}
                             <article class="piercing-article">
@@ -53,21 +55,26 @@
                                             <li><strong><i class="far fa-clock"></i> Cicatrización:</strong> {{ piercing.details.healing_time }}</li>
                                             <li><strong><i class="fas fa-gem"></i> Joyería Inicial:</strong> {{ piercing.details.initial_jewelry }}</li>
                                         </ul>
-                                        <p>{{ piercing.description }}</p>
+                                        <div>{{ piercing.description | format_text | safe }}</div>
                                     </div>
-                                    {% if piercing.images %}
-                                    <div class="piercing-images">
-                                        {% for image in piercing.images %}
-                                            <img src="{{ url_for('static', filename=image.replace('/static/', '')) }}" alt="Ejemplo de {{ piercing.name }}">
-                                        {% endfor %}
-                                    </div>
-                                    {% endif %}
+                                {% if piercing.images %}
+                                <div class="piercing-images">
+                                    {% for image in piercing.images %}
+                                        {# CORRECCIÓN: Quitamos replace(), pasamos la ruta SIN el /static/ inicial #}
+                                        {% set image_path = image.replace('/static/', '', 1) %}
+                                        <img src="{{ url_for('static', filename=image_path) }}" alt="Ejemplo de {{ piercing.name }}">
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
                                 </div>
 
                                 <h4><i class="fas fa-medkit"></i> Consejos de Cuidado</h4>
                                 <ul class="aftercare-list">
                                     {% for tip in piercing.aftercare_tips %}
-                                        <li>{{ tip }}</li>
+                                        {# --- CHANGE IS HERE --- #}
+                                        {# Apply format_text and safe filters to each tip #}
+                                        <li>{{ tip | format_text | safe }}</li>
+                                        {# --- END CHANGE --- #}
                                     {% endfor %}
                                 </ul>
 
@@ -89,13 +96,27 @@
                             <div class="info-content-constructor">
                                 {% for block in guide.content_blocks %}
                                     {# Usamos una clase CSS dinámica basada en el tipo de bloque #}
-                                    <div class="info-block block-{{ block.type }}">
-                                        
+                                    <div class="info-block block-{{ block.type }}">                      
                                         {# Condición para mostrar la imagen (si el bloque la tiene) #}
-                                        {% if 'image' in block.type %}
-                                        <div class="info-block-image">
-                                            <img src="{{ url_for('static', filename=block.image.lstrip('/')) }}" alt="{{ guide.title }}">
-                                        </div>
+                                        {% if 'image' in block.type and block.image %}
+                                    <div class="info-block-image">
+                                        {% if block.image is mapping %}
+                                            {% if block.image.pc %}
+                                            {# CORRECCIÓN: Quitamos [8:], pasamos ruta SIN el / inicial #}
+                                            <img src="{{ url_for('static', filename=block.image.pc.lstrip('/')) }}" alt="{{ guide.title }} - vista escritorio" class="responsive-image image-pc">
+                                            {% endif %}
+                                            {% if block.image.mobile %}
+                                            {# CORRECCIÓN: Quitamos [8:], pasamos ruta SIN el / inicial #}
+                                            <img src="{{ url_for('static', filename=block.image.mobile.lstrip('/')) }}" alt="{{ guide.title }} - vista móvil" class="responsive-image image-mobile">
+                                            {% elif block.image.pc %}
+                                            {# CORRECCIÓN: Quitamos [8:], pasamos ruta SIN el / inicial #}
+                                            <img src="{{ url_for('static', filename=block.image.pc.lstrip('/')) }}" alt="{{ guide.title }} - vista móvil" class="responsive-image image-mobile">
+                                            {% endif %}
+                                        {% elif block.image is string %} {# Compatibilidad antigua #}
+                                            {# CORRECCIÓN: Quitamos [8:], pasamos ruta SIN el / inicial #}
+                                            <img src="{{ url_for('static', filename=block.image.lstrip('/')) }}" alt="{{ guide.title }}" class="responsive-image image-pc image-mobile">
+                                        {% endif %}
+                                    </div>
                                         {% endif %}
 
                                         {# Condición para mostrar el texto (si el bloque lo tiene) #}

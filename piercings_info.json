@@ -9,7 +9,7 @@
         {
           "id": "helix",
           "name": "Piercing Helix",
-          "description": "El piercing Hélix es uno de los más populares y versátiles en la oreja. Se ubica en la parte superior del cartílago, en el borde exterior, lo que permite una amplia variedad de joyas y estilos. Estéticamente, puede ser minimalista con una sola pieza discreta o un punto de partida para una combinación más elaborada de múltiples piercings.",
+          "description": "El piercing Hélix es uno de los *más populares y versátiles en la oreja*. Se ubica en la parte superior del cartílago, en el borde exterior, lo que permite una amplia variedad de joyas y estilos. Estéticamente, puede ser minimalista con una sola pieza discreta o un punto de partida para una combinación más elaborada de múltiples piercings.",
           "images": [
             "/static/img/piercings/helix/helix-1.webp"
           ],
@@ -19,11 +19,11 @@
             "initial_jewelry": "Labret o barra recta de Titanio ASTM-F136 16G (1.2mm)"
           },
           "aftercare_tips": [
-            "Evita dormir sobre la oreja recién perforada para no ejercer presión y retrasar la curación.",
-            "Ten cuidado al cepillarte el cabello o al usar audífonos para no enganchar la joya.",
-            "Limpia tu piercing con una solución salina estéril dos veces al día.",
-            "Sé paciente con el proceso de curación; el cartílago tarda más en sanar que el lóbulo.",
-            "No manipules la joya ni la retires antes de que el piercing esté completamente curado."
+            "- *Evita dormir sobre la oreja recién perforada* para no ejercer presión y retrasar la curación.",
+            "- Ten cuidado al cepillarte el cabello o al usar audífonos para no enganchar la joya.",
+            "- Limpia tu piercing con una solución salina estéril dos veces al día.",
+            "- Sé paciente con el proceso de curación; el cartílago tarda más en sanar que el lóbulo.",
+            "- No manipules la joya ni la retires antes de que el piercing esté completamente curado."
           ],
           "recommended_product_tags": [
             "labrets",
@@ -34,7 +34,7 @@
         {
           "id": "lobulo",
           "name": "Piercings de Lóbulo",
-          "description": "El piercing en el lóbulo es, sin duda, el más clásico y universal. Se realiza en la parte blanda y carnosa inferior de la oreja, lo que lo hace ideal para la primera perforación. Por su parte, el \"Upper Lobe\" es un segundo o tercer piercing que se coloca ligeramente más arriba en la misma zona. Ambos son perfectos para empezar en el mundo de los piercings debido a su fácil cicatrización y baja incomodidad.",
+          "description": "El piercing en el lóbulo es, sin duda, el más clásico y universal. Se realiza en la parte blanda y carnosa inferior de la oreja, lo que lo hace *ideal para la primera perforación*. Por su parte, el \"Upper Lobe\" es un segundo o tercer piercing que se coloca ligeramente más arriba en la misma zona. Ambos son perfectos para empezar en el mundo de los piercings debido a su fácil cicatrización y baja incomodidad.",
           "images": [
             "/static/img/piercings/lobe/lobe-1.webp"
           ],
@@ -44,10 +44,10 @@
             "initial_jewelry": "Labret o arete de barra de Titanio ASTM-F136 16G(1.2mm)"
           },
           "aftercare_tips": [
-            "Realiza la limpieza dos veces al día con solución salina estéril para evitar infecciones.",
-            "Evita tocar o girar la joya; esto solo irrita el tejido en curación.",
-            "Cambia la joya solo una vez que el piercing esté completamente curado para no dañar el conducto.",
-            "Procura no aplicar productos como perfumes o geles de cabello cerca de la zona."
+            "- Realiza la limpieza dos veces al día con solución salina estéril para evitar infecciones.",
+            "- Evita tocar o girar la joya; esto solo irrita el tejido en curación.",
+            "- Cambia la joya solo una vez que el piercing esté completamente curado para no dañar el conducto.",
+            "- Procura no aplicar productos como perfumes o geles de cabello cerca de la zona."
           ],
           "recommended_product_tags": [
             "labrets",
@@ -63,12 +63,12 @@
       "id": "nariz",
       "title": "Nariz",
       "type": "zone",
-      "zone_description": "Los piercings en la nariz, como el nostril o el septum, son una forma elegante de acentuarlos rasgos faciales. Requieren un cuidado meticuloso para una buena cicatrización.",
+      "zone_description": "Los piercings en la nariz, como el *nostril* o el *septum*, son una forma elegante de acentuarlos rasgos faciales. Requieren un cuidado meticuloso para una buena cicatrización.",
       "piercings": [
         {
           "id": "septum",
           "name": "Piercing Septum",
-          "description": "El piercing Septum se realiza en el \"punto dulce\" de la nariz, una pequeña y delgada membrana de piel y cartílago entre las fosas nasales, justo por debajo del tabique nasal. Se ha convertido en un piercing muy popular gracias a su capacidad de ser discreto (se puede voltear hacia arriba para esconderlo) o ser un punto focal audaz con la joyería adecuada.",
+          "description": "El piercing Septum se realiza en el \"punto dulce\" de la nariz, una pequeña y delgada membrana de piel y cartílago entre las fosas nasales, justo por debajo del tabique nasal. Se ha convertido en un piercing muy popular gracias a su capacidad de ser discreto *(se puede voltear hacia arriba para esconderlo)* o ser un punto focal audaz con la joyería adecuada.",
           "images": [
             "/static/img/piercings/septum/septum-1.webp"
           ],
@@ -78,10 +78,10 @@
             "initial_jewelry": "Aro circular o Barbel Herradura de Titanio ASTM-F136 de 16G o 14G"
           },
           "aftercare_tips": [
-            "Evita tocar el piercing, especialmente cuando te suenas la nariz, para no irritar la zona.",
-            "Limpia con solución salina estéril dos veces al día sin mover la joya.",
-            "Sé paciente con el tiempo de curación, ya que es una zona con constante movimiento.",
-            "No gires la joya, esto puede introducir bacterias en el canal de perforación."
+            "- Evita tocar el piercing, especialmente cuando te suenas la nariz, para no irritar la zona.",
+            "- Limpia con solución salina estéril dos veces al día sin mover la joya.",
+            "- Sé paciente con el tiempo de curación, ya que es una zona con constante movimiento.",
+            "- No gires la joya, esto puede introducir bacterias en el canal de perforación."
           ],
           "recommended_product_tags": [
             "herraduras",
@@ -92,7 +92,7 @@
         {
           "id": "nostril",
           "name": "Piercing Nostril",
-          "description": "El piercing Nostril se realiza en el cartílago de una de las fosas nasales, en la curvatura exterior. Es uno de los piercings faciales más populares y versátiles, ya que puede llevarse con una joya discreta (un pequeño brillante) o con un aro más llamativo. Su posición lo convierte en un punto de acento que resalta la forma de la nariz y aporta un toque de estilo personal.",
+          "description": "El piercing Nostril se realiza en el cartílago de una de las fosas nasales, en la curvatura exterior. *Es uno de los piercings faciales más populares y versátiles*, ya que puede llevarse con una joya discreta (un pequeño brillante) o con un aro más llamativo. Su posición lo convierte en un punto de acento que resalta la forma de la nariz y aporta un toque de estilo personal.",
           "images": [
             "/static/img/piercings/nostril/nostril-1.webp"
           ],
@@ -102,11 +102,11 @@
             "initial_jewelry": "Joyas Nostril o Labret de Titanio ASTM-F136"
           },
           "aftercare_tips": [
-            "Evita el maquillaje y cremas cerca del piercing para no irritar la zona.",
-            "Ten mucho cuidado al secarte la cara o al usar toallas, ya que la joya podría engancharse.",
-            "Limpia suavemente la zona con solución salina estéril dos veces al día.",
-            "Evita tocar o girar la joya, esto puede causar la formación de queloides.",
-            "No cambies la joya antes de que el piercing esté completamente curado para evitar daños"
+            "- Evita el maquillaje y cremas cerca del piercing para no irritar la zona.",
+            "- Ten mucho cuidado al secarte la cara o al usar toallas, ya que la joya podría engancharse.",
+            "- Limpia suavemente la zona con solución salina estéril dos veces al día.",
+            "- Evita tocar o girar la joya, esto puede causar la formación de queloides.",
+            "- No cambies la joya antes de que el piercing esté completamente curado para evitar daños"
           ],
           "recommended_product_tags": [
             "nostril",
@@ -128,7 +128,7 @@
         {
           "id": "navel_piercing",
           "name": "Navel Piercing",
-          "description": "El piercing Navel, o de ombligo, es un clásico atemporal y uno de los piercings más deseados. Se realiza en el pliegue de piel justo encima del ombligo. Es una joya que realza la silueta, especialmente popular en verano, y ofrece una gran variedad de estilos, desde piezas sencillas con un pequeño brillante hasta colgantes más elaborados y llamativos.",
+          "description": "El piercing Navel, o de ombligo, *es un clásico atemporal y uno de los piercings más deseados*. Se realiza en el pliegue de piel justo encima del ombligo. Es un piercing que realza la silueta, especialmente popular en verano, y ofrece una gran variedad de estilos, desde piezas sencillas con un pequeño brillante hasta colgantes más elaborados y llamativos.",
           "images": [
             "/static/img/piercings/ombligo/navel_piercing/navel_piercing-1.jpeg"
           ],
@@ -138,11 +138,11 @@
             "initial_jewelry": "Barra curva de Titanio ASTM-F136 14G(1.6mm) "
           },
           "aftercare_tips": [
-            "Evita la ropa ajustada o con cinturones que puedan rozar el piercing y causar irritación.",
-            "Al limpiar la zona, ten cuidado de no girar ni mover la joya en exceso.",
-            "Durante la curación, protege el piercing al hacer ejercicio para evitar enganches.",
-            "Mantén el área del ombligo limpia y seca; la humedad puede favorecer la proliferación de bacterias.",
-            "Sé muy paciente con el proceso de curación, ya que puede tardar varios meses en sanar por completo."
+            "- Evita la ropa ajustada o con cinturones que puedan rozar el piercing y causar irritación.",
+            "- Al limpiar la zona, ten cuidado de no girar ni mover la joya en exceso.",
+            "- Durante la curación, protege el piercing al hacer ejercicio para evitar enganches.",
+            "- Mantén el área del ombligo limpia y seca; la humedad puede favorecer la proliferación de bacterias.",
+            "- Sé muy paciente con el proceso de curación, ya que puede tardar varios meses en sanar por completo."
           ],
           "recommended_product_tags": [
             "ombligo",
@@ -164,7 +164,7 @@
         {
           "id": "eyebrow",
           "name": "Eyebrow Piercing",
-          "description": "El piercing de ceja es una perforación que se realiza vertical u horizontalmente a través de la piel en la cresta de la ceja. Este piercing es una forma llamativa de expresión personal que enmarca el ojo y añade un toque de audacia al rostro. Se puede adaptar a diferentes estilos según la joya elegida, desde una barra discreta hasta un aro que siga la forma del ojo.",
+          "description": "El piercing de ceja es una perforación que se realiza vertical u horizontalmente a través de la piel en la cresta de la ceja. Este piercing es una forma llamativa de expresión personal que *enmarca el ojo* y añade un toque de audacia al rostro. Se puede adaptar a diferentes estilos según la joya elegida, desde una barra discreta hasta un aro que siga la forma del ojo.",
           "images": [
             "/static/img/piercings/ceja/eyebrow/eyebrow-1.png"
           ],
@@ -174,11 +174,11 @@
             "initial_jewelry": "Barra curva de Titanio ASTM-F136"
           },
           "aftercare_tips": [
-            "Evita el maquillaje o cremas en la zona para prevenir irritaciones o infecciones.",
-            "Ten cuidado al vestirte o al secarte con una toalla para no enganchar la joya.",
-            "La curación es relativamente sencilla, pero sé constante con la limpieza diaria.",
-            "Protege tu piercing del sol directo y de productos químicos fuertes como el cloro de las piscinas.",
-            "No toques la joya innecesariamente; el movimiento constante puede provocar cicatrices o rechazo del cuerpo."
+            "- Evita el maquillaje o cremas en la zona para prevenir irritaciones o infecciones.",
+            "- Ten cuidado al vestirte o al secarte con una toalla para no enganchar la joya.",
+            "- La curación es relativamente sencilla, pero sé constante con la limpieza diaria.",
+            "- Protege tu piercing del sol directo y de productos químicos fuertes como el cloro de las piscinas.",
+            "- No toques la joya innecesariamente; el movimiento constante puede provocar cicatrices o rechazo del cuerpo."
           ],
           "recommended_product_tags": [
             "bananas"
@@ -198,7 +198,7 @@
         {
           "id": "snake-bites",
           "name": "Snake-Bites",
-          "description": "Los Snake Bites son un par de piercings simétricos colocados a cada lado del labio inferior, imitando la mordida de una serpiente, de ahí su nombre. Son una forma de expresión audaz y popular, que permite una gran versatilidad en el estilo, ya que se pueden usar con aros, labrets o una combinación de ambos para un look único.\n\n",
+          "description": "Los Snake Bites son un par de piercings simétricos colocados *a cada lado del labio inferior*, imitando la mordida de una serpiente, de ahí su nombre. Son una forma de expresión audaz y popular, que permite una gran versatilidad en el estilo, ya que _se pueden usar_ con *aros, labrets* o una combinación de ambos para un look único.\n\n",
           "images": [],
           "details": {
             "pain_level": "5/10 (Moderado)",
@@ -206,11 +206,11 @@
             "initial_jewelry": "Labrets de Titanio ASTM-F136 16G de 10 a 12mm"
           },
           "aftercare_tips": [
-            "Realiza enjuagues bucales con una solución salina sin alcohol después de cada comida.",
-            "Evita alimentos picantes, ácidos o muy calientes durante las primeras semanas.",
-            "La higiene bucal es crucial; cepíllate los dientes con cuidado después de cada comida.",
-            "Evita jugar con las joyas con la lengua o los dientes, ya que esto puede dañar las encías y los dientes.",
-            "No retires las joyas hasta que el piercing esté completamente curado."
+            "- Realiza enjuagues bucales con una solución salina sin alcohol después de cada comida.",
+            "- Evita alimentos picantes, ácidos o muy calientes durante las primeras semanas.",
+            "- La higiene bucal es crucial; cepíllate los dientes con cuidado después de cada comida.",
+            "- Evita jugar con las joyas con la lengua o los dientes, ya que esto puede dañar las encías y los dientes.",
+            "- No retires las joyas hasta que el piercing esté completamente curado."
           ],
           "recommended_product_tags": [
             "labrets",
@@ -227,21 +227,19 @@
       "content_blocks": [
         {
           "type": "text",
-          "text": "¡Felicidades por tu nuevo piercing! El proceso de curación es una de las etapas más importantes para que luzca perfecto y sano. Una higiene adecuada es la clave para evitar infecciones y asegurar una curación exitosa. Sigue estos sencillos pasos y tu nuevo piercing sanará sin problemas."
+          "text": "*¡Felicidades por tu nuevo piercing!* El proceso de curación es una de las etapas más importantes para que luzca perfecto y sano. Una *higiene adecuada es la clave para evitar infecciones y asegurar una curación exitosa.* Sigue estos sencillos pasos y tu nuevo piercing sanará sin problemas."
         },
         {
           "type": "image_left",
-          "text": "El cuidado de tu piercing debe ser suave pero constante. La regla de oro es no tocarlo con las manos sucias. Lávate las manos a fondo con jabón antibacterial antes de tocar la zona. No gires la joya ni la manipules innecesariamente. Este movimiento puede irritar el canal de la perforación, introducir bacterias y retrasar la curación. La única vez que debes tocarlo es durante la limpieza.",
-          "image": ""
+          "text": "El cuidado de tu piercing debe ser *suave pero constante*. La regla de oro es *no tocarlo con las manos sucias*. Lávate las manos a fondo con jabón antibacterial antes de tocar la zona. *No gires la joya ni la manipules innecesariamente*. Este movimiento puede irritar el canal de la perforación, introducir bacterias y retrasar la curación. *La única vez que debes tocarlo es durante la limpieza.*"
         },
         {
           "type": "image_right",
-          "text": "Para la limpieza, te recomendamos usar una solución salina estéril. Puedes comprarla en cualquier farmacia o tienda especializada. Aplica la solución con una gasa estéril o un bastoncillo de algodón suavemente alrededor de la joya, eliminando cualquier residuo o costra. Hazlo dos veces al día: una por la mañana y otra por la noche. Si el piercing está en la boca, usa un enjuague bucal sin alcohol.",
-          "image": ""
+          "text": "Para la limpieza, te recomendamos usar una *solución salina estéril*. Puedes comprarla en cualquier farmacia o tienda especializada. Aplica la solución con una gasa estéril o un hisopo de algodón suavemente alrededor de la joya, eliminando cualquier residuo o costra. *Hazlo dos veces al día*: una por la mañana y otra por la noche. Si el piercing está en la boca, usa un enjuague bucal sin alcohol."
         },
         {
           "type": "text",
-          "text": "Recuerda que la paciencia es tu mejor aliada. El tiempo de curación varía según la zona del cuerpo, y forzar el cambio de joya antes de tiempo puede causar daños severos. Si notas enrojecimiento excesivo, dolor, hinchazón o secreción de color amarillo o verde, consulta a tu piercer profesional. Ellos te darán la orientación adecuada y te ayudarán a resolver cualquier inconveniente para que disfrutes al máximo de tu nuevo piercing."
+          "text": "Recuerda que la *paciencia* es tu mejor aliada. El tiempo de curación *varía según la zona del cuerpo*, y forzar el cambio de joya antes de tiempo puede causar *daños severos*. Si notas _enrojecimiento excesivo, dolor, hinchazón o secreción de color amarillo o verde_, consulta a tu piercer profesional. Ellos te darán la orientación adecuada y te ayudarán a resolver cualquier inconveniente para que disfrutes al máximo de tu nuevo piercing."
         }
       ]
     },
@@ -252,21 +250,27 @@
       "content_blocks": [
         {
           "type": "text",
-          "text": "La anodización es un proceso electroquímico que permite colorear las joyas de titanio de manera segura, sin usar pigmentos o tintes. No se trata de un recubrimiento o una pintura, sino de una capa de óxido que se crea en la superficie del metal. Esta capa es biocompatible, duradera y no se desprende, lo que la hace perfecta para piercings."
+          "text": "La anodización es un proceso electroquímico que permite colorear las joyas de titanio de manera segura, sin usar pigmentos o tintes. No se trata de un *recubrimiento* o una *pintura*, sino de una capa de óxido de *Titanio* que se crea en la superficie del metal. Esta capa es biocompatible, duradera y no se desprende, lo que la hace perfecta para piercings."
         },
         {
           "type": "image_right",
-          "text": "El proceso es fascinante. Se sumerge la joya de titanio en una solución electrolítica y se le aplica una corriente eléctrica. Al variar el voltaje, se puede controlar el grosor de la capa de óxido. Lo curioso es que el color que vemos no es un pigmento, sino el resultado de cómo la luz se refracta y se refleja en esa capa. Diferentes grosores producen diferentes colores, creando un espectro que va desde el bronce hasta el azul, el morado y el rosa.",
-          "image": "/img/piercings/info/AnodizadosAnodizados 2.webp"
+          "text": "El proceso es fascinante. Se sumerge la joya de titanio en una solución electrolítica y se le aplica una corriente eléctrica. Al variar el voltaje, se puede controlar el grosor de la capa de óxido. Lo curioso es que *el color que vemos no es un pigmento*, sino el resultado de cómo la luz se refracta y se refleja en esa capa. Diferentes grosores producen diferentes colores, creando un espectro que va desde el bronce hasta el azul, el morado y el rosa.",
+          "image": {
+            "pc": "/img/piercings/info/AnodizadosAnodizados 2.webp"
+          }
         },
         {
           "type": "image_only",
-          "image": "/img/piercings/info/Tabla de anodiazciónChat 2.webp"
+          "image": {
+            "pc": "/img/piercings/info/Tabla de anodiazciónChat 2.webp"
+          }
         },
         {
           "type": "image_left",
-          "text": "La anodización no solo tiene un fin estético, sino también funcional. Al crear esa capa de óxido, se incrementa la resistencia del material a la corrosión, haciendo que la joya sea aún más segura y duradera. Es una excelente alternativa para quienes desean un piercing colorido, ya que es mucho más seguro que los recubrimientos de otros materiales que pueden desprenderse y causar irritación o alergias.",
-          "image": "/img/piercings/info/Mesa de trabajo 1Anodizados.webp"
+          "text": "La anodización no solo tiene un fin estético, sino también funcional. Al crear esa capa de óxido, *se incrementa* la resistencia del material a la corrosión, haciendo que la joya sea aún más segura y duradera. Es una excelente alternativa para quienes desean *un piercing colorido*, ya que es mucho más seguro que los recubrimientos de *otros materiales* que pueden desprenderse y causar irritación o alergias.",
+          "image": {
+            "pc": "/img/piercings/info/Mesa de trabajo 1Anodizados.webp"
+          }
         },
         {
           "type": "text",
@@ -281,27 +285,94 @@
       "content_blocks": [
         {
           "type": "text",
-          "text": "Elegir el material correcto para tu piercing es tan importante como la perforación misma. El contacto constante con la piel y los tejidos requiere de un material que sea biocompatible, seguro y que no cause reacciones adversas. A continuación, te explicamos las diferencias entre los materiales más comunes y por qué algunos son la mejor opción."
+          "text": "Elegir *el material correcto* para tu piercing es tan importante como la perforación misma. El contacto constante con la piel y los tejidos requiere de un material que sea *biocompatible, seguro y que no cause reacciones adversas*. A continuación, te explicamos las diferencias entre los materiales más comunes y por qué algunos son la mejor opción."
         },
         {
           "type": "image_left",
-          "text": "## Titanio ASTM-F136 (Grado de implante)\n\nConsiderado el estándar de oro en la industria de los piercings. El titanio de grado de implante es un material totalmente hipoalergénico, ligero y biocompatible. Es la mejor opción para perforaciones iniciales por su excelente capacidad de curación. Su principal ventaja es que no contiene níquel, un metal que a menudo causa alergias. Además, puede ser anodizado en una amplia gama de colores.",
-          "image": ""
+          "text": "## Titanio ASTM-F136 (Grado de implante)\n\nConsiderado *el estándar de oro en la industria* de los piercings. El titanio de grado de implante es un material totalmente hipoalergénico, ligero y biocompatible. *Es la mejor opción* para perforaciones iniciales por su excelente capacidad de curación. Su principal ventaja es que no contiene níquel, un metal que a menudo causa alergias. Además, puede ser anodizado en una amplia gama de colores."
         },
         {
           "type": "image_right",
-          "text": "## Oro de 18k\n\nEl oro de 18k es una excelente opción para piercings, siempre y cuando sea de alta calidad. Es hipoalergénico y muy durable. La pureza de 18 quilates asegura que el contenido de oro es alto (75%) y la cantidad de otros metales (como el cobre o la plata) es menor, reduciendo el riesgo de irritación. ¡Importante! Evita el oro laminado o chapado, ya que el recubrimiento puede desprenderse.",
-          "image": ""
+          "text": "## Oro de 18k\n\nEl oro de 18k es una excelente opción para piercings, siempre y cuando sea de alta calidad. *Es hipoalergénico y muy durable.* La pureza de 18 quilates asegura que el contenido de oro es alto (75%) y la cantidad de otros metales (como el cobre o la plata) es menor, reduciendo el riesgo de irritación. ¡Importante! *Evita el oro laminado o chapado*, ya que el recubrimiento puede desprenderse."
         },
         {
           "type": "image_left",
-          "text": "## Acero Inoxidable Quirúrgico (316L)\n\nEs una opción popular y económica. Es resistente y fácil de limpiar. Sin embargo, no es 100% libre de níquel. Aunque el níquel está firmemente ligado al acero, una pequeña cantidad puede liberarse y causar una reacción alérgica en personas sensibles. Por eso, no se considera la mejor opción para perforaciones iniciales, especialmente en áreas de cartílago.",
-          "image": ""
+          "text": "## Acero Inoxidable Quirúrgico (316L)\n\nEs una opción popular y económica. Es resistente y fácil de limpiar. Sin embargo, *no es 100% libre de níquel*. Aunque el níquel está firmemente ligado al acero, una pequeña cantidad puede liberarse y causar una *reacción alérgica*. Por eso, no se considera la mejor opción para perforaciones iniciales, *especialmente en áreas de cartílago*."
         },
         {
           "type": "image_right",
-          "text": "## Joyería de Fantasía\n\nEste grupo incluye materiales como la plata esterlina, aleaciones de metales o bisutería. ¡Bajo ninguna circunstancia deben usarse para un piercing inicial! Contienen altos niveles de níquel, zinc y otros metales que pueden causar reacciones alérgicas severas, infecciones y cicatrizaciones queloides. Este tipo de joyería no es apta para el uso interno en el cuerpo y solo debe ser considerada para un uso externo en joyería de moda, nunca en perforaciones.",
-          "image": ""
+          "text": "## Joyería de Fantasía\n\nEste grupo incluye materiales como la plata esterlina, aleaciones de metales o bisutería. *¡Bajo ninguna circunstancia deben usarse para un piercing inicial!* Contienen *altos niveles* de _níquel, zinc y otros metales que pueden causar reacciones alérgicas_ *severas*, infecciones y cicatrizaciones queloides. Este tipo de joyería no es apta para el uso interno en el cuerpo y solo debe ser considerada para un _uso externo en joyería para Piercings_, *nunca en perforaciones*."
+        }
+      ]
+    },
+    {
+      "id": "guía_rápida:_tipos_de_joyas_para_tu_piercing",
+      "title": "Tipos de Joyas para tu Piercing",
+      "type": "info",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "Elegir la joya adecuada es tan importante como la perforación en sí. No solo define tu estilo, sino que es crucial para una *buena cicatrización*. Al inicio, siempre usaremos materiales biocompatibles como el *Titanio Grado Implante (ASTM F-136)*, pero la *forma* de la joya varía mucho según la zona.\n\nEstas son las piezas básicas que debes conocer:"
+        },
+        {
+          "type": "image_left",
+          "text": "## *El Labret*\n\nEs la joya inicial *más versátil y recomendada*, especialmente para perforaciones en la oreja (como hélix, tragus, conch) y en la zona de los labios (philtrum, medusa, labio inferior). Su base interna es un disco plano, lo que *maximiza el confort* y evita enganchones dentro de la boca o contra el pelo."
+        },
+        {
+          "type": "image_right",
+          "text": "## *El Barbell (Barra Recta)*\n\nLa joya clásica para la *lengua*, los *pezones* y piercings transversales como el *industrial* (que usa una barra muy larga). Consiste en una barra recta con dos bolas o topes en los extremos. _Es fundamental medir la longitud correcta_ para evitar presión en la zona."
+        },
+        {
+          "type": "image_left",
+          "text": "## *La Banana (Barra Curva)*\n\nPerfecta para anatomías curvas. Es la joya estándar para el *ombligo* y la *ceja*. Su forma de 'J' (o ligera curva) se adapta perfectamente al pliegue de la piel, permitiendo que la perforación sane sin tensión innecesaria.",
+          "image": {
+            "pc": "img/piercings/info/En piedrita.webp"
+          }
+        },
+        {
+          "type": "image_right",
+          "text": "## *El Aro (Clicker, BCR, Segmento)*\n\nLos aros son muy populares para el septum, el daith y, una vez curado, el nostril (nariz) o el hélix.\n_No se recomiendan como joya inicial_ en la mayoría de perforaciones (especialmente cartílago), ya que su movimiento constante puede irritar y complicar la curación. Los *Clickers* (con bisagra) son los más cómodos de poner y quitar.",
+          "image": {
+            "pc": "img/piercings/info/Muchas Joyas.webp"
+          }
+        },
+        {
+          "type": "image_left",
+          "text": "## *La Herradura (Barra Circular)*\n\nMuy usada en el *septum* (ya que permite ocultar el piercing fácilmente) y en piercings como el smiley. Es básicamente una barra circular abierta con dos topes o bolas en los extremos. Da un look diferente al aro cerrado.",
+          "image": {
+            "pc": "img/piercings/info/Ilustrado.webp"
+          }
+        },
+        {
+          "type": "text",
+          "text": "## Elige con sabiduría\n\nRecuerda: Tu anillador profesional siempre elegirá la joya inicial con el *material*, *grosor (gauge)* y *longitud* adecuados para tu anatomía específica y para permitir la inflamación inicial. _Nunca fuerces una joya ni la cambies antes de tiempo_."
+        }
+      ]
+    },
+    {
+      "id": "tu_seguridad_es_nuestra_prioridad:_así_trabajamos",
+      "title": "Tu Seguridad es Nuestra Prioridad: Así Trabajamos",
+      "type": "info",
+      "content_blocks": [
+        {
+          "type": "text",
+          "text": "Realizar un piercing es un procedimiento que tomamos con la máxima seriedad. Queremos que tu experiencia sea segura, cómoda y profesional. Aquí te explicamos nuestro proceso paso a paso, donde _la esterilización y tu bienestar son lo primero_."
+        },
+        {
+          "type": "image_left",
+          "text": "## *1. Asesoría y Marcado Preciso*\n\nTodo comienza contigo.\n- Primero, *analizamos tu anatomía* para confirmar que la perforación deseada es viable y te favorecerá.\n- Te ayudamos a elegir tu joya inicial, recomendando siempre *Titanio Grado Implante*.\n- Revisamos la ubicación de vasos sanguíneos visibles para evitar perforarlos.\n- Limpiamos la zona con un antiséptico profesional.\n- Marcamos el punto exacto con violeta de genciana y un palillo estéril, asegurándonos de que _estés 100% conforme con la ubicación_ antes de continuar."
+        },
+        {
+          "type": "image_right",
+          "text": "## *2. El Procedimiento Aséptico*\n\nAquí no hay atajos. Tu salud es lo más importante.\n- Utilizamos *materiales 100% esterilizados mediante Autoclave* (el estándar hospitalario).\n- Preparamos un campo estéril y abrimos todos los paquetes (aguja, guantes, gasas) delante de ti.\n- Usamos exclusivamente *Aguja Americana* de la más alta calidad para una perforación precisa y menos traumática.\n- Volvemos a desinfectar la zona, nos calzamos los *guantes quirúrgicos estériles* y preparamos la joya y la aguja.\n- Solo entonces, con todo listo y estéril, realizamos la perforación."
+        },
+        {
+          "type": "image_left",
+          "text": "## *3. Te Acompañamos en la Curación*\n\nNuestro trabajo no termina con la perforación.\n- Al adquirir tu *joya de Titanio* con nosotros, te obsequiamos un *Kit de Limpieza* completo.\n- Este kit incluye una *Solución Salina* estéril e *Hisopos de 2 tamaños* para facilitar tu rutina.\n- De esta forma, _nos aseguramos de que tengas el material necesario_ para cuidar tu piercing y dejarte una excelente impresión.\n- Además del kit, te explicamos verbalmente todos los cuidados y te enviamos una *Guía de Cuidado* digital."
+        },
+        {
+          "type": "text",
+          "text": "Nuestro objetivo es garantizar una cicatrización *RÁPIDA* y exitosa."
         }
       ]
     }

@@ -49,7 +49,6 @@ def format_content_text(text):
 # Añadimos las definiciones que faltaban
 load_dotenv()
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-CAROUSEL_FILE = os.path.join(BASE_DIR, 'carousel.json')
 GUIDE_CARDS_FILE = os.path.join(BASE_DIR, 'guide_cards.json')
 PORTFOLIO_FILE = os.path.join(BASE_DIR, 'portfolio.json') # <-- NUEVO
 FEATURES_FILE = os.path.join(BASE_DIR, 'features.json')   # <-- NUEVO
@@ -69,7 +68,7 @@ def load_json_data(filepath, default_value=None):
 app = Flask(__name__)
 
 # Configuración SEGURA y PERSISTENTE de sesiones (Flask-Session)
-app.config['SECRET_KEY'] = 'tu_clave_secreta_muy_fuerte_y_larga_123!'
+app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY', 'default_secret_key_for_dev')
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_FILE_DIR'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'session_data')
 app.config['SESSION_PERMANENT'] = True
@@ -530,33 +529,62 @@ def piercings():
     return render_template('piercings.html', piercings_data=piercings_data)
 
 def format_content_text(text):
-    """
-    Convierte un bloque de texto con una notación simple a HTML.
-    - Las líneas que empiezan con '## ' se convierten en subtítulos (<h4>).
-    - El resto de líneas se envuelven en párrafos (<p>).
-    """
     if not text:
         return ""
-        
+
     html_output = []
-    # Divide el texto en párrafos separados por una o más líneas en blanco
-    paragraphs = re.split(r'\n\s*\n', text.strip())
-    
+    paragraphs = re.split(r'\n\s*\n', text.strip()) # Split by blank lines
+    in_list = False
+
     for para in paragraphs:
-        # Elimina espacios extra al principio/final de cada párrafo
         clean_para = para.strip()
-        if clean_para.startswith('## '):
-            # Es un subtítulo. Le quitamos el '## ' y lo envolvemos en <h4>
-            subtitle_text = clean_para[3:]
-            html_output.append(f'<h4>{subtitle_text}</h4>')
-        elif clean_para:
-            # Es un párrafo normal. Lo envolvemos en <p>
-            # Reemplazamos los saltos de línea simples por <br> para mantenerlos
-            paragraph_html = clean_para.replace('\n', '<br>')
+        lines = clean_para.split('\n') # Split paragraph into lines
+
+        # --- APPLY INLINE FORMATTING *BEFORE* JOINING/WRAPPING ---
+        # Apply bold and underline to the raw paragraph text first
+        formatted_para = clean_para # Start with the clean paragraph
+        formatted_para = re.sub(r'\*(.*?)\*', r'<b>\1</b>', formatted_para, flags=re.DOTALL) # DOTALL allows matching across newlines within a paragraph
+        formatted_para = re.sub(r'_(.*?)_', r'<u>\1</u>', formatted_para, flags=re.DOTALL) # DOTALL here too
+
+        # Now re-split the *formatted* paragraph into lines for further processing
+        lines = formatted_para.split('\n')
+
+        # 1. Detect Subtítulos (using the first line of the formatted paragraph)
+        if lines[0].strip().startswith('## '):
+            if in_list:
+                html_output.append('</ul>')
+                in_list = False
+            # Get subtitle text *after* ##, apply inline format again (safe, won't double format)
+            subtitle_text = lines[0].strip()[3:]
+            html_output.append(f'<h4>{subtitle_text}</h4>') # The text already has b/u tags
+
+        # 2. Detect Listas (check if *original* lines started with '- ')
+        elif all(original_line.strip().startswith('- ') for original_line in para.strip().split('\n') if original_line.strip()):
+             if not in_list:
+                 html_output.append('<ul>')
+                 in_list = True
+             # Iterate through the *formatted* lines now
+             for line in lines:
+                 if line.strip().startswith('- '): # Check the formatted line starts with '-'
+                     item_text = line.strip()[2:] # Remove '- '
+                     html_output.append(f'<li>{item_text}</li>') # item_text already has b/u tags
+
+        # 3. Párrafos Normales
+        elif formatted_para: # Use the formatted paragraph
+            if in_list:
+                html_output.append('</ul>')
+                in_list = False
+            # Join lines with <br>, the b/u tags are already present
+            paragraph_html = '<br>'.join(lines)
             html_output.append(f'<p>{paragraph_html}</p>')
-            
+
+    if in_list:
+        html_output.append('</ul>')
+
     return "\n".join(html_output)
 
+# Ensure filter registration:
+app.jinja_env.filters['format_text'] = format_content_text
 
 
 
@@ -863,6 +891,20 @@ def add_to_cart():
     if not product:
         return jsonify({'status': 'error', 'message': 'Producto no encontrado'}), 404
     
+    # --- INICIO DE LA VALIDACIÓN DE STOCK ---
+    available_stock = product.get('stock', {}).get(size, 0)
+
+    # Considerar también el stock que ya está en el carrito
+    item_in_cart = next((item for item in cart['cart_items'] if item['product_id'] == product_id and item['size'] == size), None)
+    quantity_in_cart = item_in_cart['quantity'] if item_in_cart else 0
+
+    if available_stock < (quantity_in_cart + quantity):
+        return jsonify({
+            'status': 'error',
+            'message': f'Stock insuficiente. Solo quedan {available_stock} unidades de este tamaño.'
+        }), 400
+    # --- FIN DE LA VALIDACIÓN DE STOCK ---
+
     # --- Lógica de precios corregida ---
     if product.get('on_sale'):
         price = product.get('sale_price', product['price'])
@@ -1148,15 +1190,6 @@ def check_session():
     print(f"--- /check-session: El valor de session['test_value'] es: {test_value} ---")
     return f"El valor de 'test_value' en la sesión es: {test_value}"
 
-# --- REEMPLAZA LA RUTA DEL CARRUSEL EXISTENTE POR ESTA ---
-@app.route('/api/carousel_images')
-def carousel_images():
-    """
-    Endpoint para obtener la lista de imágenes para el carrusel.
-    Ahora lee los datos desde carousel.json.
-    """
-    carousel_data = load_json_data(CAROUSEL_FILE, {"images": []})
-    return jsonify(carousel_data.get("images", []))
 
 # --- 4. PUNTO DE ENTRADA DE LA APLICACIÓN ---
 

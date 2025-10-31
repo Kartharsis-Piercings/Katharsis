@@ -64,13 +64,47 @@
 /* Columna de navegación izquierda */
 .piercing-nav {
     width: 25%;
-    position: sticky; /* ¡Magia! El índice se queda fijo al hacer scroll */
-    top: 100px; /* Distancia desde la parte superior */
+    position: sticky;
+    top: 100px;
     align-self: flex-start;
     background: #1a1a1a;
     padding: 1.5rem;
     border-radius: 8px;
     border: 1px solid #2a2a2a;
+    max-height: calc(100vh - 100px - 4rem); /* Altura máxima = (Altura pantalla - Offset superior - Espacio inferior) */
+    overflow-y: auto; /* Muestra scroll vertical SOLO si el contenido es más largo */
+}
+
+/* Estilo sutil para la barra de scroll en navegadores WebKit*/
+.piercing-nav::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra */
+}
+.piercing-nav::-webkit-scrollbar-track {
+    background: #1a1a1a; /* Fondo del track (igual que el nav) */
+    border-radius: 4px;
+}
+.piercing-nav::-webkit-scrollbar-thumb {
+    background-color: #444; /* Color de la barra de scroll */
+    border-radius: 4px;
+    border: 2px solid #1a1a1a; /* Espacio alrededor de la barra */
+}
+.piercing-nav::-webkit-scrollbar-thumb:hover {
+    background-color: #666; /* Color al pasar el mouse */
+}
+
+div.zone-description { /* Changed selector */
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-bottom: 0.7rem;
+    max-width: 80ch;
+    line-height: 1.8; /* Added line-height for consistency */
+}
+/* Optional: Reset margin for paragraphs generated *inside* the div by the filter */
+div.zone-description > p {
+     margin-bottom: 0.5em; /* Add some space between paragraphs inside */
+}
+div.zone-description > p:last-child {
+     margin-bottom: 0; /* No extra space after the last paragraph */
 }
 
 .piercing-nav h3 {
@@ -111,7 +145,12 @@
 }
 
 .piercing-info-text p {
-    line-height: 1.5;
+    line-height: 1.5; /* Or your desired line height */
+    color: #ccc;      /* Or your desired text color */
+    margin-bottom: 1em; /* Space between paragraphs */
+}
+.piercing-info-text p:last-child {
+    margin-bottom: 0;
 }
 
 .content-section {
@@ -234,29 +273,115 @@
 .info-block {
     margin-bottom: 2.5rem; /* Espacio entre bloques de contenido */
 }
+/* --- ESTILOS UNIFICADOS PARA TEXTO FORMATEADO (Info, Zona, Piercing) --- */
+
+/* Estilo para Negrita */
+.info-block-text b,
+.zone-description b,
+.piercing-info-text b {
+  color: #84529C; /* Blanco más brillante */
+  font-weight: bold;
+}
+
+/* Estilo para Subrayado */
+.info-block-text u,
+.zone-description u,
+.piercing-info-text u {
+  text-decoration: underline;
+  text-decoration-color: #84529C; /* Subrayado con el color principal */
+  text-decoration-thickness: 1.5px; /* Grosor opcional */
+}
+
+/* Estilo para Listas */
+.info-block-text ul,
+.zone-description ul,
+.piercing-info-text ul {
+  list-style: none; /* Quitamos viñeta por defecto */
+  margin-left: 5px;  /* Sin indentación extra */
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-left: 0;
+}
+
+/* Estilo para Items de Lista */
+.info-block-text li,
+.zone-description li,
+.piercing-info-text li {
+  margin-bottom: 10px; /* Espacio entre items */
+  color: #ccc;          /* Color de texto normal para items */
+  padding-left: 20px; /* Espacio para la viñeta personalizada */
+  position: relative; /* Necesario para la pseudo-viñeta */
+}
+
+/* Viñeta Personalizada */
+.info-block-text li::before,
+.zone-description li::before,
+.piercing-info-text li::before {
+  content: ''; /* Elemento vacío */
+  position: absolute;
+  left: 0;
+  top: 8px; /* Ajusta verticalmente si es necesario */
+  width: 6px;
+  height: 6px;
+  background-color: #84529C; /* Color principal para la viñeta */
+  border-radius: 1px;
+}
+
+/* Estilo para Subtítulos (h4) */
+.info-block-text h4,
+.zone-description h4,
+.piercing-info-text h4 {
+  color: #84529C;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #84529C;
+  padding-left: 1rem;
+}
+
+/* Quitar margen superior extra si es el primer elemento */
+.info-block-text h4:first-child,
+.zone-description h4:first-child,
+.piercing-info-text h4:first-child {
+  margin-top: 0;
+}
+
+/* Ajustes específicos para párrafos dentro de zone/piercing descriptions */
+div.zone-description > p,
+.piercing-info-text > p {
+    margin-bottom: 1em; /* Espacio entre párrafos */
+    color: #ccc;       /* Color de texto estándar */
+    line-height: 1.8;
+}
+div.zone-description > p:last-child,
+.piercing-info-text > p:last-child {
+    margin-bottom: 0;
+}
 
 /* --- Estilos para los bloques con imagen y texto --- */
 .info-block.block-image_left,
 .info-block.block-image_right {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
-    gap: 2rem;
-    align-items: center;
+    display: grid;                 /* Activa el layout de rejilla */
+    grid-template-columns: 1fr 1fr; /* Crea dos columnas de igual tamaño */
+    gap: 2rem;                     /* Espacio entre imagen y texto */
+    align-items: center;           /* Centra verticalmente el contenido */
+    margin-bottom: 2.5rem;         /* Espacio debajo de cada bloque */
 }
 
 /* Invierte el orden para el bloque con imagen a la derecha */
 .info-block.block-image_right .info-block-image {
-    order: 2;
+    order: 2; /* Mueve la imagen a la segunda columna */
 }
 .info-block.block-image_right .info-block-text {
-    order: 1;
+    order: 1; /* Mueve el texto a la primera columna */
 }
 
-/* --- Estilos para los componentes internos --- */
+/* --- Estilos para los componentes internos (asegúrate que estén) --- */
 .info-block-image img {
     width: 100%;
     border-radius: 8px;
-    display: block;
+    display: block; /* Importante para evitar espacios extra */
 }
 
 .info-block-text {
@@ -264,16 +389,43 @@
     color: #ccc;
 }
 
-/* Los párrafos dentro de los bloques de texto tienen un margen inferior */
 .info-block-text p {
     margin-bottom: 1em;
 }
 
-/* Elimina el margen del último párrafo para un espaciado limpio */
 .info-block-text p:last-child {
     margin-bottom: 0;
 }
 
+/* Estilos para h4 (títulos dentro del texto) - ya deberías tenerlos */
+.info-block-text h4 {
+    color: #84529C;
+    font-size: 1.3rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    border-left: 3px solid #84529C;
+    padding-left: 0.75rem;
+}
+.info-block-text h4:first-child {
+    margin-top: 0;
+}
+
+.info-block-image .responsive-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block; /* Asegura que sea un bloque por defecto */
+    margin-left: auto; /* Centrado por si acaso */
+    margin-right: auto;
+}
+
+/* Por defecto (PC): Oculta la móvil, muestra la de PC */
+.info-block-image .image-mobile {
+    display: none;
+}
+.info-block-image .image-pc {
+    display: block;
+}
 
 /* Responsive */
 @media (max-width: 900px) {
@@ -342,6 +494,12 @@
     width: 100%;
     max-height: 250px;
     }
+    .content-section {
+    /* Ajustamos el margen para que coincida con la altura del header (60px) 
+       y la nueva posición de la barra de navegación (top: 68px). 
+       Un valor de 80px dará un espacio cómodo. */
+    scroll-margin-top: 80px; 
+    }
 }
 
 @media (max-width: 768px) {
@@ -407,4 +565,17 @@
     .info-block.block-image_right .info-block-text {
         order: initial;
     }
+.info-block-image .image-pc {
+        display: none; /* Oculta PC */
+    }
+    .info-block-image .image-mobile {
+        display: block; /* Muestra Móvil */
+    }
+}
+
+/* --- Ajustes adicionales para bloques solo con imagen --- */
+.info-block.block-image_only .info-block-image {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
