@@ -351,8 +351,7 @@ if (guideSlider) {
 
     nextButton.addEventListener('click', slideNext);
     prevButton.addEventListener('click', slidePrev);
-    addSwipeNavigation(categoryContainer, nextButton, prevButton);
-
+    addSwipeNavigation(guideSlider, nextButton, prevButton);
     const startAutoSlide = () => {
         clearInterval(autoSlideInterval);
         autoSlideInterval = setInterval(slideNext, 5000);
