@@ -14,37 +14,59 @@ document.addEventListener('DOMContentLoaded', () => {
         guideNavList.classList.toggle('active');
     });
 
-    // --- 2. LÓGICA DE SCROLL MANUAL (MEJORADA) ---
+    // --- 2. LÓGICA DE SCROLL MANUAL (VERSIÓN CORREGIDA) ---
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            // Prevenimos el salto de ancla por defecto del navegador
+            // Prevenimos el salto de ancla por defecto
             e.preventDefault(); 
             
-            // Cerramos el menú si está abierto
+            // Cerramos el menú si está abierto (en móvil)
             if (guideNavList.classList.contains('active')) {
                 guideNavList.classList.remove('active');
             }
 
-            // Obtenemos el ID del ancla (ej: "#oreja")
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
 
             if (targetElement) {
-                // --- Cálculo del Offset ---
+                // --- Cálculo del Offset Fijo ---
                 
-                // Obtenemos la altura del header principal (asumimos 60px)
+                // Altura del header principal (sabemos que es 60px)
                 const headerOffset = 60; 
                 
-                // Obtenemos la altura real del botón morado "Navegación"
-                const navBarOffset = navToggleBtn.offsetHeight;
+                // Altura de la barra de navegación "sticky"
+                let navBarOffset = 0;
                 
-                // Sumamos ambas alturas y un pequeño búfer de 15px
-                const totalOffset = headerOffset + navBarOffset + 15;
+                // Detectamos si estamos en vista móvil o escritorio
+                if (window.innerWidth <= 900) {
+                    // En móvil, el offset es la altura del botón morado
+                    // (que tiene 1rem de padding (16px*2=32) + font-size ~16px = ~48px)
+                    // Usamos la altura sticky del CSS: 68px
+                    navBarOffset = 68;
+                } else {
+                    // En escritorio, el offset es la altura sticky del nav: 100px
+                    navBarOffset = 100;
+                }
+                
+                // Búfer adicional para que no quede pegado
+                const buffer = 15;
+                
+                // En móvil, queremos que el offset sea menor que en escritorio
+                // Si estamos en móvil (window.innerWidth <= 900), usamos el offset de 68px del CSS
+                // Si estamos en escritorio, usamos el de 100px.
+                
+                let totalOffset;
+                
+                if (window.innerWidth <= 900) {
+                    // Offset para MÓVIL (Header + Botón Navegación + Buffer)
+                    totalOffset = 60 + 68 + buffer; // Aprox 143px
+                } else {
+                    // Offset para ESCRITORIO (Header (que desaparece) + Nav Sticky + Buffer)
+                    totalOffset = 100 + buffer; // Aprox 115px (como lo tenías en el CSS)
+                }
 
                 // --- Cálculo de la Posición ---
-                // Obtenemos la posición del elemento relativa a la ventana
                 const elementPosition = targetElement.getBoundingClientRect().top;
-                // Sumamos el scroll actual de la página y restamos nuestro offset
                 const offsetPosition = elementPosition + window.pageYOffset - totalOffset;
 
                 // Hacemos scroll suave a esa posición calculada
