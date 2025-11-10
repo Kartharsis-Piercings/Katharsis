@@ -47,6 +47,36 @@ if (track && track.children.length > 0) {
     });
 }
 
+const mainCarousel = document.querySelector('.main-image-carousel');
+if (mainCarousel) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50; // Mínimo de píxeles
+
+    // Usamos passive: true para optimizar el scroll
+    mainCarousel.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    mainCarousel.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+        const swipeDistance = touchEndX - touchStartX;
+        if (swipeDistance < -swipeThreshold) {
+            // Swipe izquierda -> Clic en Siguiente
+            document.querySelector('.carousel-button-main.next').click();
+        } else if (swipeDistance > swipeThreshold) {
+            // Swipe derecha -> Clic en Anterior
+            document.querySelector('.carousel-button-main.prev').click();
+        }
+        touchStartX = 0;
+        touchEndX = 0;
+    }
+}
+
 // Controles de cantidad
 document.querySelector('.quantity-btn.plus').addEventListener('click', () => {
     const input = document.getElementById('quantity');

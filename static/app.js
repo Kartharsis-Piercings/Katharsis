@@ -1,4 +1,43 @@
 // static/app.js
+/**
+ * Añade navegación por swipe (deslizar) a un contenedor de carrusel.
+ * @param {HTMLElement} container El elemento que escuchará el gesto (ej. el carrusel).
+ * @param {HTMLElement} nextButton El botón "siguiente" al que se le hará clic.
+ * @param {HTMLElement} prevButton El botón "anterior" al que se le hará clic.
+ */
+
+function addSwipeNavigation(container, nextButton, prevButton) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50; // Mínimo de píxeles para considerar un swipe
+
+    container.addEventListener('touchstart', (e) => {
+        // Solo nos interesa el primer dedo
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true }); // passive: true para mejor performance de scroll
+
+    container.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+        const swipeDistance = touchEndX - touchStartX;
+
+        if (swipeDistance < -swipeThreshold) {
+            // Swipe hacia la izquierda (queremos ir al siguiente)
+            if (nextButton) nextButton.click();
+        } else if (swipeDistance > swipeThreshold) {
+            // Swipe hacia la derecha (queremos ir al anterior)
+            if (prevButton) prevButton.click();
+        }
+        
+        // Resetea los valores
+        touchStartX = 0;
+        touchEndX = 0;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     
     // --- LÓGICA DEL CARRUSEL MEJORADA ---
@@ -86,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Añadir eventos
                 nextBtn.addEventListener('click', () => { nextSlide(); startAutoSlide(); });
                 prevBtn.addEventListener('click', () => { prevSlide(); startAutoSlide(); });
+                addSwipeNavigation(categoryContainer, nextButton, prevButton);
                 carouselSlide.addEventListener('transitionend', handleLoop);
                 carouselContainer.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
                 carouselContainer.addEventListener('mouseleave', startAutoSlide);
@@ -139,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
             track.addEventListener('transitionend', handleLoop);
             nextButton.addEventListener('click', () => { if (currentIndex < slides.length - 1) { currentIndex++; moveToSlide(currentIndex); }});
             prevButton.addEventListener('click', () => { if (currentIndex > 0) { currentIndex--; moveToSlide(currentIndex); }});
+            addSwipeNavigation(galleryContainer, nextButton, prevButton);
         }
     }
 
@@ -228,6 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentIndex--;
                 updateCarousel();
             });
+            addSwipeNavigation(categoryContainer, nextButton, prevButton);
             
             // Lógica de hover (sin cambios)
             // ...
@@ -309,6 +351,7 @@ if (guideSlider) {
 
     nextButton.addEventListener('click', slideNext);
     prevButton.addEventListener('click', slidePrev);
+    addSwipeNavigation(categoryContainer, nextButton, prevButton);
 
     const startAutoSlide = () => {
         clearInterval(autoSlideInterval);

@@ -22,8 +22,8 @@
 
 @media (max-width: 600px) {
     .hero {
-        height: 22vh;
-        min-height: 120px;
+        height: 35vh;
+        min-height: 140px;
         background-position: center top;
     }
 }
@@ -156,7 +156,7 @@ div.zone-description > p:last-child {
 .content-section {
     margin-bottom: 4rem;
     /* Evita que el título quede oculto bajo el header al navegar desde el índice */
-    scroll-margin-top: 100px; 
+    scroll-margin-top: 110px; 
 }
 
 .content-section > h2 {
@@ -309,8 +309,7 @@ div.zone-description > p:last-child {
 .piercing-info-text li {
   margin-bottom: 10px; /* Espacio entre items */
   color: #ccc;          /* Color de texto normal para items */
-  padding-left: 20px; /* Espacio para la viñeta personalizada */
-  position: relative; /* Necesario para la pseudo-viñeta */
+  padding-left: 20px; /* Espacio para la viñeta personalizada *//
 }
 
 /* Viñeta Personalizada */
@@ -498,7 +497,7 @@ div.zone-description > p:last-child,
     /* Ajustamos el margen para que coincida con la altura del header (60px) 
        y la nueva posición de la barra de navegación (top: 68px). 
        Un valor de 80px dará un espacio cómodo. */
-    scroll-margin-top: 80px; 
+    scroll-margin-top: 125px; 
     }
 }
 
