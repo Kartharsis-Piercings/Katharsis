@@ -1,0 +1,269 @@
+{
+  "16G": {
+    "tops": {
+      "top_16g_perla_3mm": {
+        "name": "Top Perla 3mm (16G)",
+        "stock": 91,
+        "costo": 12.5
+      },
+      "top_16g_pua_3mm": {
+        "name": "Top Púa 3mm (16G)",
+        "stock": 15,
+        "costo": 12.5
+      },
+      "top_16g_zircon_ab_4mm": {
+        "name": "Top Zircón AB 4mm (16G)",
+        "stock": 3,
+        "costo": 12.5
+      },
+      "top_16g_zircon_blanco_4mm": {
+        "name": "Top Zircón Blanco 4mm (16G)",
+        "stock": 0,
+        "costo": 12.5
+      },
+      "top_16g_obsidiana_4mm": {
+        "name": "Top Obsidiana 4mm (16G)",
+        "stock": 3,
+        "costo": 12.5
+      },
+      "top_16g_amatista_4mm": {
+        "name": "Top Amatista 4mm (16G)",
+        "stock": 1,
+        "costo": 12.5
+      },
+      "top_16g_zircon_rosa_4mm": {
+        "name": "Top Zircón Rosa 4mm (16G)",
+        "stock": 1,
+        "costo": 12.5
+      },
+      "top_16g_zircon_3cuerpos": {
+        "name": "Top Zircón 3 Cuerpos (16G)",
+        "stock": 2,
+        "costo": 12.5
+      },
+      "top_16g_aqua_5cuerpos": {
+        "name": "Top 5 Cuerpos Aquamarine (16G)",
+        "stock": 1,
+        "costo": 12.5
+      },
+      "top_16g_zircon_5cuerpos": {
+        "name": "Top 5 Cuerpos Zircón (16G)",
+        "stock": 2,
+        "costo": 12.5
+      },
+      "top_16g_corona_zircon": {
+        "name": "Top Corona Zircón (16G)",
+        "stock": 2,
+        "costo": 12.5
+      },
+      "top_16g_laurel_zircon": {
+        "name": "Top Laurel Zircón (16G)",
+        "stock": 3,
+        "costo": 12.5
+      },
+      "top_16g_corazon_4mm": {
+        "name": "Top Corazón 4mm (16G)",
+        "stock": 8,
+        "costo": 12.5
+      },
+      "top_16g_bola_titanio_4mm": {
+        "name": "Top Bola Titanio 4mm (16G)",
+        "stock": 16,
+        "costo": 12.5
+      },
+      "top_16g_rayo": {
+        "name": "Top Rayo Titanio (16G)",
+        "stock": 10,
+        "costo": 12.5
+      },
+      "top_16g_cruz": {
+        "name": "Top Cruz Titanio (16G)",
+        "stock": 10,
+        "costo": 12.5
+      },
+      "top_16g_luna": {
+        "name": "Top Luna Titanio (16G)",
+        "stock": 8,
+        "costo": 12.5
+      },
+      "top_16g_plano_2.5mm": {
+        "name": "Top Plano Titanio 2.5mm (16G)",
+        "stock": 10,
+        "costo": 12.5
+      },
+      "top_16g_zircon_blanco_2.5mm": {
+        "name": "Top Zircon Blanco Titanio 2.5mm (16G)",
+        "stock": 8,
+        "costo": 12.5
+      },
+      "top_16g_amatista_2.5mm": {
+        "name": "Top Amatista Titanio 2.5mm (16G)",
+        "stock": 1,
+        "costo": 12.5
+      },
+      "top_16g_mariposa_3cuerpos_amatista": {
+        "name": "Top Mariposa Amatista",
+        "stock": 2,
+        "costo": 12.5
+      },
+      "top_16g_lagrima_amatista": {
+        "name": "Top Lagrima Amatista Titanio (16G)",
+        "stock": 2,
+        "costo": 12.5
+      },
+      "top_16g_triangulo_blanco": {
+        "name": "Top Triangulo Titanio (16G)",
+        "stock": 2,
+        "costo": 12.5
+      },
+      "top_16g_mariposa_2cuerpos_blanca": {
+        "name": "Top Mariposa Blanca Titanio",
+        "stock": 2,
+        "costo": 12.5
+      },
+      "top_16g_estrella_amatista": {
+        "name": "Top Estrella Amatista Titanio",
+        "stock": 2,
+        "costo": 12.5
+      },
+      "top_lagrima_amatista": {
+        "name": "Top lagrima de Amatista",
+        "stock": 2,
+        "costo": 3.0
+      },
+      "top_mariposa_3c_amatista": {
+        "name": "Top mariposa de 3 Cuerpos de Amatista",
+        "stock": 2,
+        "costo": 3.3
+      },
+      "top_hojas_doscuerpos_blanco": {
+        "name": "Top hojas de Zircon Blanco",
+        "stock": 2,
+        "costo": 2.17
+      },
+      "top_estrella_lateral_amatista": {
+        "name": "Top de Estrellas de Amatista",
+        "stock": 2,
+        "costo": 4.0
+      },
+      "top_trebol_3hojas_blanco": {
+        "name": "Top Trebol de 3 hojas Blanco",
+        "stock": 2,
+        "costo": 3.66
+      }
+    },
+    "bases": {
+      "labret": {
+        "base_16g_labret_4mm": {
+          "name": "Base Labret Titanio 4mm",
+          "size_label": "4mm",
+          "stock": 10,
+          "costo": 12.5
+        },
+        "base_16g_labret_5mm": {
+          "name": "Base Labret 5mm (16G)",
+          "size_label": "5mm",
+          "stock": 0,
+          "costo": 12.5
+        },
+        "base_16g_labret_6mm": {
+          "name": "Base Labret 6mm (16G)",
+          "size_label": "6mm",
+          "stock": 11,
+          "costo": 12.5
+        },
+        "base_16g_labret_7mm": {
+          "name": "Base Labret 7mm (16G)",
+          "size_label": "7mm",
+          "stock": 2,
+          "costo": 12.5
+        },
+        "base_16g_labret_8mm": {
+          "name": "Base Labret 8mm (16G)",
+          "size_label": "8mm",
+          "stock": 79,
+          "costo": 12.5
+        },
+        "base_16g_labret_10mm": {
+          "name": "Base Labret 10mm (16G)",
+          "size_label": "10mm",
+          "stock": 1,
+          "costo": 12.5
+        },
+        "base_16g_labret_12mm": {
+          "name": "Base Labret 12mm (16G)",
+          "size_label": "12mm",
+          "stock": 8,
+          "costo": 12.5
+        }
+      },
+      "banana": {
+        "base_16g_banana_8mm": {
+          "name": "Base Banana 8mm (16G)",
+          "size_label": "8mm",
+          "stock": 12,
+          "costo": 12.5
+        },
+        "base_16g_banana_10mm": {
+          "name": "Base Banana 10mm (16G)",
+          "size_label": "10mm",
+          "stock": 8,
+          "costo": 12.5
+        }
+      },
+      "herradura": {
+        "base_16g_herradura_8mm": {
+          "name": "Base Herradura 8mm (16G)",
+          "size_label": "8mm",
+          "stock": 12,
+          "costo": 12.5
+        },
+        "base_16g_herradura_10mm": {
+          "name": "Base Herradura 10mm (16G)",
+          "size_label": "10mm",
+          "stock": 10,
+          "costo": 12.5
+        }
+      }
+    }
+  },
+  "14G": {
+    "tops": {
+      "top_14g_bola_4mm": {
+        "name": "Top Bola Titanio 4mm (14G)",
+        "stock": 8,
+        "costo": 12.5
+      },
+      "top_14g_3mm": {
+        "name": "Top Perla Titanio 3mm",
+        "stock": 4,
+        "costo": 12.5
+      },
+      "top_14g_perla_5mm": {
+        "name": "Top Perla 5mm (14G)",
+        "stock": 0,
+        "costo": 12.5
+      }
+    },
+    "bases": {
+      "barra_recta": {
+        "base_14g_barra_14mm": {
+          "name": "Base Barra Recta 14mm (14G)",
+          "size_label": "14mm",
+          "stock": 4,
+          "costo": 12.5
+        },
+        "base_14g_barra_22mm": {
+          "name": "Base Barra Recta 22mm (14G)",
+          "size_label": "22mm",
+          "stock": 0,
+          "costo": 12.5
+        }
+      }
+    }
+  },
+  "20G": {
+    "tops": {},
+    "bases": {}
+  }
+}

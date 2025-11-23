@@ -52,6 +52,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 GUIDE_CARDS_FILE = os.path.join(BASE_DIR, 'guide_cards.json')
 PORTFOLIO_FILE = os.path.join(BASE_DIR, 'portfolio.json') # <-- NUEVO
 FEATURES_FILE = os.path.join(BASE_DIR, 'features.json')   # <-- NUEVO
+INVENTORY_FILE = os.path.join(BASE_DIR, 'inventory.json')
 
 def load_json_data(filepath, default_value=None):
     """Carga datos desde un archivo JSON de forma segura."""
@@ -62,6 +63,14 @@ def load_json_data(filepath, default_value=None):
         # CORRECCIÓN: Si no se especifica un valor por defecto, devolvemos una LISTA vacía,
         # que es lo que la mayoría de las funciones esperan.
         return default_value if default_value is not None else []
+    
+def save_json_data(filepath, data):
+    """Guarda datos en un archivo JSON de forma segura."""
+    try:
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"Error crítico al guardar en {filepath}: {e}")
 # --- FIN DE LA CORRECCIÓN ---
 
 
@@ -118,6 +127,82 @@ def load_coupons():
             return json.load(f)
     except FileNotFoundError:
         return []
+
+@lru_cache(maxsize=1)
+def load_inventory_cached():
+    """Carga el archivo maestro de inventario (tops y bases)."""
+    try:
+        with open(INVENTORY_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {} # Devuelve un dict vacío si no existe
+
+def get_product_stock_levels(product, full_inventory):
+    """
+    Toma un producto del catálogo y le añade el diccionario 'stock'
+    basado en el inventario real (Sistema Híbrido Avanzado).
+    """
+    
+    # --- Sistema 1: Pieza Única (Aros, Nostrils, Navels) ---
+    # Si el producto NO tiene 'gauge' o 'base_type', usa su propio 'stock'.
+    if 'gauge' not in product or 'base_type' not in product:
+        # El producto ya tiene su 'stock' (ej: {"8mm": 5, "10mm": 3})
+        return product
+
+    try:
+        gauge = product['gauge']             # ej: "16G"
+        base_type = product['base_type']     # ej: "labret"
+        
+        # Obtener el inventario de bases para este tipo
+        available_bases = full_inventory.get(gauge, {}).get('bases', {}).get(base_type, {})
+        new_stock_dict = {}
+
+        # --- Sistema 2: Componente 1-Top (Labrets) ---
+        if 'inventory_top_id' in product:
+            top_id = product['inventory_top_id'] # ej: "top_16g_perla_3mm"
+            top_stock = full_inventory.get(gauge, {}).get('tops', {}).get(top_id, {}).get('stock', 0)
+
+            if top_stock <= 0:
+                # Si el TOP está agotado, todas las bases están agotadas para este producto
+                for base in available_bases.values():
+                    new_stock_dict[base['size_label']] = 0
+            else:
+                # Si hay Tops, ver el stock de las BASES
+                for base in available_bases.values():
+                    available = min(top_stock, base.get('stock', 0))
+                    new_stock_dict[base['size_label']] = available
+
+        # --- Sistema 3: Componente 2-Tops (Bananas, Herraduras, Barras) ---
+        elif 'inventory_top_ids' in product:
+            top_ids = product.get('inventory_top_ids', []) # ej: ["top_16g_bola_4mm", "top_16g_bola_4mm"]
+            
+            # Contar cuántos de cada top se necesitan
+            top_needs = {}
+            for t_id in top_ids:
+                top_needs[t_id] = top_needs.get(t_id, 0) + 1
+            
+            # Encontrar el stock limitante de los tops
+            # ej: si necesitas 2 "top_bola" y hay 5 en stock, puedes hacer 5 / 2 = 2 joyas
+            top_stock_limit = 999
+            for top_id, count_needed in top_needs.items():
+                stock_of_this_top = full_inventory.get(gauge, {}).get('tops', {}).get(top_id, {}).get('stock', 0)
+                possible_sets = stock_of_this_top // count_needed
+                if possible_sets < top_stock_limit:
+                    top_stock_limit = possible_sets
+            
+            # Ahora, comprobar contra las bases
+            for base in available_bases.values():
+                # El stock es el mínimo entre los sets de tops y las bases
+                available = min(top_stock_limit, base.get('stock', 0))
+                new_stock_dict[base['size_label']] = available
+                
+        product['stock'] = new_stock_dict
+        
+    except Exception as e:
+        print(f"Error al procesar stock para producto {product.get('id')}: {e}")
+        product['stock'] = {}
+
+    return product
 
 # --- Meta ads API ---
 def send_meta_capi_event(event_name, user_data_raw, custom_data):
@@ -587,7 +672,6 @@ def format_content_text(text):
 app.jinja_env.filters['format_text'] = format_content_text
 
 
-
 @app.route('/servicios')
 def servicios():
     return render_template('servicios.html')
@@ -681,6 +765,14 @@ def joyas():
     filtered_products = get_filtered_products(all_products, logic_filters)
     sorted_products = sort_products(filtered_products, filters['sort_by'])
     
+    full_inventory = load_inventory_cached()
+    enriched_products_list = []
+    for product in sorted_products:
+        # Esta función añade el stock real de 'inventory.json'
+        enriched_products_list.append(
+            get_product_stock_levels(product, full_inventory)
+        )
+
     per_page = app.config['PRODUCTS_PER_PAGE']
     total_products = len(sorted_products)
     total_pages = (total_products + per_page - 1) // per_page
@@ -729,7 +821,15 @@ def api_filter_products():
     filtered_products = get_filtered_products(all_products, filters)
     sorted_products = sort_products(filtered_products, filters['sort_by'])
     
-    # 2. Lógica de paginación
+    #2. Enriquecer con niveles de stock reales
+    full_inventory = load_inventory_cached()
+    enriched_products_list = []
+    for product in sorted_products:
+        enriched_products_list.append(
+            get_product_stock_levels(product, full_inventory)
+        )
+    
+    # 3. Lógica de paginación
     total_products = len(sorted_products)
     total_pages = (total_products + per_page - 1) // per_page
     
@@ -737,7 +837,7 @@ def api_filter_products():
     end_idx = start_idx + per_page
     products_for_page = sorted_products[start_idx:end_idx]
     
-    # 3. Devolver un objeto JSON con los productos Y la información de paginación
+    # 4. Devolver un objeto JSON con los productos Y la información de paginación
     return jsonify({
         'products': products_for_page,
         'total_pages': total_pages,
@@ -767,7 +867,11 @@ def product_detail(product_id):
         return render_template('404.html'), 404
 
     # --- INICIO DE LA NUEVA LÓGICA DE PRODUCTOS RELACIONADOS ---
-    
+    full_inventory = load_inventory_cached()
+    current_product = get_product_stock_levels(
+        current_product, full_inventory
+    )
+
     scored_products = []
     current_body_parts = set(current_product.get('body_parts', []))
     current_category = current_product.get('category')
@@ -877,12 +981,13 @@ def toggle_wishlist():
     
     return jsonify({'status': 'success', 'action': status, 'wishlist': session['wishlist']})
 
+
 @app.route('/add_to_cart', methods=['POST'])
 def add_to_cart():
     cart = initialize_cart()
     product_id = request.form.get('product_id')
     quantity = int(request.form.get('quantity', 1))
-    size = request.form.get('size')
+    size = request.form.get('size') # ej: "8mm"
     
     if not size:
         return jsonify({'status': 'error', 'message': 'Por favor selecciona un tamaño'}), 400
@@ -891,10 +996,63 @@ def add_to_cart():
     if not product:
         return jsonify({'status': 'error', 'message': 'Producto no encontrado'}), 404
     
-    # --- INICIO DE LA VALIDACIÓN DE STOCK ---
-    available_stock = product.get('stock', {}).get(size, 0)
+    available_stock = 0
+    inventory_links = None
+    
+    # --- CASO 1: Producto de Pieza Única (Aro, Nostril, Navel) ---
+    if 'gauge' not in product:
+        available_stock = product.get('stock', {}).get(size, 0)
+    
+    # --- CASO 2: Producto de Componentes (Labret, Banana, Herradura, Barra) ---
+    else:
+        full_inventory = load_inventory_cached()
+        gauge = product.get('gauge')
+        base_type = product.get('base_type')
 
-    # Considerar también el stock que ya está en el carrito
+        if not all([gauge, base_type]):
+             return jsonify({'status': 'error', 'message': 'Producto mal configurado (falta gauge o base_type)'}), 500
+
+        # 1. Encontrar la BASE por su 'size_label'
+        all_bases_of_type = full_inventory.get(gauge, {}).get('bases', {}).get(base_type, {})
+        target_base_key_value = next(
+            (item for item in all_bases_of_type.items() if item[1].get('size_label') == size), 
+            (None, None)
+        )
+        target_base_id = target_base_key_value[0]
+        target_base_obj = target_base_key_value[1]
+        
+        if not target_base_obj:
+            return jsonify({'status': 'error', 'message': f'El tamaño {size} no está disponible.'}), 404
+        
+        base_stock = target_base_obj.get('stock', 0)
+        
+        # 2. Encontrar el stock limitante de los TOPS
+        top_stock_limit = 999
+        
+        # Sistema 2 (1-Top): Labret
+        if 'inventory_top_id' in product:
+            top_id = product['inventory_top_id']
+            top_stock_limit = full_inventory.get(gauge, {}).get('tops', {}).get(top_id, {}).get('stock', 0)
+            inventory_links = { "gauge": gauge, "top_ids": [top_id], "base_id": target_base_id, "base_type": base_type }
+
+        # Sistema 3 (2-Tops): Banana, Herradura, Barra
+        elif 'inventory_top_ids' in product:
+            top_ids_needed = product.get('inventory_top_ids', []) # ej: ["top_bola", "top_bola"]
+            top_needs = {}
+            for t_id in top_ids_needed:
+                top_needs[t_id] = top_needs.get(t_id, 0) + 1
+            
+            for top_id, count_needed in top_needs.items():
+                stock_of_this_top = full_inventory.get(gauge, {}).get('tops', {}).get(top_id, {}).get('stock', 0)
+                possible_sets = stock_of_this_top // count_needed
+                if possible_sets < top_stock_limit:
+                    top_stock_limit = possible_sets
+            inventory_links = { "gauge": gauge, "top_ids": top_ids_needed, "base_id": target_base_id, "base_type": base_type }
+        
+        # El stock real es el mínimo de las dos piezas (Tops vs Base)
+        available_stock = min(top_stock_limit, base_stock)
+
+    # --- Validación de Carrito (lógica sin cambios) ---
     item_in_cart = next((item for item in cart['cart_items'] if item['product_id'] == product_id and item['size'] == size), None)
     quantity_in_cart = item_in_cart['quantity'] if item_in_cart else 0
 
@@ -903,32 +1061,37 @@ def add_to_cart():
             'status': 'error',
             'message': f'Stock insuficiente. Solo quedan {available_stock} unidades de este tamaño.'
         }), 400
-    # --- FIN DE LA VALIDACIÓN DE STOCK ---
-
-    # --- Lógica de precios corregida ---
+    
+    # --- Lógica para añadir al carrito (con una pequeña adición) ---
     if product.get('on_sale'):
         price = product.get('sale_price', product['price'])
     else:
         price = product['price']
+    
     existing_item = next((item for item in cart['cart_items'] if item['product_id'] == product_id and item['size'] == size), None)
 
     if existing_item:
         existing_item['quantity'] += quantity
     else:
-        cart['cart_items'].append({
+        new_item = {
             'product_id': product_id,
             'name': product['name'],
             'image': product['images'][0] if product.get('images') else '',
-            'price': price, # Este ya es el precio de oferta si aplica
-            'original_price': product['price'], # Guardamos el precio original para el badge
+            'price': price,
             'quantity': quantity,
             'size': size,
-            'material': product.get('material', 'N/A'), # Añadimos material
-            'body_parts': product.get('body_parts', []), # Añadimos zonas del cuerpo
-            'is_new': product.get('is_new', False), # Añadimos si es nuevo
-            'on_sale': product.get('on_sale', False), # Añadimos si está en oferta
+            'original_price': product['price'],
+            'material': product.get('material', 'N/A'),
+            'body_parts': product.get('body_parts', []),
+            'is_new': product.get('is_new', False),
+            'on_sale': product.get('on_sale', False),
             'added_at': datetime.now().isoformat()
-        })
+        }
+        
+        if inventory_links:
+            new_item['inventory_links'] = inventory_links
+
+        cart['cart_items'].append(new_item)
     
     session.modified = True
     return jsonify({'status': 'success', 'message': f'"{product["name"]}" añadido al carrito', 'cart_count': len(cart['cart_items'])})
@@ -1067,6 +1230,59 @@ def process_order():
     if len(yape_code) < 3 > 5:
         return jsonify({'message': 'El código de Yape parece inválido.'}), 400
 
+ # --- INICIO: LÓGICA DE DESCUENTO DE STOCK ---
+    inventory_data = load_json_data(INVENTORY_FILE, {})
+    products_data = load_json_data(app.config['PRODUCTS_FILE'], [])
+    products_json_changed = False
+    
+    for item in cart['cart_items']:
+        quantity_to_deduct = item['quantity']
+        
+        # --- CASO 1: Producto de Componentes (Labret, Banana, etc.) ---
+        if 'inventory_links' in item:
+            links = item['inventory_links']
+            gauge = links['gauge']
+            base_type = links['base_type']
+            base_id = links['base_id']
+            top_ids_to_deduct = links.get('top_ids', []) # Lista de IDs de top, ej: ["top_bola", "top_bola"]
+            
+            try:
+                # A. Descontar stock de la BASE (siempre 1)
+                base_stock = inventory_data[gauge]['bases'][base_type][base_id]['stock']
+                inventory_data[gauge]['bases'][base_type][base_id]['stock'] = max(0, base_stock - quantity_to_deduct)
+                
+                # B. Descontar stock de los TOPS (puede ser 1 o más)
+                for top_id in top_ids_to_deduct:
+                    top_stock = inventory_data[gauge]['tops'][top_id]['stock']
+                    # Descontamos 1 top por CADA cantidad de producto
+                    inventory_data[gauge]['tops'][top_id]['stock'] = max(0, top_stock - quantity_to_deduct)
+                    
+            except KeyError as e:
+                print(f"ERROR: No se pudo descontar stock. Enlace de inventario roto: {e}")
+            
+        # --- CASO 2: Producto de Pieza Única (Aro, Nostril, Navel) ---
+        else:
+            product_id = item['product_id']
+            size = item['size']
+            product_to_update = next((p for p in products_data if str(p['id']) == product_id), None)
+            
+            if product_to_update and size in product_to_update.get('stock', {}):
+                current_stock = product_to_update['stock'][size]
+                product_to_update['stock'][size] = max(0, current_stock - quantity_to_deduct)
+                products_json_changed = True
+            else:
+                print(f"ERROR: No se pudo descontar stock para pieza única ID {product_id}, Talla {size}")
+
+    # --- Guardar los archivos de inventario actualizados ---
+    try:
+        save_json_data(INVENTORY_FILE, inventory_data)
+        if products_json_changed:
+            save_json_data(app.config['PRODUCTS_FILE'], products_data)
+    except Exception as e:
+        print(f"ERROR CRÍTICO: No se pudo guardar el inventario actualizado: {e}")
+        
+    # --- FIN: LÓGICA DE DESCUENTO DE STOCK ---
+    
     # --- 3. Preparar el mensaje de WhatsApp para ti ---
     total = get_cart_total(cart)
     items_text = ""

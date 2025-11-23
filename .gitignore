@@ -17,3 +17,10 @@ manager.exe
 manager_config.json
 manager copy.py
 build/
+
+# Archivos de bases de datos
+credentials.json
+servicios.json
+ventas_pendientes.json
+costos_cache.json
+clientes_cache.json

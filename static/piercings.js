@@ -14,67 +14,68 @@ document.addEventListener('DOMContentLoaded', () => {
         guideNavList.classList.toggle('active');
     });
 
-    // --- 2. LÓGICA DE SCROLL MANUAL (VERSIÓN CORREGIDA) ---
+    // --- 2. FUNCIÓN DE SCROLL CENTRALIZADA ---
+    /**
+     * Calcula la posición correcta del ancla y se desplaza suavemente.
+     * @param {string} anchorId - El ID del elemento al que saltar (ej: "#oreja").
+     */
+    function scrollToAnchor(anchorId) {
+        const targetElement = document.querySelector(anchorId);
+        if (!targetElement) return;
+
+        // --- Cálculo del Offset Fijo ---
+        // Usamos los valores fijos del CSS para máxima fiabilidad.
+        
+        let offsetPx = 115; // Offset de ESCRITORIO (top: 100px + 15px buffer)
+
+        if (window.innerWidth <= 900) {
+            // Offset para MÓVIL (usamos el valor de scroll-margin-top: 125px del CSS)
+            offsetPx = 125; 
+        }
+
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offsetPx;
+
+        // --- Corrección Crucial para iOS (iPhone) ---
+        // Usamos setTimeout(..., 0) para asegurar que el scroll ocurra
+        // DESPUÉS de que el navegador termine de procesar el clic (y cerrar el menú).
+        // Esto evita que iOS "luche" contra el scroll.
+        setTimeout(() => {
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }, 0); // 0ms de retraso es suficiente para pasarlo al siguiente 'tick'
+    }
+
+    // --- 3. ASIGNAR EVENTO A LOS ENLACES DE NAVEGACIÓN (Problema 1) ---
+    // Esto maneja los clics en el menú lateral morado.
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            // Prevenimos el salto de ancla por defecto
-            e.preventDefault(); 
+            e.preventDefault(); // Detener el salto por defecto
             
-            // Cerramos el menú si está abierto (en móvil)
+            // Cerrar el menú si está activo (en móvil)
             if (guideNavList.classList.contains('active')) {
                 guideNavList.classList.remove('active');
             }
-
+            
             const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-
-            if (targetElement) {
-                // --- Cálculo del Offset Fijo ---
-                
-                // Altura del header principal (sabemos que es 60px)
-                const headerOffset = 60; 
-                
-                // Altura de la barra de navegación "sticky"
-                let navBarOffset = 0;
-                
-                // Detectamos si estamos en vista móvil o escritorio
-                if (window.innerWidth <= 900) {
-                    // En móvil, el offset es la altura del botón morado
-                    // (que tiene 1rem de padding (16px*2=32) + font-size ~16px = ~48px)
-                    // Usamos la altura sticky del CSS: 68px
-                    navBarOffset = 68;
-                } else {
-                    // En escritorio, el offset es la altura sticky del nav: 100px
-                    navBarOffset = 100;
-                }
-                
-                // Búfer adicional para que no quede pegado
-                const buffer = 15;
-                
-                // En móvil, queremos que el offset sea menor que en escritorio
-                // Si estamos en móvil (window.innerWidth <= 900), usamos el offset de 68px del CSS
-                // Si estamos en escritorio, usamos el de 100px.
-                
-                let totalOffset;
-                
-                if (window.innerWidth <= 900) {
-                    // Offset para MÓVIL (Header + Botón Navegación + Buffer)
-                    totalOffset = 60 + 68 + buffer; // Aprox 143px
-                } else {
-                    // Offset para ESCRITORIO (Header (que desaparece) + Nav Sticky + Buffer)
-                    totalOffset = 100 + buffer; // Aprox 115px (como lo tenías en el CSS)
-                }
-
-                // --- Cálculo de la Posición ---
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - totalOffset;
-
-                // Hacemos scroll suave a esa posición calculada
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
-            }
+            scrollToAnchor(targetId); // Llama a nuestra función central
         });
     });
-});
+
+    // --- 4. NUEVO: MANEJAR SCROLL EN CARGA DE PÁGINA (Problema 2) ---
+    // Esto se ejecuta cuando vienes desde index.html con un #ancla.
+    // Usamos 'load' en lugar de 'DOMContentLoaded' para esperar a que
+    // el CSS y las imágenes se carguen y el layout sea estable.
+    window.addEventListener('load', () => {
+        if (window.location.hash) {
+            // Se usa setTimeout para dar tiempo al navegador a pintar
+            // todo antes de que intentemos calcular la posición.
+            setTimeout(() => {
+                scrollToAnchor(window.location.hash);
+            }, 100); // 100ms de retraso para asegurar renderizado completo.
+        }
+    });
+
+}); // Fin de DOMContentLoaded
