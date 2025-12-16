@@ -2055,8 +2055,13 @@ a.guide-card:hover .btn-card {
     }
     .product-card .btn-add-cart {
         flex-shrink: 0;
+        margin-left: 10px;
     }
-}
+
+    .view-btn.active {
+            margin-left: 5px;
+        }
+    } 
 
 @media (max-width: 600px) {
     .guide-card-wrapper {
