@@ -214,6 +214,7 @@
             .hero-joyas {
                 height: 18vh;
                 padding: 3vh 2% 0 2%;
+                margin-top: 7vh;
             }
             .hero-content-joyas h1 {
                 font-size: 1rem;
@@ -1234,23 +1235,40 @@ footer.glow-background::before {
             background: #6a3d7f;
         }
 
+        /* --- BOTÓN DE WISHLIST (Corazón Flotante) --- */
+        .product-image {
+            position: relative; /* Vital para que el botón se posicione respecto a la imagen */
+        }
+
         .btn-wishlist {
-            width: 45px;
-            background: #333;
+            position: absolute; /* Lo saca del flujo normal para ponerlo encima */
+            top: 10px;          /* Separación desde arriba */
+            right: 10px;        /* Separación desde la derecha */
+            width: 35px;
+            height: 35px;
+            background: rgba(65, 65, 65, 0.498); /* Fondo blanco semitransparente para que se vea sobre cualquier foto */
             border: none;
-            border-radius: 4px;
-            color: #ccc;
+            border-radius: 50%; /* Lo hacemos redondo, queda más elegante */
+            color: #ffffffc7;
             cursor: pointer;
-            transition: all 0.3s;
-            max-height: 35px;
-            float: right;
-            transform: translateX(0px);
+            transition: all 0.3s ease;
+            z-index: 20;        /* Asegura que esté encima de la imagen */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2); /* Sombrita para resaltar */
         }
 
         .btn-wishlist:hover {
+            background: #fff;
             color: #ff5252;
+            transform: scale(1.1); /* Efecto pop al pasar el mouse */
         }
 
+        /* Estilo cuando está activo (con la clase .active agregada por JS/Jinja) */
+        .btn-wishlist.active i {
+            color: #ff5252;
+        }
         .pagination {
             display: flex;
             justify-content: center;

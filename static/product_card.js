@@ -36,22 +36,48 @@ function setupProductCardListeners() {
         btn.dataset.listenerAttached = 'true';
     });
 
-    // 2. Lógica para WISHLIST
+    // 2. WISHLIST (Lógica Completada)
     document.querySelectorAll('.btn-wishlist').forEach(btn => {
         if (btn.dataset.listenerAttached) return;
-        btn.addEventListener('click', async function() {
-            // Tu lógica de wishlist
+        
+        btn.addEventListener('click', async function(e) {
+            e.preventDefault();
+            const productId = this.dataset.productId;
+            const icon = this.querySelector('i');
+            
+            try {
+                const response = await fetch('/toggle_wishlist', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ product_id: productId })
+                });
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    if (data.action === 'added') {
+                        this.classList.add('active');
+                        icon.classList.remove('far'); // Corazón vacío
+                        icon.classList.add('fas');    // Corazón lleno
+                        icon.style.color = '#ff5252';
+                    } else {
+                        this.classList.remove('active');
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        icon.style.color = ''; // Volver al color original
+                    }
+                }
+            } catch (error) {
+                console.error('Error wishlist:', error);
+            }
         });
         btn.dataset.listenerAttached = 'true';
     });
 
-    // 3. Lógica para AÑADIR AL CARRITO
-    document.querySelectorAll('form[action="/add_to_cart"]').forEach(form => {
+    // 3. AÑADIR AL CARRITO (Cards Normales)
+    // Usamos la clase .add-to-cart-form que definimos en el HTML
+    document.querySelectorAll('.add-to-cart-form').forEach(form => {
         if (form.dataset.listenerAttached) return;
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            // Tu lógica para añadir al carrito
-        });
+        form.addEventListener('submit', handleAddToCartSubmit);
         form.dataset.listenerAttached = 'true';
     });
 }

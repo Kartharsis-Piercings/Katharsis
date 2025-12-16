@@ -9,6 +9,13 @@
                 <span class="badge-sale">-{{ ((product.price - product.sale_price) / product.price * 100) | round | int }}%</span>
             {% endif %}
         </div>
+        {# --- NUEVO BOTÓN DE WISHLIST --- #}
+        {# Verificamos si el producto está en la lista de deseos de la sesión #}
+        {% set in_wishlist = product.id in session.get('wishlist', []) %}
+        <button class="btn-wishlist {% if in_wishlist %}active{% endif %}" data-product-id="{{ product.id }}" title="Añadir a favoritos">
+            <i class="{% if in_wishlist %}fas{% else %}far{% endif %} fa-heart" {% if in_wishlist %}style="color: #ff5252;"{% endif %}></i>
+        </button>
+        {# ------------------------------- #}
         <button class="quick-view" data-product-id="{{ product.id }}">Vista rápida</button>
     </div>
     <div class="product-info">
@@ -27,9 +34,15 @@
                 <input type="hidden" name="product_id" value="{{ product.id }}">
                 <select name="size" class="size-select" required>
                     <option value="" disabled selected>Tamaño</option>
-                    {% for size in product.stock.keys() %}
-                    <option value="{{ size }}">{{ size }}</option>
-                    {% endfor %}
+                    {# --- CORRECCIÓN: Verificamos si 'stock' existe antes de usarlo --- #}
+                    {% if product.stock %}
+                        {% for size in product.stock.keys() %}
+                        <option value="{{ size }}">{{ size }}</option>
+                        {% endfor %}
+                    {% else %}
+                        {# Si no hay datos de stock (ej. productos de inventario complejo), mostramos opción genérica #}
+                        <option value="N/A">Ver Detalle</option>
+                    {% endif %}
                 </select>
                 <input type="hidden" name="quantity" value="1">
                 <button type="submit" class="btn-add-cart">Añadir</button>

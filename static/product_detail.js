@@ -1,45 +1,55 @@
-// --- LÓGICA MEJORADA DE LA GALERÍA DE IMÁGENES ---
+// static/product_detail.js
+
+// --- LÓGICA DE LA GALERÍA DE IMÁGENES ---
 const track = document.querySelector('.carousel-track-main');
-// Solo activar si hay imágenes y más de una
+
 if (track && track.children.length > 0) {
     const slides = Array.from(track.children);
     const thumbnails = document.querySelectorAll('.thumbnails img');
     let currentIndex = 0;
 
-    // Función central para mover el carrusel y actualizar las miniaturas
+    // Función central para mover el carrusel
     const moveToSlide = (newIndex) => {
-        // Mueve el track del carrusel
         track.style.transform = `translateX(-${100 * newIndex}%)`;
 
-        // Actualiza la clase 'active' en la miniatura correspondiente
-        thumbnails[currentIndex].classList.remove('active');
-        thumbnails[newIndex].classList.add('active');
+        // Actualizar miniaturas activas
+        if(thumbnails.length > 0 && thumbnails[currentIndex]) {
+            thumbnails[currentIndex].classList.remove('active');
+        }
+        if(thumbnails.length > 0 && thumbnails[newIndex]) {
+            thumbnails[newIndex].classList.add('active');
+        }
 
         currentIndex = newIndex;
     };
 
-    // Event listeners para los botones del carrusel (solo si hay más de una imagen)
+    // Botones (solo si hay más de 1 imagen)
     if (slides.length > 1) {
         const nextButton = document.querySelector('.carousel-button-main.next');
         const prevButton = document.querySelector('.carousel-button-main.prev');
 
-        nextButton.addEventListener('click', () => {
-            const nextIndex = (currentIndex + 1) % slides.length; // Bucle hacia adelante
-            moveToSlide(nextIndex);
-        });
+        if(nextButton) {
+            nextButton.addEventListener('click', () => {
+                const nextIndex = (currentIndex + 1) % slides.length;
+                moveToSlide(nextIndex);
+            });
+        }
 
-        prevButton.addEventListener('click', () => {
-            const prevIndex = (currentIndex - 1 + slides.length) % slides.length; // Bucle hacia atrás
-            moveToSlide(prevIndex);
-        });
+        if(prevButton) {
+            prevButton.addEventListener('click', () => {
+                const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+                moveToSlide(prevIndex);
+            });
+        }
     } else {
-        // Oculta los botones si solo hay una imagen
-        document.querySelector('.carousel-button-main.next').style.display = 'none';
-        document.querySelector('.carousel-button-main.prev').style.display = 'none';
+        // Ocultar botones si es imagen única
+        const nextBtn = document.querySelector('.carousel-button-main.next');
+        const prevBtn = document.querySelector('.carousel-button-main.prev');
+        if(nextBtn) nextBtn.style.display = 'none';
+        if(prevBtn) prevBtn.style.display = 'none';
     }
 
-
-    // Event listeners para las miniaturas
+    // Clic en miniaturas
     thumbnails.forEach((thumb, index) => {
         thumb.addEventListener('click', () => {
             moveToSlide(index);
@@ -47,13 +57,13 @@ if (track && track.children.length > 0) {
     });
 }
 
+// Swipe en Móvil
 const mainCarousel = document.querySelector('.main-image-carousel');
 if (mainCarousel) {
     let touchStartX = 0;
     let touchEndX = 0;
-    const swipeThreshold = 50; // Mínimo de píxeles
+    const swipeThreshold = 50;
 
-    // Usamos passive: true para optimizar el scroll
     mainCarousel.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
@@ -65,87 +75,115 @@ if (mainCarousel) {
 
     function handleSwipe() {
         const swipeDistance = touchEndX - touchStartX;
-        if (swipeDistance < -swipeThreshold) {
-            // Swipe izquierda -> Clic en Siguiente
-            document.querySelector('.carousel-button-main.next').click();
-        } else if (swipeDistance > swipeThreshold) {
-            // Swipe derecha -> Clic en Anterior
-            document.querySelector('.carousel-button-main.prev').click();
+        const nextBtn = document.querySelector('.carousel-button-main.next');
+        const prevBtn = document.querySelector('.carousel-button-main.prev');
+
+        if (swipeDistance < -swipeThreshold && nextBtn) {
+            nextBtn.click();
+        } else if (swipeDistance > swipeThreshold && prevBtn) {
+            prevBtn.click();
         }
         touchStartX = 0;
         touchEndX = 0;
     }
 }
 
-// Controles de cantidad
-document.querySelector('.quantity-btn.plus').addEventListener('click', () => {
-    const input = document.getElementById('quantity');
-    input.value = parseInt(input.value) + 1;
-});
+// --- CONTROLES DE CANTIDAD ---
+const btnPlus = document.querySelector('.quantity-btn.plus');
+const btnMinus = document.querySelector('.quantity-btn.minus');
 
-document.querySelector('.quantity-btn.minus').addEventListener('click', () => {
-    const input = document.getElementById('quantity');
-    if (parseInt(input.value) > 1) {
-        input.value = parseInt(input.value) - 1;
-    }
-});
+if(btnPlus) {
+    btnPlus.addEventListener('click', () => {
+        const input = document.getElementById('quantity');
+        if(input) input.value = parseInt(input.value) + 1;
+    });
+}
 
-// --- AÑADIR AL CARRITO CON AJAX ---
-document.querySelector('.add-to-cart-form').addEventListener('submit', async function(e) {
-    e.preventDefault(); // Prevenimos la recarga de la página
+if(btnMinus) {
+    btnMinus.addEventListener('click', () => {
+        const input = document.getElementById('quantity');
+        if (input && parseInt(input.value) > 1) {
+            input.value = parseInt(input.value) - 1;
+        }
+    });
+}
 
-    const form = this;
-    const btn = form.querySelector('.btn-add-cart');
-    const sizeSelect = form.querySelector('select[name="size"]');
+// --- AÑADIR AL CARRITO (CORREGIDO) ---
+const addToCartForm = document.querySelector('.add-to-cart-form');
 
-    // Validación simple
-    if (!sizeSelect.value) {
-        alert('Por favor, selecciona un tamaño.');
-        return;
-    }
+if (addToCartForm) {
+    addToCartForm.addEventListener('submit', async function(e) {
+        e.preventDefault(); 
 
-    // Guardamos el estado original del botón
-    const originalText = btn.textContent;
-    const originalBg = btn.style.backgroundColor;
+        const form = this;
+        const btn = form.querySelector('.btn-add-cart');
+        const sizeSelect = form.querySelector('select[name="size"]');
 
-    // Mostramos feedback visual en el botón
-    btn.textContent = '✓ Añadido';
-    btn.style.backgroundColor = '#4CAF50'; // Verde éxito
-    btn.disabled = true;
-
-    try {
-        const formData = new FormData(form);
-        const response = await fetch("{{ url_for('add_to_cart') }}", {
-            method: 'POST',
-            body: formData
-        });
-
-        if (response.ok && data.status === 'success') {
-            // Actualizamos el contador del carrito en el header
-            const data = await response.json();
-            const cartCountEl = document.querySelector('.cart-count');
-            if (cartCountEl) {
-                cartCountEl.textContent = data.cart_count; // Actualiza el número
-                // La animación que ya tienes funcionará perfecto aquí
-                cartCountEl.classList.add('animate');
-                setTimeout(() => cartCountEl.classList.remove('animate'), 500);
-            }
-        } else {
-            alert(data.message || 'Hubo un error al añadir el producto.');
+        // 1. Validación
+        if (sizeSelect && !sizeSelect.value) {
+            alert('Por favor, selecciona un tamaño.');
+            return;
         }
 
-    } catch (error) {
-        console.error('Error al añadir al carrito:', error);
-        alert('Error de conexión. Inténtalo de nuevo.');
-    } finally {
-        // Restauramos el botón después de un par de segundos
-        setTimeout(() => {
+        // 2. Estado Visual de Carga
+        const originalText = btn.textContent;
+        const originalBg = btn.style.backgroundColor;
+        
+        btn.textContent = 'Añadiendo...';
+        btn.disabled = true;
+
+        try {
+            const formData = new FormData(form);
+            
+            // CORRECCIÓN CRÍTICA: Usamos la variable global addToCartUrl definida en el HTML
+            // en lugar de usar Jinja {{ url_for }} aquí.
+            const response = await fetch(addToCartUrl, {
+                method: 'POST',
+                body: formData
+            });
+
+            // CORRECCIÓN LÓGICA: Parseamos JSON antes de usar 'data'
+            const data = await response.json();
+
+            if (response.ok && data.status === 'success') {
+                // Éxito Visual
+                btn.textContent = '✓ Añadido';
+                btn.style.backgroundColor = '#4CAF50'; 
+
+                // Actualizar contador del header
+                const cartCountEl = document.querySelector('.cart-count');
+                if (cartCountEl) {
+                    cartCountEl.textContent = data.cart_count;
+                    cartCountEl.classList.add('animate'); // Asegúrate de tener CSS para esta clase si quieres animación
+                    setTimeout(() => cartCountEl.classList.remove('animate'), 500);
+                }
+            } else {
+                // Error del servidor (ej. sin stock)
+                alert(data.message || 'Hubo un error al añadir el producto.');
+                // Revertir visualmente si falló la lógica de negocio
+                btn.textContent = originalText;
+                btn.style.backgroundColor = originalBg;
+            }
+
+        } catch (error) {
+            console.error('Error al añadir al carrito:', error);
+            alert('Error de conexión. Inténtalo de nuevo.');
             btn.textContent = originalText;
             btn.style.backgroundColor = originalBg;
-            btn.disabled = false;
-        }, 2000);
-    }
-});
+        } finally {
+            // Restaurar botón después de 2 segundos (solo si fue éxito)
+            if (btn.textContent === '✓ Añadido') {
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.backgroundColor = originalBg;
+                    btn.disabled = false;
+                }, 2000);
+            } else {
+                btn.disabled = false;
+            }
+        }
+    });
+}
 
 // --- LÓGICA DEL ACORDEÓN ---
 const accordionHeaders = document.querySelectorAll('.accordion-header');
@@ -154,7 +192,7 @@ accordionHeaders.forEach(header => {
         const accordionItem = header.parentElement;
         const accordionContent = header.nextElementSibling;
         
-        // Cierra otros acordeones abiertos para que solo uno esté abierto a la vez
+        // Cierra otros acordeones
         document.querySelectorAll('.accordion-item').forEach(item => {
             if (item !== accordionItem && item.classList.contains('active')) {
                 item.classList.remove('active');
@@ -162,7 +200,7 @@ accordionHeaders.forEach(header => {
             }
         });
 
-        // Abre o cierra el acordeón clickeado
+        // Alternar el actual
         accordionItem.classList.toggle('active');
         if (accordionItem.classList.contains('active')) {
             accordionContent.style.maxHeight = accordionContent.scrollHeight + "px";

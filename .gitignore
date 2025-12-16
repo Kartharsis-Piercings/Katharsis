@@ -11,12 +11,15 @@ session_data/
 
 # Archivos del GUI
 favicon.ico
+certificado_bg.jpg
 manager.py
 manager.spec
 manager.exe
 manager_config.json
 manager copy.py
 build/
+Certificados/
+
 
 # Archivos de bases de datos
 credentials.json
@@ -24,3 +27,5 @@ servicios.json
 ventas_pendientes.json
 costos_cache.json
 clientes_cache.json
+material_recipes.json
+materials.json

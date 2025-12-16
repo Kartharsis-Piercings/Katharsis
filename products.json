@@ -280,7 +280,7 @@
     "name": "Aro Clásico de Titanio",
     "stock": {
       "10mm": 18,
-      "8mm": 9,
+      "8mm": 8,
       "6mm": 10
     },
     "category": "Aros",
@@ -1350,5 +1350,41 @@
       "10mm": 1
     },
     "id": 40
+  },
+  {
+    "name": "REQUIEM - Serum Reparador de Granulomas",
+    "category": "Afer Care",
+    "body_parts": [
+      "ceja",
+      "labios",
+      "nariz",
+      "ombligo",
+      "oreja"
+    ],
+    "price": 38.0,
+    "sale_price": 34.0,
+    "costo": 5.1,
+    "images": [
+      "../static/img/products/barbel_de_titanio_con_cuarzo_rosa_para_ombligo/barbel_de_titanio_con_cuarzo_rosa_para_ombligo_b75d12df.webp"
+    ],
+    "description": "REQUIEM es una pontente fusión botánica diseñada para traer calma y transformación a las pieles reactivas.\n\nFormulado con aceites esenciales para sistir en la reducción visible de Granulomas, suavizar la apariencia de cicatrices Queloides y acelerar la regeneración de cicactrices dificiles.",
+    "is_new": true,
+    "on_sale": false,
+    "material": "titanio",
+    "popularity": 0,
+    "rosca": "interna",
+    "details": {
+      "gauge": "-",
+      "closure_type": "-",
+      "anodization": "-",
+      "material": "Aceites Esenciales",
+      "brand": "Katharsis.",
+      "stone_type": "-",
+      "dimensions": "-"
+    },
+    "stock": {
+      "10ml": 38
+    },
+    "id": 41
   }
 ]

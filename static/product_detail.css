@@ -108,7 +108,7 @@
     font-size: 2.5rem;
     font-family: 'Quicksand', sans-serif;
     margin-bottom: 0.75rem;
-    margin-top: 2rem;
+    margin-top: 0.5rem;
 }
 
 .product-info
@@ -240,6 +240,7 @@
 .btn-add-cart {
     width: 100%;
     padding: 1rem;
+    margin-bottom: 15px;
     background: #84529C;
     color: white;
     border: none;

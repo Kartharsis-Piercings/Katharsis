@@ -3,7 +3,7 @@
     "tops": {
       "top_16g_perla_3mm": {
         "name": "Top Perla 3mm (16G)",
-        "stock": 91,
+        "stock": 90,
         "costo": 12.5
       },
       "top_16g_pua_3mm": {
@@ -63,7 +63,7 @@
       },
       "top_16g_corazon_4mm": {
         "name": "Top Corazón 4mm (16G)",
-        "stock": 8,
+        "stock": 6,
         "costo": 12.5
       },
       "top_16g_bola_titanio_4mm": {
@@ -181,13 +181,13 @@
         "base_16g_labret_8mm": {
           "name": "Base Labret 8mm (16G)",
           "size_label": "8mm",
-          "stock": 79,
+          "stock": 77,
           "costo": 12.5
         },
         "base_16g_labret_10mm": {
           "name": "Base Labret 10mm (16G)",
           "size_label": "10mm",
-          "stock": 1,
+          "stock": 0,
           "costo": 12.5
         },
         "base_16g_labret_12mm": {
@@ -231,7 +231,7 @@
     "tops": {
       "top_14g_bola_4mm": {
         "name": "Top Bola Titanio 4mm (14G)",
-        "stock": 8,
+        "stock": 6,
         "costo": 12.5
       },
       "top_14g_3mm": {
@@ -250,7 +250,7 @@
         "base_14g_barra_14mm": {
           "name": "Base Barra Recta 14mm (14G)",
           "size_label": "14mm",
-          "stock": 4,
+          "stock": 3,
           "costo": 12.5
         },
         "base_14g_barra_22mm": {

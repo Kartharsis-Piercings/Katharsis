@@ -280,7 +280,7 @@
       ]
     },
     {
-      "id": "¿cuál_elegir?",
+      "id": "cuál_elegir",
       "title": "Acero, Titanio y Fantasia ¿Cuál elegir?",
       "type": "info",
       "content_blocks": [
@@ -307,7 +307,7 @@
       ]
     },
     {
-      "id": "guía_rápida:_tipos_de_joyas_para_tu_piercing",
+      "id": "tipos_de_joyas",
       "title": "Tipos de Joyas para tu Piercing",
       "type": "info",
       "content_blocks": [
@@ -351,7 +351,7 @@
       ]
     },
     {
-      "id": "tu_seguridad_es_nuestra_prioridad:_así_trabajamos",
+      "id": "asi_trabajamos",
       "title": "Tu Seguridad es Nuestra Prioridad: Así Trabajamos",
       "type": "info",
       "content_blocks": [

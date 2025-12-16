@@ -87,7 +87,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=3)
 app.config['SESSION_COOKIE_SECURE'] = False 
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(days=1)
+#app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(days=0)
 # Inicializar Flask-Session
 Session(app)
 
@@ -837,6 +837,17 @@ def api_filter_products():
     end_idx = start_idx + per_page
     products_for_page = sorted_products[start_idx:end_idx]
     
+    sanitized_products = []
+    for p in products_for_page:
+        # Creamos una copia para no afectar la caché del servidor
+        p_clean = p.copy()
+        # Borramos el costo si existe
+        p_clean.pop('costo', None) 
+        # También podemos borrar otros datos internos si quieres
+        p_clean.pop('inventory_top_id', None)
+        p_clean.pop('inventory_top_ids', None)
+        sanitized_products.append(p_clean)
+    
     # 4. Devolver un objeto JSON con los productos Y la información de paginación
     return jsonify({
         'products': products_for_page,
@@ -850,6 +861,9 @@ def api_get_product(product_id):
     product = next((p for p in products if p['id'] == product_id), None)
 
     if product:
+
+        product_clean = product.copy()
+        product_clean.pop('costo', None) 
         # Si se encuentra el producto, devuélvelo como JSON
         return jsonify(product)
     else:
@@ -896,14 +910,24 @@ def product_detail(product_id):
         if score > 0:
             scored_products.append({'product': product, 'score': score})
 
-    # Ordenar la lista por la puntuación más alta
+    # 1. Ordenar la lista por la puntuación más alta (relevancia)
     scored_products.sort(key=lambda x: x['score'], reverse=True)
 
-    # Extraer solo los productos y limitar a los 4 mejores
-    related_products = [item['product'] for item in scored_products[:4]]
+    # 2. MEJORA: Selección Aleatoria Ponderada
+    # Tomamos un "pool" de candidatos más grande (ej. los 12 mejores productos relacionados)
+    # para evitar mostrar siempre los mismos 4 si hay muchos similares.
+    top_candidates = scored_products[:12]
     
-    # --- FIN DE LA NUEVA LÓGICA ---
+    # Si tenemos suficientes candidatos, elegimos 4 al azar de entre los mejores
+    if len(top_candidates) > 4:
+        selected_items = random.sample(top_candidates, 4)
+    else:
+        # Si hay pocos, los mostramos todos
+        selected_items = top_candidates
 
+    # Extraer solo los diccionarios de productos
+    related_products = [item['product'] for item in selected_items]
+    
     return render_template(
         'product_detail.html', 
         product=current_product, 

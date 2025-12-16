@@ -4,6 +4,72 @@
 
 {% block extra_head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='product_detail.css') }}">
+    
+    <meta property="og:type" content="product" />
+    <meta property="og:title" content="{{ product.name }} | Katharsis" />
+    <meta property="og:description" content="{{ product.description }}" />
+    <meta property="og:image" content="{{ url_for('static', filename=product.images[0].replace('../static/', ''), _external=True) }}" />
+    <meta property="og:url" content="{{ request.url }}" />
+    <meta property="og:site_name" content="Katharsis Piercing Studio" />
+    <meta property="product:price:amount" content="{{ product.sale_price if product.on_sale else product.price }}" />
+    <meta property="product:price:currency" content="PEN" />
+
+    <style>
+        .breadcrumbs-container {
+            margin-bottom: 0rem;
+            margin-top: 20px;
+            padding-bottom: 10px;
+        }
+
+        .breadcrumbs {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* Enlaces (Pasos anteriores) */
+        .breadcrumbs a {
+            color: #84529C; /* Tu morado corporativo */
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .breadcrumbs a:hover {
+            color: #bd8ce2; /* Un morado más claro al pasar el mouse */
+            text-shadow: 0 0 8px rgba(132, 82, 156, 0.6); /* Efecto Glow */
+            transform: translateY(-1px); /* Ligera elevación */
+        }
+
+        /* Separador (Flecha) */
+        .breadcrumbs .separator {
+            font-size: 0.7rem;
+            color: #555;
+            padding-top: 2px; /* Ajuste óptico */
+        }
+
+        /* Item Actual (No clicable) */
+        .breadcrumbs .current-item {
+            color: #f0f0f0; /* Blanco hueso */
+            font-weight: 400;
+            background: #1a1a1a;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid #333;
+        }
+        
+        /* Icono de casa */
+        .home-icon {
+            font-size: 1rem;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -36,6 +102,29 @@
 
             <!-- Información del producto -->
             <div class="product-info">
+                <div class="breadcrumbs-container">
+                    <nav class="breadcrumbs">
+                        <a href="{{ url_for('index') }}">
+                            <i class="fas fa-home home-icon"></i>
+                        </a>
+                        
+                        <i class="fas fa-chevron-right separator"></i>
+                        
+                        <a href="{{ url_for('joyas') }}">Joyas</a>
+                        
+                        <i class="fas fa-chevron-right separator"></i>
+                        
+                        <a href="{{ url_for('joyas', category=product.category) }}">
+                            <i class="fas fa-tags" style="font-size: 0.8rem;"></i>
+                            {{ product.category | capitalize }}
+                        </a>
+                        
+                        <i class="fas fa-chevron-right separator"></i>
+                        
+                        <span class="current-item">{{ product.name }}</span>
+                    </nav>
+                </div>
+        
                 <h1>{{ product.name }}</h1>
                 
                 <div class="product-meta">

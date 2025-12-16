@@ -1,18 +1,1 @@
-[
-  {
-    "code": "HEROZ-PIERNON",
-    "type": "percentage",
-    "discount": -100.0,
-    "min_purchase": 65.0,
-    "expiration": "2025-10-15",
-    "active": true
-  },
-  {
-    "code": "RODRIGO-VRG-LARGA",
-    "type": "percentage",
-    "discount": 50.0,
-    "min_purchase": 65.0,
-    "expiration": "2025-10-15",
-    "active": true
-  }
-]
+[]

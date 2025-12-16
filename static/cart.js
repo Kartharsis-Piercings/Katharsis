@@ -1,422 +1,217 @@
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- MANEJO DEL MODAL DE PAGO ---
-    const checkoutBtn = document.getElementById('checkout-btn');
-    const yapeModal = document.getElementById('yape-payment-modal');
-    const closeModalBtn = document.getElementById('close-yape-modal');
-    const yapeForm = document.getElementById('yape-verification-form');
-    const verificationStatus = document.getElementById('verification-status');
-    const termsCheckbox = document.getElementById('terms-checkbox');
 
-    // Nos aseguramos de que todos los elementos existan antes de añadir listeners
-    if (checkoutBtn && termsCheckbox && yapeModal) {
+    // --- SCRIPT INCRUSTADO DE CARRITO (VERSIÓN FINAL) ---
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log("CARGA FORZADA: Script de carrito activo");
 
-        // Función para actualizar el estado del botón (visual)
-        const updateButtonState = () => {
+        // 1. REFERENCIAS AL DOM
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const yapeModal = document.getElementById('yape-payment-modal');
+        const closeModalBtn = document.getElementById('close-yape-modal');
+        const termsCheckbox = document.getElementById('terms-checkbox');
+        const yapeForm = document.getElementById('yape-verification-form');
+        const verificationStatus = document.getElementById('verification-status');
+
+        // 2. LÓGICA DEL MODAL
+        if (checkoutBtn && termsCheckbox && yapeModal) {
+            
+            // Estado inicial del botón
             checkoutBtn.disabled = !termsCheckbox.checked;
-        };
 
-        // Estado inicial del botón al cargar la página
-        updateButtonState();
+            // Escuchar cambios en el checkbox
+            termsCheckbox.addEventListener('change', () => {
+                checkoutBtn.disabled = !termsCheckbox.checked;
+            });
 
-        // Escuchar cambios en el checkbox para habilitar/deshabilitar el botón
-        termsCheckbox.addEventListener('input', updateButtonState);
+            // Click en "Continuar al pago"
+            checkoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log("Botón presionado");
 
-        // Listener principal para el clic en el botón de pago
-        checkoutBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevenimos cualquier acción por defecto
+                // Validar Checkbox
+                if (!termsCheckbox.checked) {
+                    alert('Por favor, acepta los Términos y Condiciones.');
+                    return;
+                }
 
-            // --- VALIDACIÓN FINAL ANTES DE MOSTRAR EL MODAL ---
+                // Validar Campos de Envío
+                const requiredIds = ['shipping-name', 'shipping-dni', 'shipping-region', 'shipping-city', 'shipping-address', 'shipping-phone'];
+                let missing = false;
+                
+                requiredIds.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (!el || !el.value.trim()) {
+                        missing = true;
+                        if(el) el.style.border = "2px solid red";
+                    } else {
+                        if(el) el.style.border = "1px solid #333";
+                    }
+                });
 
-            // 1. Validar que los términos y condiciones estén aceptados
-            if (!termsCheckbox.checked) {
-                alert('Por favor, acepta los Términos y Condiciones para continuar.');
-                return; // Detiene la ejecución aquí mismo
-            }
+                if (missing) {
+                    alert('Por favor, completa todos los campos de envío resaltados.');
+                    return;
+                }
 
-            // 2. Validar que los demás campos de envío estén llenos
-            const name = document.getElementById('shipping-name').value;
-            const dni = document.getElementById('shipping-dni').value;
-            const region = document.getElementById('shipping-region').value;
-            const city = document.getElementById('shipping-city').value;
-            const address = document.getElementById('shipping-address').value;
-            const phone = document.getElementById('shipping-phone').value;
+                // ABRIR MODAL
+                console.log("Abriendo modal...");
+                yapeModal.style.display = 'flex';
+                // Forzar visualización por si el CSS falla
+                yapeModal.style.visibility = 'visible';
+                yapeModal.style.opacity = '1';
+            });
+        } else {
+            console.error("Faltan elementos HTML: Botón, Modal o Checkbox no encontrados.");
+        }
 
-            if (!name || !dni || !region || !city || !address || !phone) {
-                alert('Por favor, completa todos los campos de Detalles de Envío antes de continuar.');
-                return; // Detiene la ejecución si falta algún dato
-            }
-
-            // 3. Si todas las validaciones pasan, mostramos el modal de pago
-            yapeModal.style.display = 'flex';
-        });
-    }
-
-    if (closeModalBtn) {
-        closeModalBtn.addEventListener('click', () => {
-            if (yapeModal) {
+        // Cerrar Modal
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', () => {
+                if(yapeModal) yapeModal.style.display = 'none';
+            });
+        }
+        
+        window.addEventListener('click', (e) => {
+            if (yapeModal && e.target === yapeModal) {
                 yapeModal.style.display = 'none';
             }
         });
-    }
 
-    if (yapeForm) {
-        yapeForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const submitButton = yapeForm.querySelector('.btn-confirm-payment');
-            submitButton.textContent = 'Verificando...';
-            submitButton.disabled = true;
-            verificationStatus.textContent = '';
+        // 3. PROCESO DE PAGO (YAPE)
+        if (yapeForm) {
+            yapeForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = yapeForm.querySelector('button[type="submit"]');
+                const originalText = btn.textContent;
+                
+                btn.textContent = 'Verificando...';
+                btn.disabled = true;
+                if(verificationStatus) verificationStatus.textContent = '';
 
-            const formData = {
-                customer_info: {
-                    name: document.getElementById('shipping-name').value,
-                    dni: document.getElementById('shipping-dni').value,
-                    region: document.getElementById('shipping-region').value,
-                    city: document.getElementById('shipping-city').value,
-                    address: document.getElementById('shipping-address').value,
-                    phone: document.getElementById('shipping-phone').value,
-                    consent_purchase: document.getElementById('whatsapp-consent-purchase').checked,
-                    consent_offers: document.getElementById('whatsapp-consent-offers').checked,
-                },
-                yape_code: document.getElementById('yape-code').value,
-            };
+                const formData = {
+                    customer_info: {
+                        name: document.getElementById('shipping-name')?.value,
+                        dni: document.getElementById('shipping-dni')?.value,
+                        region: document.getElementById('shipping-region')?.value,
+                        city: document.getElementById('shipping-city')?.value,
+                        address: document.getElementById('shipping-address')?.value,
+                        phone: document.getElementById('shipping-phone')?.value,
+                        consent_purchase: document.getElementById('whatsapp-consent-purchase')?.checked || false,
+                        consent_offers: document.getElementById('whatsapp-consent-offers')?.checked || false,
+                    },
+                    yape_code: document.getElementById('yape-code').value,
+                };
 
-            try {
-                const response = await fetch('/process_order', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
-                });
+                try {
+                    const response = await fetch('/process_order', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    });
 
-                const result = await response.json();
+                    const result = await response.json();
 
-                if (response.ok) {
-                    verificationStatus.style.color = 'green';
-                    verificationStatus.textContent = result.message;
-                    // Redirigir a una página de éxito después de unos segundos
-                    setTimeout(() => {
-                        window.location.href = result.redirect_url;
-                    }, 3000);
-                } else {
-                    throw new Error(result.message || 'Error desconocido');
+                    if (response.ok) {
+                        if(verificationStatus) {
+                            verificationStatus.style.color = 'green';
+                            verificationStatus.textContent = result.message;
+                        }
+                        setTimeout(() => window.location.href = result.redirect_url, 2000);
+                    } else {
+                        throw new Error(result.message || 'Error desconocido');
+                    }
+                } catch (error) {
+                    if(verificationStatus) {
+                        verificationStatus.style.color = 'red';
+                        verificationStatus.textContent = error.message;
+                    }
+                    btn.textContent = originalText;
+                    btn.disabled = false;
                 }
-
-            } catch (error) {
-                verificationStatus.style.color = 'red';
-                verificationStatus.textContent = `Error: ${error.message}. Por favor, verifica el código e intenta de nuevo.`;
-                submitButton.textContent = 'Verificar y Finalizar Compra';
-                submitButton.disabled = false;
-            }
-        });
-    }
-    
-    // Función para actualizar el mensaje personalizado de un ítem
-    async function updateCartItemMessage(itemId, message) {
-        const [productId, size] = itemId.split('-');
-        try {
-            const response = await fetch('/update_cart_message', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    product_id: productId,
-                    size: size,
-                    message: message
-                })
             });
-            if (!response.ok) {
-                console.error('Error al guardar el mensaje del producto.');
-            }
-        } catch (error) {
-            console.error('Error de conexión al guardar el mensaje:', error);
         }
-    }
 
-    // Función para actualizar ítem (CORREGIDA)
-    async function updateCartItem(itemId, quantity) {
-        const [productId, size] = itemId.split('-');
-
-        try {
-            const response = await fetch('/update_cart_item', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    product_id: productId, 
-                    size: size,
-                    quantity: quantity
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error('Error en la respuesta del servidor.');
+        // 4. FUNCIONALIDAD DEL CARRITO (Botones +, -, Eliminar)
+        
+        // Actualizar Totales en Pantalla
+        function updateSummary(subtotal, total, shipping, promo) {
+            const fmt = n => `S/ ${parseFloat(n).toLocaleString('es-PE', {minimumFractionDigits: 2})}`;
+            
+            const els = {
+                sub: document.querySelector('.summary-row .subtotal'),
+                tot: document.querySelector('.summary-row.total .total'),
+                shp: document.getElementById('shipping-cost-display'),
+                mod: document.getElementById('modal-total-amount')
+            };
+            
+            if(els.sub) els.sub.textContent = fmt(subtotal);
+            if(els.tot) els.tot.textContent = fmt(total);
+            if(els.shp) els.shp.textContent = fmt(shipping);
+            if(els.mod) els.mod.textContent = fmt(total);
+            
+            const promoBox = document.querySelector('.promo-message');
+            if(promoBox) {
+                promoBox.style.display = promo ? 'flex' : 'none';
+                if(promo) promoBox.querySelector('.promo-text').textContent = promo;
             }
+        }
 
-            const data = await response.json();
-
-            if (data.status === 'success') {
-                const itemElement = document.querySelector(`.cart-item[data-id="${itemId}"]`);
-
-                if (itemElement) {
-                    const itemPriceElement = itemElement.querySelector('.item-price');
-                    if (itemPriceElement) {
-                        // BUG 1 CORREGIDO: Usamos "S/" en lugar de "$"
-                        itemPriceElement.textContent = `S/ ${data.item_total.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        // Eventos de botones
+        document.body.addEventListener('click', async (e) => {
+            // Botones de cantidad
+            if (e.target.closest('.quantity-btn')) {
+                const btn = e.target.closest('.quantity-btn');
+                const isPlus = btn.classList.contains('plus');
+                const itemId = btn.dataset.id;
+                const qtySpan = btn.parentElement.querySelector('.quantity');
+                let newQty = parseInt(qtySpan.textContent) + (isPlus ? 1 : -1);
+                
+                if (newQty > 0) {
+                    const [pid, size] = itemId.split('-');
+                    const res = await fetch('/update_cart_item', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ product_id: pid, size: size, quantity: newQty })
+                    });
+                    const data = await res.json();
+                    if(data.status === 'success') {
+                        qtySpan.textContent = newQty;
+                        const row = document.querySelector(`.cart-item[data-id="${itemId}"]`);
+                        if(row) row.querySelector('.item-price').textContent = `S/ ${parseFloat(data.item_total).toFixed(2)}`;
+                        updateSummary(data.subtotal, data.total, data.shipping_cost, data.promo_message);
                     }
                 }
-
-                // BUG 2 CORREGIDO: Pasamos todos los datos a la función que actualiza los totales
-                updateSummaryTotals(data.subtotal, data.total, data.shipping_cost, data.promo_message);
-            } else {
-                alert(data.message || 'No se pudo actualizar el producto.');
             }
 
-        } catch (error) {
-            console.error('Error al actualizar el carrito:', error);
-            alert('Hubo un problema de conexión. Inténtalo de nuevo.');
-        }
-    }
-
-// Coloca esta única versión de la función en tu cart.js
-function updateSummaryTotals(subtotal, total, shippingCost, promoMessage) {
-    const formatCurrency = (value) => `S/ ${parseFloat(value).toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-
-    // Actualiza el resumen del carrito
-    document.querySelector('.summary-row .subtotal').textContent = formatCurrency(subtotal);
-    document.querySelector('.summary-row.total .total').textContent = formatCurrency(total);
-    document.getElementById('shipping-cost-display').textContent = formatCurrency(shippingCost);
-
-    // Actualiza el total en el modal
-    document.getElementById('modal-total-amount').textContent = formatCurrency(total);
-    
-    // Muestra u oculta el mensaje de promoción de envío
-    const promoContainer = document.querySelector('.promo-message');
-    if (promoContainer) {
-        const promoTextEl = promoContainer.querySelector('.promo-text');
-        if (promoMessage) {
-            promoTextEl.textContent = promoMessage;
-            promoContainer.style.display = 'flex';
-        } else {
-            promoContainer.style.display = 'none';
-        }
-    }
-}
-
-    // Función para eliminar ítem
-    async function removeCartItem(itemId) {
-        const [productId, size] = itemId.split('-');
-        const response = await fetch('/remove_from_cart', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCSRFToken()
-            },
-            body: JSON.stringify({ 
-                product_id: productId, 
-                size: size
-            })
-            
-        });
-        
-        const data = await response.json();
-        if(data.status === 'success') {
-            document.querySelector(`.cart-item[data-id="${itemId}"]`)?.remove();
-            
-            // Re-calcula los totales desde el objeto 'cart' devuelto
-            const newSubtotal = data.cart.cart_items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const newTotal = getCartTotal(data.cart); // Usa tu función auxiliar que ya tienes
-            
-            updateSummaryTotals(newSubtotal, newTotal);
-            updateCartCount(data.cart_count); // actualiza el contador global
-        }
-    }
-
-    // Función auxiliar para calcular total
-    function getCartTotal(cart) {
-        let total = cart.cart_items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        total += cart.shipping_cost || 0;
-        return total;
-    }
-
-    // Actualizar contador del carrito
-    function updateCartCount(change) {
-        const cartCount = document.querySelector('.cart-count');
-        if (cartCount) {
-            let count = parseInt(cartCount.textContent) || 0;
-            count = Math.max(0, count + change);
-            cartCount.textContent = count;
-            
-            cartCount.classList.add('animate');
-            setTimeout(() => cartCount.classList.remove('animate'), 500);
-        }
-    }
-
-    // Conectar eventos
-    function setupEventListeners() {
-        document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const itemId = this.dataset.id;
-                const input = this.parentElement.querySelector('.quantity');
-                const newQuantity = parseInt(input.textContent) + 1;
-                input.textContent = newQuantity;
-                updateCartItem(itemId, newQuantity);
-            });
-        });
-        
-        document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const itemId = this.dataset.id;
-                const input = this.parentElement.querySelector('.quantity');
-                if (parseInt(input.textContent) > 1) {
-                    const newQuantity = parseInt(input.textContent) - 1;
-                    input.textContent = newQuantity;
-                    updateCartItem(itemId, newQuantity);
-                }
-            });
-        });
-        
-        document.querySelectorAll('.item-remove').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const itemId = this.dataset.id;
-                if (confirm('¿Eliminar este producto del carrito?')) {
-                    removeCartItem(itemId);
-                }
-            });
-        });
-
-        document.querySelectorAll('.item-message-input').forEach(textarea => {
-            let debounceTimer;
-            textarea.addEventListener('input', function() {
-                clearTimeout(debounceTimer);
-                const itemId = this.dataset.id;
-                const message = this.value;
-
-                // Usamos un 'debounce' para no enviar una petición por cada letra tecleada
-                debounceTimer = setTimeout(() => {
-                    updateCartItemMessage(itemId, message);
-                }, 500); // Espera medio segundo después de que el usuario deja de escribir
-            });
-        });
-    }
-    
-    // SOLUCIÓN: Verificar existencia de elementos antes de agregar listeners
-    const applyCouponBtn = document.getElementById('apply-coupon');
-    if (applyCouponBtn) {
-        applyCouponBtn.addEventListener('click', async () => {
-            const couponInput = document.getElementById('coupon-input');
-            const couponCode = couponInput.value.trim();
-            
-            if (!couponCode) {
-                alert('Por favor, introduce un código de cupón.');
-                return;
-            }
-
-            try {
-                const response = await fetch('/apply_coupon', {
+            // Botón Eliminar
+            if (e.target.closest('.item-remove')) {
+                const btn = e.target.closest('.item-remove');
+                if(!confirm('¿Eliminar producto?')) return;
+                
+                const itemId = btn.dataset.id;
+                const [pid, size] = itemId.split('-');
+                const res = await fetch('/remove_from_cart', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ coupon_code: couponCode })
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ product_id: pid, size: size })
                 });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    // Si el cupón se aplica correctamente, recargamos la página
-                    // para que el servidor muestre los nuevos totales y el mensaje flash.
-                    location.reload();
-                } else {
-                    // Si hay un error, lo mostramos en un alert.
-                    alert(data.error || 'Ocurrió un error al aplicar el cupón.');
-                }
-            } catch (error) {
-                console.error('Error de red:', error);
-                alert('No se pudo conectar con el servidor. Inténtalo de nuevo.');
+                if((await res.json()).status === 'success') location.reload();
             }
         });
-    }
-    
-    const shippingRegion = document.getElementById('shipping-region');
-    if (shippingRegion) {
-        shippingRegion.addEventListener('change', async function() {
-            const region = this.value;
-            if (!region) return;
 
-            try {
-                const response = await fetch('/update_shipping', {
+        // Cambio de Región
+        const regionSelect = document.getElementById('shipping-region');
+        if(regionSelect) {
+            regionSelect.addEventListener('change', async function() {
+                if(!this.value) return;
+                const res = await fetch('/update_shipping', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ region })
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({region: this.value})
                 });
-
-                if (!response.ok) {
-                    throw new Error('Error al actualizar el envío.');
-                }
-
-                const data = await response.json();
-
-                if (data.status === 'success') {
-                    // ¡Aquí está la magia!
-                    // Llamamos a la función que actualiza los precios en la página
-                    // en lugar de recargarla.
-                    updateSummaryTotals(data.subtotal, data.total, data.shipping_cost, data.promo_message);
-                }
-
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Hubo un problema al calcular el costo de envío.');
-            }
-        });
-    }
-    
-
-    
-    const saveCartBtn = document.querySelector('.save-cart');
-    if (saveCartBtn) {
-        saveCartBtn.addEventListener('click', async () => {
-            const response = await fetch('/save_cart', {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': getCSRFToken()
+                const data = await res.json();
+                if(data.status === 'success') {
+                    updateSummary(data.subtotal, data.total, data.shipping_cost, data.promo_message);
                 }
             });
-            
-            if (response.ok) {
-                alert('Carrito guardado. Puedes acceder a él desde tu perfil.');
-            }
-        });
-    }
-    
-    // Funciones auxiliares
-    function getCSRFToken() {
-        return document.querySelector('input[name="csrf_token"]')?.value || '';
-    }
-    
-    // Inicializar solo si estamos en la página del carrito
-    if (document.querySelector('.cart-container')) {
-        setupEventListeners();
-    }
-});
-
- const saveCartBtn = document.getElementById('save-cart-btn');
-    if (saveCartBtn) {
-        saveCartBtn.addEventListener('click', async () => {
-            const response = await fetch('/save_cart', { method: 'POST' });
-            const data = await response.json();
-            alert(data.message);
-            if (response.ok) {
-                location.reload(); // Recarga la página para mostrar el carrito vacío
-            }
-        });
-    }
-
-    const restoreCartBtn = document.getElementById('restore-cart-btn');
-    if (restoreCartBtn) {
-        restoreCartBtn.addEventListener('click', async () => {
-            const response = await fetch('/restore_cart', { method: 'POST' });
-            const data = await response.json();
-            alert(data.message);
-            if (response.ok) {
-                location.reload(); // Recarga la página para mostrar el carrito restaurado
-            }
-        });
-    }
-;
+        }
+    });
