@@ -1492,31 +1492,55 @@ def booking_page():
 @app.route('/api/available_slots')
 def get_available_slots():
     date_str = request.args.get('date')
-    if not date_str: return jsonify([])
+    if not date_str:
+        return jsonify([])
 
-    # --- HORARIOS SINCRONIZADOS CON EL GESTOR ---
-    # Exactamente los que pediste (sin 14:00)
+    # 1. TUS HORARIOS BASE
     base_slots = [
         "10:00", "11:00", "12:00", "13:00", 
         "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"
     ]
 
     try:
-        sheet = get_google_sheet() # Tu función existente para Agenda
-        records = sheet.get_all_records()
+        # 2. Leer TODA la hoja como una matriz simple (lista de listas)
+        # Esto evita el error "index out of range" por encabezados malformados
+        sheet = get_google_sheet()
+        rows = sheet.get_all_values() # <--- Cambio clave
         
         occupied_slots = []
-        for row in records:
-            if str(row.get('Fecha')) == date_str:
-                if row.get('Estado') not in ['CANCELLED', 'RECHAZADA', 'No Asistió']:
-                    occupied_slots.append(str(row.get('Hora')))
+        
+        # 3. Recorrer filas (saltando la primera que es el encabezado)
+        for i, row in enumerate(rows):
+            if i == 0: continue 
+            
+            # Protección: Si la fila está vacía o tiene menos de 7 columnas, la saltamos
+            if not row or len(row) < 7: 
+                continue
 
+            # Mapeo manual de columnas (A=0, B=1, C=2...)
+            # B: Fecha (Index 1)
+            # C: Hora (Index 2)
+            # G: Estado (Index 6)
+            
+            row_date = str(row[1]).strip()
+            row_time = str(row[2]).strip()
+            row_status = str(row[6]).strip()
+
+            # Lógica de filtrado
+            if row_date == date_str:
+                if row_status not in ['CANCELLED', 'RECHAZADA', 'No Asistió']:
+                    occupied_slots.append(row_time)
+
+        # 4. Calcular disponibles
         available = [slot for slot in base_slots if slot not in occupied_slots]
+        
         return jsonify(available)
 
     except Exception as e:
-        print(f"Error Sheets: {e}")
-        return jsonify([])
+        print(f"Error Sheets CRÍTICO: {e}")
+        # En caso de error, devolvemos los base_slots para no bloquear la venta,
+        # o una lista vacía si prefieres seguridad total.
+        return jsonify(base_slots)
 
 # ==========================================
 # LÓGICA DE CLIENTES Y RESERVAS
