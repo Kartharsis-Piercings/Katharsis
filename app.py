@@ -14,7 +14,10 @@ load_dotenv()
 from datetime import datetime, timedelta
 from functools import lru_cache
 import random
+import gspread
 from copy import deepcopy # deepcopy puede ser útil en algunas actualizaciones complejas
+from google.auth.transport.requests import Request
+#from google.oauth2.service_account import Credentials as ServiceAccountCredentials
 
 # --- 1. INICIALIZACIÓN Y CONFIGURACIÓN ---
 
@@ -53,6 +56,8 @@ GUIDE_CARDS_FILE = os.path.join(BASE_DIR, 'guide_cards.json')
 PORTFOLIO_FILE = os.path.join(BASE_DIR, 'portfolio.json') # <-- NUEVO
 FEATURES_FILE = os.path.join(BASE_DIR, 'features.json')   # <-- NUEVO
 INVENTORY_FILE = os.path.join(BASE_DIR, 'inventory.json')
+APPOINTMENTS_FILE = os.path.join(BASE_DIR, 'appointments.json')
+SERVICES_FILE = os.path.join(BASE_DIR, 'services.json')
 
 def load_json_data(filepath, default_value=None):
     """Carga datos desde un archivo JSON de forma segura."""
@@ -96,6 +101,37 @@ app.config['PRODUCTS_PER_PAGE'] = 12
 app.config['PRODUCTS_FILE'] = 'products.json'
 app.config['COUPONS_FILE'] = 'coupons.json'
 app.jinja_env.filters['format_text'] = format_content_text
+
+# --- LÓGICA DE CITAS ---
+
+def load_appointments():
+    """Carga la lista de citas."""
+    return load_json_data(APPOINTMENTS_FILE, [])
+
+def save_appointments(data):
+    """Guarda la lista de citas."""
+    save_json_data(APPOINTMENTS_FILE, data)
+
+# Configuración de Servicios Disponibles
+# Aquí definimos que la SEÑA siempre es 20 soles.
+# Configuración de Servicios Disponibles
+# Ahora incluimos el campo 'image' apuntando a la carpeta que creaste.
+
+def load_services():
+    """Carga los servicios desde el archivo JSON local."""
+    try:
+        with open(SERVICES_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print("Advertencia: No se encontró services.json. Usando diccionario vacío.")
+        return {}
+    except json.JSONDecodeError:
+        print("Error: services.json está corrupto.")
+        return {}
+
+# Cargamos los servicios al iniciar la app
+SERVICES = load_services()
+
 
 # --- 2. FILTROS Y FUNCIONES DE AYUDA ---
 
@@ -1235,8 +1271,8 @@ def restore_cart():
 @app.route('/process_order', methods=['POST'])
 def process_order():
     """
-    Recibe los datos del formulario de checkout, 'verifica' el pago
-    y prepara una notificación por WhatsApp.
+    Recibe los datos del formulario de checkout, 'verifica' el pago,
+    sincroniza con Google Sheets (Clientes y Ventas) y prepara notificación.
     """
     data = request.get_json()
     customer_info = data.get('customer_info')
@@ -1248,13 +1284,39 @@ def process_order():
     if not all([customer_info, yape_code, cart.get('cart_items')]):
         return jsonify({'message': 'Faltan datos para procesar el pedido.'}), 400
 
-    # --- 2. Simulación de Verificación de Yape ---
-    # En un caso real, aquí conectarías con la API de Yape o un sistema de verificación.
-    # Por ahora, simularemos que cualquier código de más de 5 caracteres es válido.
-    if len(yape_code) < 3 > 5:
+    if len(yape_code) < 3:
         return jsonify({'message': 'El código de Yape parece inválido.'}), 400
 
- # --- INICIO: LÓGICA DE DESCUENTO DE STOCK ---
+    # ==================================================================
+    # BLOQUE DE SINCRONIZACIÓN CON GOOGLE SHEETS
+    # ==================================================================
+    sale_id_generated = f"V-{uuid.uuid4().hex[:6].upper()}" # Genera ID tipo V-1BDFC8
+    final_client_id = "Pendiente"
+
+    try:
+        # A. Preparar datos para el registro de cliente
+        # Adaptamos lo que viene del carrito para que funcione con find_or_create_client
+        client_data_for_sheet = {
+            'name': customer_info['name'],
+            'phone': customer_info['phone'],
+            'dni': customer_info.get('dni', ''), # Puede venir vacío o con ceros
+            'dob': '', # El carrito no pide fecha de nacimiento
+            'consent_offers': customer_info.get('consent_offers', False)
+        }
+        
+        # B. Obtener/Crear Cliente (Devuelve el DNI o ID Web)
+        final_client_id = find_or_create_client(client_data_for_sheet)
+        
+        # C. Registrar la Venta en la hoja "Registro_Ventas"
+        register_sale_in_sheets(sale_id_generated, customer_info, cart, final_client_id)
+        
+    except Exception as e:
+        # Si falla Google Sheets, NO detenemos la venta, solo lo registramos en consola
+        print(f"ADVERTENCIA: Error sincronizando con Sheets: {e}")
+
+    # ==================================================================
+    # INICIO: LÓGICA DE DESCUENTO DE STOCK (Tu código original intacto)
+    # ==================================================================
     inventory_data = load_json_data(INVENTORY_FILE, {})
     products_data = load_json_data(app.config['PRODUCTS_FILE'], [])
     products_json_changed = False
@@ -1268,17 +1330,16 @@ def process_order():
             gauge = links['gauge']
             base_type = links['base_type']
             base_id = links['base_id']
-            top_ids_to_deduct = links.get('top_ids', []) # Lista de IDs de top, ej: ["top_bola", "top_bola"]
+            top_ids_to_deduct = links.get('top_ids', []) 
             
             try:
-                # A. Descontar stock de la BASE (siempre 1)
+                # A. Descontar stock de la BASE
                 base_stock = inventory_data[gauge]['bases'][base_type][base_id]['stock']
                 inventory_data[gauge]['bases'][base_type][base_id]['stock'] = max(0, base_stock - quantity_to_deduct)
                 
-                # B. Descontar stock de los TOPS (puede ser 1 o más)
+                # B. Descontar stock de los TOPS
                 for top_id in top_ids_to_deduct:
                     top_stock = inventory_data[gauge]['tops'][top_id]['stock']
-                    # Descontamos 1 top por CADA cantidad de producto
                     inventory_data[gauge]['tops'][top_id]['stock'] = max(0, top_stock - quantity_to_deduct)
                     
             except KeyError as e:
@@ -1312,38 +1373,36 @@ def process_order():
     items_text = ""
     for item in cart['cart_items']:
         items_text += f"- {item['name']} (Tamaño: {item['size']}, Cant: {item['quantity']}) - S/ {item['price'] * item['quantity']}\n"
-        # Si el ítem tiene un mensaje, lo añadimos
         if item.get('message'):
             items_text += f"  📝 Mensaje: {item['message']}\n"
-    # URL-encode para el mensaje de Telegram
+
+    # Mensaje Actualizado con los IDs de gestión
     message_to_owner = (f"""
+        *NUEVO PEDIDO WEB 🛍️*
+        Fecha: {order_timestamp}
+        *ID Venta:* `{sale_id_generated}`
+        *ID Cliente:* `{final_client_id}`
+        *Yape:* `{yape_code}`
 
-Fecha del Pedido: {order_timestamp}
-*Código de Pedido:* `{cart.get('id', 'N/A')[:8]}`
-*Código Yape (VERIFICADO):* `{yape_code}`
+        *Cliente:*
+        - Nombre: {customer_info.get('name')}
+        - DNI: {customer_info.get('dni')}
+        - Cel: {customer_info.get('phone')}
+        - Dirección: {customer_info.get('address')}, {customer_info.get('city')}
 
-*Cliente:*
-- *Nombre:* {customer_info.get('name')}
-- *DNI:* {customer_info.get('dni')}
-- *Celular:* {customer_info.get('phone')}
-- *Dirección:* {customer_info.get('address')}, {customer_info.get('city')}, {customer_info.get('region')}
+        *Resumen:*
+        {items_text}
+        *Subtotal:* S/ {sum(i['price'] * i['quantity'] for i in cart['cart_items'])}
+        *Envío:* S/ {cart.get('shipping_cost', 0)}
+        *TOTAL PAGADO:* *S/ {total}*
 
-*Resumen del Carrito:*
-{items_text}
-*Subtotal:* S/ {sum(i['price'] * i['quantity'] for i in cart['cart_items'])}
-*Envío:* S/ {cart.get('shipping_cost', 0)}
-*TOTAL PAGADO:* *S/ {total}*
-
-*Consentimientos:*
-- *Notificaciones de compra:* {'Sí' if customer_info.get('consent_purchase') else 'No'}
-- *Ofertas y promociones:* {'Sí' if customer_info.get('consent_offers') else 'No'}
-
-*Acción requerida: Prepara el paquete y coordina el envío.*
-    """.strip())
+        *Consentimientos:*
+        - Compras: {'Sí' if customer_info.get('consent_purchase') else 'No'}
+        - Ofertas: {'Sí' if customer_info.get('consent_offers') else 'No'}
+            """.strip())
 
     # --- INICIO: Bloque para enviar evento a Meta CAPI ---
     try:
-        # 1. Preparamos los datos del usuario (dividiendo el nombre)
         full_name = customer_info.get("name", "").split()
         first_name = full_name[0] if full_name else ""
         last_name = " ".join(full_name[1:]) if len(full_name) > 1 else ""
@@ -1354,10 +1413,8 @@ Fecha del Pedido: {order_timestamp}
             "phone": customer_info.get("phone", ""),
             "city": customer_info.get("city", ""),
             "state": customer_info.get("region", "")
-            # Nota: Sería ideal añadir un campo de email en tu formulario para mejorar el matching.
         }
 
-        # 2. Preparamos los datos de la compra
         custom_data_for_meta = {
             "currency": "PEN",
             "value": get_cart_total(cart),
@@ -1365,10 +1422,10 @@ Fecha del Pedido: {order_timestamp}
             "contents": [
                 {"id": item['product_id'], "quantity": item['quantity']} for item in cart['cart_items']
             ],
-            "num_items": len(cart['cart_items'])
+            "num_items": len(cart['cart_items']),
+            "order_id": sale_id_generated # Agregamos el ID de venta a Meta también
         }
 
-        # 3. Enviamos el evento 'Purchase'
         send_meta_capi_event(
             event_name="Purchase",
             user_data_raw=user_data_for_meta,
@@ -1376,24 +1433,19 @@ Fecha del Pedido: {order_timestamp}
         )
     except Exception as e:
         print(f"No se pudo enviar el evento a Meta CAPI. Error: {e}")
-    # --- FIN: Bloque para enviar evento a Meta CAPI ---
+    # --- FIN: Bloque Meta CAPI ---
 
-    # --- 4. Abrir WhatsApp Web con el mensaje (en el servidor) ---
-    # CAMBIA '51999888777' por tu número de WhatsApp en formato internacional
+    # --- 4. Enviar notificación ---
     send_order_notification(message_to_owner)
     
-    # --- 5. Limpiar el carrito y responder al cliente ---
+    # --- 5. Limpiar sesión ---
     session.pop('cart', None)
-    session.pop('saved_cart', None) # También limpiar el guardado por si acaso
+    session.pop('saved_cart', None) 
     session.modified = True
 
-    # Aquí también podrías enviar un mensaje de confirmación al cliente si tienes una API
-    # ...
-
-    # Devuelve una respuesta exitosa al frontend
     return jsonify({
-        'message': '¡Pago verificado con éxito! Tu pedido ha sido confirmado. Serás redirigido en breve.',
-        'redirect_url': url_for('index') # O una página de "gracias por tu compra"
+        'message': '¡Pedido confirmado! Redirigiendo...',
+        'redirect_url': url_for('index') 
     })
 
 # --- RUTA PARA GUARDAR MENSAJES PERSONALIZADOS EN EL CARRITO ---
@@ -1432,7 +1484,302 @@ def check_session():
 
 
 # --- 4. PUNTO DE ENTRADA DE LA APLICACIÓN ---
+@app.route('/agendar')
+def booking_page():
+    # Renderiza la página de reservas
+    return render_template('booking.html', services=SERVICES)
 
+@app.route('/api/available_slots')
+def get_available_slots():
+    date_str = request.args.get('date')
+    if not date_str: return jsonify([])
+
+    # --- HORARIOS SINCRONIZADOS CON EL GESTOR ---
+    # Exactamente los que pediste (sin 14:00)
+    base_slots = [
+        "10:00", "11:00", "12:00", "13:00", 
+        "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"
+    ]
+
+    try:
+        sheet = get_google_sheet() # Tu función existente para Agenda
+        records = sheet.get_all_records()
+        
+        occupied_slots = []
+        for row in records:
+            if str(row.get('Fecha')) == date_str:
+                if row.get('Estado') not in ['CANCELLED', 'RECHAZADA', 'No Asistió']:
+                    occupied_slots.append(str(row.get('Hora')))
+
+        available = [slot for slot in base_slots if slot not in occupied_slots]
+        return jsonify(available)
+
+    except Exception as e:
+        print(f"Error Sheets: {e}")
+        return jsonify([])
+
+# ==========================================
+# LÓGICA DE CLIENTES Y RESERVAS
+# ==========================================
+
+def get_clients_sheet():
+    """Conecta a la pestaña de Clientes."""
+    gc = gspread.service_account(filename="service_account.json")
+    return gc.open("Katharsis_Gestor").worksheet("Clientes")
+
+def register_sale_in_sheets(sale_id, customer_info, cart, client_id):
+    """
+    Registra la venta forzando la escritura desde la columna A.
+    """
+    try:
+        # 1. Conexión
+        agenda_ws = get_google_sheet()
+        spreadsheet = agenda_ws.spreadsheet
+        ws = spreadsheet.worksheet("Registro_Ventas")
+        
+        current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        notes = f"Venta Web: {customer_info.get('city', 'Peru')}"
+        
+        # 2. Preparar las filas de datos
+        rows_to_add = []
+        for item in cart['cart_items']:
+            total_price = item['price'] * item['quantity']
+            row = [
+                sale_id,                            # A
+                current_date,                       # B
+                str(client_id),                     # C
+                customer_info['name'],              # D
+                "Producto",                         # E
+                item['product_id'],                 # F
+                item['name'],                       # G
+                item['size'],                       # H
+                item['quantity'],                   # I
+                item['price'],                      # J
+                total_price,                        # K
+                "",                                 # L (Costo)
+                "Yape Web",                         # M
+                notes                               # N
+            ]
+            rows_to_add.append(row)
+
+        # 3. ENCONTRAR LA PRIMERA FILA VACÍA REAL
+        # Obtenemos toda la columna A para ver dónde termina
+        col_a_values = ws.col_values(1) 
+        first_empty_row = len(col_a_values) + 1
+        
+        # 4. DEFINIR EL RANGO EXACTO PARA ESCRIBIR
+        # Desde A{fila} hasta N{fila + n_items}
+        start_cell = f"A{first_empty_row}"
+        end_cell = f"N{first_empty_row + len(rows_to_add) - 1}"
+        range_to_update = f"{start_cell}:{end_cell}"
+        
+        # 5. ESCRIBIR LOS DATOS EN ESE RANGO
+        ws.update(range_to_update, rows_to_add)
+        
+        print(f"✅ Venta {sale_id} registrada correctamente en filas {first_empty_row}-{first_empty_row + len(rows_to_add) - 1}.")
+        
+    except Exception as e:
+        print(f"❌ Error registrando venta en Sheets: {e}")
+
+def find_or_create_client(data):
+    """
+    Lógica MAESTRA de Clientes (Versión Final Blindada):
+    1. Admite ceros a la izquierda (fuerza string).
+    2. Funciona para Agenda (con DOB) y Carrito (sin DOB).
+    3. Busca por DNI o Nombre.
+    4. Si encuentra: Actualiza ID temporal (CLI-xxx) por DNI real y llena huecos vacíos.
+    5. Si no encuentra: Crea uno nuevo con soporte de consentimiento.
+    """
+    try:
+        sheet = get_clients_sheet()
+        records = sheet.get_all_records()
+        
+        # 1. LIMPIEZA DE DATOS (Vital para los ceros a la izquierda)
+        # Convertimos todo a string explícitamente para que '0123' no sea 123
+        input_dni = str(data.get('dni', '')).strip()
+        input_name = str(data['name']).strip().lower()
+        input_phone = str(data['phone']).strip()
+        
+        # Manejo de Consentimiento (Viene del carrito, por defecto No)
+        input_consent = "Sí" if data.get('consent_offers') else "No"
+        
+        # 2. MANEJO HÍBRIDO DE FECHA (Agenda vs Carrito)
+        input_dob_sheet = ""
+        if data.get('dob'): # Solo si la fecha existe (Agenda)
+            try:
+                # Convertir de YYYY-MM-DD (HTML) a DD/MM/YYYY (Excel)
+                input_dob_sheet = datetime.strptime(data['dob'], "%Y-%m-%d").strftime("%d/%m/%Y")
+            except:
+                input_dob_sheet = data['dob'] # Fallback
+        
+        # Variables para búsqueda
+        found_index = -1
+        existing_row = None
+
+        # 3. ALGORITMO DE BÚSQUEDA
+        for i, row in enumerate(records):
+            # Forzamos string en los datos del Excel para comparar texto con texto
+            row_dni = str(row.get('ID_Cliente_DNI', '')).strip()
+            row_name = str(row.get('Nombre_Completo', '')).strip().lower()
+            
+            # A) Coincidencia EXACTA por DNI
+            if input_dni and row_dni == input_dni:
+                found_index = i
+                existing_row = row
+                break
+            
+            # B) Coincidencia por NOMBRE (Solo si nombre es largo, para evitar falsos positivos)
+            if len(input_name) > 3 and row_name == input_name:
+                found_index = i
+                existing_row = row
+                break
+                
+        # 4. ESCENARIO: CLIENTE ENCONTRADO (Actualizar y Rellenar)
+        if existing_row:
+            print(f"Cliente existente encontrado: {existing_row['Nombre_Completo']}")
+            
+            # Calculamos fila en Excel (Índice + 2 por encabezado)
+            row_num = found_index + 2 
+            
+            current_id = str(existing_row.get('ID_Cliente_DNI', ''))
+            final_id = current_id
+
+            # --- A. REEMPLAZO DE ID TEMPORAL ---
+            # Si tiene ID temporal (CLI- o WEB-) Y ahora nos dio un DNI real
+            if (current_id.upper().startswith('CLI-') or current_id.upper().startswith('WEB-')) and input_dni:
+                print(f"ACTUALIZANDO: ID temporal {current_id} -> DNI {input_dni}")
+                sheet.update_cell(row_num, 1, input_dni) # Col 1: ID
+                final_id = input_dni
+
+            # --- B. SMART FILL (Rellenar huecos) ---
+            # Si falta teléfono en Excel y lo tenemos ahora
+            if not existing_row.get('Telefono') and input_phone:
+                sheet.update_cell(row_num, 3, input_phone) # Col 3: Telefono
+                
+            # Si falta Cumpleaños en Excel y lo tenemos ahora (viene de Agenda)
+            excel_dob = existing_row.get('Fec. Nacimiento (DD/MM/YYYY)', '')
+            if not excel_dob and input_dob_sheet:
+                sheet.update_cell(row_num, 5, input_dob_sheet) # Col 5: Nacimiento
+
+            return final_id
+
+        # 5. ESCENARIO: CLIENTE NUEVO (Crear)
+        else:
+            print("Cliente nuevo. Registrando...")
+            
+            # Generar ID: DNI si existe, sino WEB-UUID
+            final_id = input_dni if input_dni else f"WEB-{uuid.uuid4().hex[:6].upper()}"
+            
+            # Orden Columnas: [ID, Nombre, Telefono, Email, Nacimiento, Registro, Consentimiento]
+            new_row = [
+                str(final_id),          # Aseguramos texto
+                data['name'].title(),   # Nombre bonito
+                input_phone,
+                "",                     # Email (vacío)
+                input_dob_sheet,        # Fecha nac (o vacío si es carrito)
+                datetime.now().strftime("%Y-%m-%d"), # Fecha Registro
+                input_consent           # Consentimiento
+            ]
+            
+            sheet.append_row(new_row)
+            return final_id
+
+    except Exception as e:
+        print(f"Error en lógica de clientes: {e}")
+        # Retorno de seguridad para no romper el flujo de venta/agenda
+        return data.get('dni') or f"ERR-{data.get('name')[:3]}"
+
+# --- CONFIGURACIÓN GOOGLE SHEETS ---
+def get_google_sheet():
+    """Conecta con Google Sheets usando la autenticación moderna de gspread."""
+    try:
+        # Método moderno: gspread busca y autentica solo con el archivo JSON
+        gc = gspread.service_account(filename="service_account.json")
+        
+        # Abre la hoja. ¡RECUERDA PONER EL NOMBRE DE TU ARCHIVO DE DRIVE!
+        sheet = gc.open("Katharsis_Gestor").worksheet("Agenda_Unificada")
+        return sheet
+    except Exception as e:
+        print(f"Error CRÍTICO conectando a Google Sheets: {e}")
+        # Lanzamos el error para verlo en consola si falla
+        raise e
+
+# --- RUTA DE RESERVA ACTUALIZADA ---
+@app.route('/book_appointment', methods=['POST'])
+def book_appointment():
+    data = request.get_json()
+    
+    # Validar campos (incluyendo el nuevo 'client_dob')
+    required = ['service_id', 'date', 'time', 'client_name', 'client_phone', 'client_dob', 'yape_code']
+    if not all(k in data for k in required):
+        return jsonify({'status': 'error', 'message': 'Faltan datos obligatorios.'}), 400
+
+    try:
+        # 1. BUSCAR O REGISTRAR CLIENTE
+        client_data = {
+            'name': data['client_name'],
+            'phone': data['client_phone'],
+            'dni': data.get('client_dni', ''),
+            'dob': data['client_dob']
+        }
+        
+        # Esta función nos devuelve el ID (DNI real o generado)
+        final_client_id = find_or_create_client(client_data)
+        
+        # 2. PREPARAR CITA
+        appt_id = str(uuid.uuid4())[:8]
+        service_info = SERVICES.get(data['service_id'], {})
+        
+        full_data = {
+            "id": appt_id,
+            "source": "WEB",
+            "status": "CONFIRMED", 
+            "date": data['date'],
+            "time": data['time'],
+            "service": service_info.get('name', 'Servicio'),
+            "client_name": data['client_name'],
+            "client_id": final_client_id, # Guardamos el ID enlazado
+            "phone": data['client_phone'],
+            "deposit": 20.00,
+            "yape": data['yape_code']
+        }
+
+        # 3. GUARDAR EN AGENDA (Google Sheets)
+        # Orden: ID, Fecha, Hora, Servicio, Cliente(Nombre), Tel, Estado, Seña, Yape, JSON
+        # NOTA: En la columna E (Cliente) guardamos el NOMBRE para que sea legible en el Excel,
+        # pero en el JSON de respaldo guardamos el ID para el sistema.
+        row = [
+            full_data['id'],
+            full_data['date'],
+            full_data['time'],
+            full_data['service'],
+            full_data['client_name'],
+            full_data['phone'],
+            full_data['status'],
+            full_data['deposit'],
+            full_data['yape'],
+            json.dumps(full_data)
+        ]
+        
+        sheet = get_google_sheet()
+        sheet.append_row(row)
+
+        # 4. NOTIFICACIÓN TELEGRAM
+        msg = (f"📅 *NUEVA CITA WEB*\n\n"
+               f"👤 *Cliente:* {full_data['client_name']} (ID: {final_client_id})\n"
+               f"🎂 *Cumple:* {data['client_dob']}\n"
+               f"💎 *Servicio:* {full_data['service']}\n"
+               f"🗓 *Fecha:* {full_data['date']} a las {full_data['time']}\n"
+               f"💰 *Seña:* S/ 20.00 (Yape: `{full_data['yape']}`)")
+        
+        send_order_notification(msg)
+
+        return jsonify({'status': 'success', 'message': 'Cita registrada.', 'redirect_url': url_for('index')})
+
+    except Exception as e:
+        print(f"Error crítico al agendar: {e}")
+        return jsonify({'status': 'error', 'message': 'Error de conexión. Intenta de nuevo.'}), 500
+    
 if __name__ == '__main__':
     session_dir = app.config['SESSION_FILE_DIR']
     if not os.path.exists(session_dir):

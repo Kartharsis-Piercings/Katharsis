@@ -1,0 +1,74 @@
+{
+    "lobulo": {
+        "name": "Perforación Lóbulo",
+        "deposit": 20.0,
+        "duration": 60,
+        "image": "img/services/lobulo.webp"
+    },
+    "helix": {
+        "name": "Perforación Helix",
+        "deposit": 20.0,
+        "duration": 60,
+        "image": "img/services/helix.webp"
+    },
+    "tragus": {
+        "name": "Perforación Tragus",
+        "deposit": 20.0,
+        "duration": 60,
+        "image": "img/services/tragus.webp"
+    },
+    "conch": {
+        "name": "Perforación Conch",
+        "deposit": 20.0,
+        "duration": 60,
+        "image": "img/services/conch.webp"
+    },
+    "nostril": {
+        "name": "Perforación Nostril",
+        "deposit": 20.0,
+        "duration": 60,
+        "image": "img/services/nostril.webp"
+    },
+    "septum": {
+        "name": "Perforación Septum",
+        "deposit": 20.0,
+        "duration": 60,
+        "image": "img/services/septum.webp"
+    },
+    "ceja": {
+        "name": "Perforación Ceja",
+        "deposit": 20.0,
+        "duration": 60,
+        "image": "img/services/ceja.webp"
+    },
+    "labio": {
+        "name": "Perforación Labio/Labret",
+        "deposit": 20.0,
+        "duration": 60,
+        "image": "img/services/labio.webp"
+    },
+    "ombligo": {
+        "name": "Perforación Ombligo",
+        "deposit": 20.0,
+        "duration": 60,
+        "image": "img/services/ombligo.webp"
+    },
+    "nipple": {
+        "name": "Perforación Pezón",
+        "deposit": 20.0,
+        "duration": 60,
+        "image": "img/services/nipple.webp"
+    },
+    "industrial": {
+        "name": "Perforación Industrial",
+        "deposit": 20.0,
+        "duration": 60,
+        "image": "img/services/industrial.webp"
+    },
+    "revision": {
+        "name": "Revisión / Cambio de Joya",
+        "deposit": 10.0,
+        "duration": 60,
+        "image": "img/services/revision.webp"
+    }
+}

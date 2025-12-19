@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% block title %}Agendar Cita | Katharsis{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='booking.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+{% endblock %}
+
+{% block content %}
+<section class="booking-section">
+    <div class="booking-container">
+        
+        <div class="booking-steps">
+            <h1>Agenda tu Cita</h1>
+            <p class="subtitle">Asegura tu espacio con un adelanto de S/ 20.00</p>
+
+            <div class="step-box">
+                <h2>1. ¿Qué te vas a perforar?</h2>
+                <div class="services-grid">
+                    {% for id, service in services.items() %}
+                    <div class="service-card" 
+                         data-id="{{ id }}" 
+                         data-name="{{ service.name }}" 
+                         data-deposit="{{ service.deposit }}">
+                         
+                        <div class="service-img-container">
+                            <img src="{{ url_for('static', filename=service.image) }}" 
+                                 alt="{{ service.name }}"
+                                 class="service-image"> 
+                        </div>
+                        
+                        <h3>{{ service.name }}</h3>
+                        <p class="deposit-tag">Adelanto: S/ {{ service.deposit }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="step-box disabled" id="step-2">
+                <h2>2. Elige Fecha y Hora</h2>
+                <div class="datetime-container">
+                    <input type="text" id="datepicker" placeholder="Selecciona una fecha">
+                    <div id="time-slots" class="time-slots-grid">
+                        <p class="placeholder-text">Selecciona un día para ver horarios</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-box disabled" id="step-3">
+                <h2>3. Tus Datos</h2>
+                <form id="booking-form">
+                    <div class="form-group">
+                        <label>Nombre Completo</label>
+                        <input type="text" id="client-name" required placeholder="Ej: Ana Pérez">
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha de Nacimiento</label>
+                        <input type="date" id="client-dob" required style="width: 100%; padding: 0.8rem; background: #252525; border: 1px solid #333; color: white; border-radius: 5px;">
+                    </div>
+                    <div class="form-group-row">
+                        <div class="form-group">
+                            <label>Celular (WhatsApp)</label>
+                            <input type="tel" id="client-phone" required placeholder="999 888 777">
+                        </div>
+                        <div class="form-group">
+                            <label>DNI (Opcional)</label>
+                            <input type="text" id="client-dni" placeholder="12345678">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="booking-summary-wrapper">
+            <div class="booking-summary">
+                <h3>Resumen de Reserva</h3>
+                
+                <div class="summary-item">
+                    <span>Servicio:</span>
+                    <strong id="summary-service">-</strong>
+                </div>
+                <div class="summary-item">
+                    <span>Fecha:</span>
+                    <strong id="summary-date">-</strong>
+                </div>
+                <div class="summary-item">
+                    <span>Hora:</span>
+                    <strong id="summary-time">-</strong>
+                </div>
+                
+                <div class="summary-divider"></div>
+                
+                <div class="summary-total">
+                    <span>Adelanto a pagar hoy:</span>
+                    <span class="price" id="summary-price">S/ 0.00</span>
+                </div>
+
+                <p class="disclaimer">
+                    * El monto restante (joya + servicio) se paga en el estudio el día de tu cita.
+                </p>
+
+                <button id="btn-pay-booking" class="btn-primary" disabled>
+                    Confirmar y Pagar Adelanto
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<div id="booking-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <button class="close-modal-btn" id="close-booking-modal">&times;</button>
+        <div class="yape-modal-body">
+            <div class="yape-qr-section">
+                <h3>El Adelanto</h3>
+                <p>Escanea y paga <strong>S/ <span id="modal-deposit-amount">20.00</span></strong></p>
+                <img src="{{ url_for('static', filename='img/yape-QR.webp') }}" alt="QR Yape" class="yape-qr-image">
+                <div class="yape-info">
+                    <p>O yapea al: <strong>+51 922 207 389</strong></p> 
+                </div>
+            </div>
+            
+            <div class="yape-verification-section">
+                <h3>Confirmar Cita</h3>
+                <p class="verification-instructions">
+                    Ingresa el código de operación del Yape para agendar tu cita.
+                </p>
+                <form id="booking-verification-form">
+                    <div class="form-group">
+                        <label>Código de Operación</label>
+                        <input type="text" id="booking-yape-code" placeholder="Ej: 123456" required>
+                    </div>
+                    <button type="submit" class="btn-confirm-payment">Finalizar Reserva</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
+    <script src="{{ url_for('static', filename='booking.js') }}"></script>
+{% endblock %}

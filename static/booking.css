@@ -1,0 +1,420 @@
+/* static/booking.css */
+
+.booking-section {
+    padding: 3rem 5%;
+    background: #0f0f0f;
+    min-height: 100vh;
+}
+
+.booking-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 350px; /* Columna ancha + Resumen */
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.booking-steps h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Quicksand', sans-serif;
+    color: #f5f5f5;
+}
+
+.subtitle {
+    color: #888;
+    margin-bottom: 2rem;
+}
+
+/* CAJAS DE PASOS */
+.step-box {
+    background: #1a1a1a;
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid #333;
+    margin-bottom: 2rem;
+    transition: opacity 0.3s;
+}
+
+.step-box.disabled {
+    opacity: 0.5;
+    pointer-events: none; /* Bloquea clics hasta completar el anterior */
+}
+
+.step-box h2 {
+    color: #84529C;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+}
+
+/* GRID DE SERVICIOS */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.service-card {
+    background: #252525;
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.service-card:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+.service-card.selected {
+    border-color: #84529C;
+    background: #2d2033; /* Un morado muy oscuro */
+}
+
+/* Estilos para la imagen del servicio */
+.service-img-container {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 10px auto; /* Centrado horizontal y margen abajo */
+    border-radius: 0%; /* Esto la hace redonda */
+    overflow: hidden;
+    border: 2px solid #333; /* Un borde sutil */
+    background-color: #000;
+}
+
+.service-card:hover .service-img-container {
+    border-color: #84529C; /* El borde se pone morado al pasar el mouse */
+}
+
+.service-card.selected .service-img-container {
+    border-color: #84529C;
+    box-shadow: 0 0 10px rgba(132, 82, 156, 0.5); /* Glow al seleccionar */
+}
+
+.service-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la foto llene el círculo sin deformarse */
+    display: block;
+}
+
+.service-card h3 {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.deposit-tag {
+    font-size: 0.8rem;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+/* CALENDARIO Y HORAS */
+.datetime-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#datepicker {
+    width: 100%;
+    padding: 1rem;
+    background: #252525;
+    border: 1px solid #333;
+    color: white;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.time-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+.time-slot {
+    padding: 0.8rem;
+    background: #252525;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.time-slot:hover {
+    background: #333;
+}
+
+.time-slot.selected {
+    background: #84529C;
+    border-color: #84529C;
+    font-weight: bold;
+}
+
+/* FORMULARIO */
+.form-group {
+    margin-bottom: 1rem;
+}
+.form-group-row {
+    display: flex;
+    gap: 1rem;
+}
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    background: #252525;
+    border: 1px solid #333;
+    color: white;
+    border-radius: 5px;
+}
+
+/* RESUMEN FLOTANTE */
+.booking-summary-wrapper {
+    position: sticky;
+    top: 100px;
+}
+
+.booking-summary {
+    background: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid #84529C; /* Borde morado para destacar */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.booking-summary h3 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+}
+
+.summary-item strong {
+    color: #ccc;
+    text-align: right;
+    max-width: 60%;
+}
+
+.summary-divider {
+    height: 1px;
+    background: #333;
+    margin: 1rem 0;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.summary-total .price {
+    color: #4CAF50;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.disclaimer {
+    font-size: 0.75rem;
+    color: #777;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+#btn-pay-booking {
+    width: 100%;
+    padding: 1rem;
+    background: #84529C;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#btn-pay-booking:disabled {
+    background: #444;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+#btn-pay-booking:hover:not(:disabled) {
+    background: #6a3d7f;
+}
+
+/* --- ESTILOS DEL MODAL DE PAGO (Copiados para Reservas) --- */
+
+/* Asegurarnos que el z-index sea altísimo */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 999999 !important; /* <--- IMPORTANTE */
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+/* Forzar que se muestre cuando JS lo pide */
+.modal-overlay[style*="display: flex"] {
+    display: flex !important;
+}
+
+.modal-content {
+    background: #1a1a1a;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid #84529C;
+    max-width: 700px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 0 25px rgba(132, 82, 156, 0.3);
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-modal-btn:hover {
+    color: #ff5252;
+}
+
+/* Cuerpo del Modal (Dos columnas: QR y Formulario) */
+.yape-modal-body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.yape-qr-section, .yape-verification-section {
+    flex: 1;
+    min-width: 280px;
+    text-align: center;
+}
+
+/* Lado Izquierdo: QR */
+.yape-qr-section h3 {
+    color: #84529C;
+    margin-bottom: 1rem;
+}
+
+.yape-qr-image {
+    max-width: 295px;
+    border-radius: 10px;
+    border: 2px solid #84529C;
+    margin: 1rem 0;
+}
+
+.yape-info p {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-top: 0.5rem;
+}
+
+/* Lado Derecho: Formulario */
+.yape-verification-section h3 {
+    color: #f5f5f5;
+    margin-bottom: 1rem;
+}
+
+.verification-instructions {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.yape-verification-section input {
+    width: 100%;
+    padding: 1rem;
+    background: #252525;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+}
+
+.yape-verification-section input:focus {
+    border-color: #84529C;
+    outline: none;
+}
+
+.btn-confirm-payment {
+    width: 100%;
+    padding: 1rem;
+    background: #4CAF50; /* Verde Yape */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-confirm-payment:hover {
+    background: #45a049;
+    transform: scale(1.02);
+}
+
+.btn-confirm-payment:disabled {
+    background: #555;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+    .booking-container {
+        grid-template-columns: 1fr;
+    }
+    .booking-summary-wrapper {
+        position: static;
+        margin-top: 2rem;
+    }
+    .form-group-row {
+        flex-direction: column;
+    }
+    .yape-qr-image {
+        max-width: 265px;
+    }
+}

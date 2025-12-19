@@ -279,9 +279,9 @@
   {
     "name": "Aro Clásico de Titanio",
     "stock": {
-      "10mm": 18,
+      "10mm": 16,
       "8mm": 8,
-      "6mm": 10
+      "6mm": 9
     },
     "category": "Aros",
     "body_parts": [
@@ -599,7 +599,7 @@
   {
     "name": "Nostril de Titanio con Zircón AB 2mm",
     "stock": {
-      "8mm": 2
+      "8mm": 0
     },
     "category": "Nostril",
     "body_parts": [
