@@ -265,16 +265,9 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
-    "details": {
-      "gauge": "20G (0.8mm)",
-      "closure_type": "Clicker",
-      "anodization": "Compatible",
-      "material": "Titanio ASTM -F136",
-      "brand": "Right Grand",
-      "stone_type": "Ninguna",
-      "dimensions": "-"
-    },
-    "id": 8
+    "details": {},
+    "id": 8,
+    "costo": 2.37
   },
   {
     "name": "Aro Clásico de Titanio",
@@ -303,16 +296,9 @@
     "material": "titanio",
     "popularity": 10,
     "rosca": "interna",
-    "details": {
-      "gauge": "16G (1.2mm)",
-      "closure_type": "Clicker",
-      "anodization": "Compatible",
-      "material": "Titanio ASTM -F136",
-      "brand": "Right Grand",
-      "stone_type": "Ninguna",
-      "dimensions": "-"
-    },
-    "id": 9
+    "details": {},
+    "id": 9,
+    "costo": 2.49
   },
   {
     "name": "Barbel Banana de Titanio",
@@ -598,9 +584,7 @@
   },
   {
     "name": "Nostril de Titanio con Zircón AB 2mm",
-    "stock": {
-      "8mm": 0
-    },
+    "stock": {},
     "category": "Nostril",
     "body_parts": [
       "nariz"
@@ -618,16 +602,9 @@
     "material": "titanio",
     "popularity": 10,
     "rosca": "interna",
-    "details": {
-      "gauge": "20G (0.8mm)",
-      "closure_type": "-",
-      "anodization": "Compatible",
-      "material": "Titanio ASTM F-136",
-      "brand": "Right Grand",
-      "stone_type": "Zircón AB",
-      "dimensions": "2mm"
-    },
-    "id": 18
+    "details": {},
+    "id": 18,
+    "costo": 4.5
   },
   {
     "name": "Nostril de Titanio con Zircón Blanco 2mm",
@@ -651,16 +628,9 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
-    "details": {
-      "gauge": "20G (0.8mm)",
-      "closure_type": "-",
-      "anodization": "Compatible",
-      "material": "Titanio ASTM F-136",
-      "brand": "Right Grand",
-      "stone_type": "Zircon Blanco",
-      "dimensions": "2mm"
-    },
-    "id": 19
+    "details": {},
+    "id": 19,
+    "costo": 4.5
   },
   {
     "name": "Nostril de Titanio Corazon",
@@ -684,16 +654,9 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
-    "details": {
-      "gauge": "20G (0.8mm)",
-      "closure_type": "-",
-      "anodization": "Compatible",
-      "material": "Titanio ASTM F-136",
-      "brand": "Right Grand",
-      "stone_type": "Ninguna",
-      "dimensions": "3mm"
-    },
-    "id": 20
+    "details": {},
+    "id": 20,
+    "costo": 3.5
   },
   {
     "name": "Nostril de Titanio Estrella",
@@ -716,16 +679,9 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
-    "details": {
-      "gauge": "20G (1.2mm)",
-      "closure_type": "-",
-      "anodization": "Compatible",
-      "material": "Titanio ASTM F-136",
-      "brand": "Right Grand",
-      "stone_type": "Ninguna",
-      "dimensions": "2.7mm"
-    },
-    "id": 21
+    "details": {},
+    "id": 21,
+    "costo": 3.5
   },
   {
     "name": "Nostril de Titanio Luna",
@@ -749,16 +705,9 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
-    "details": {
-      "gauge": "20G (0.8mm)",
-      "closure_type": "-",
-      "anodization": "Compatible",
-      "material": "Titanio ASTM F-136",
-      "brand": "Right Grand",
-      "stone_type": "Ninguna",
-      "dimensions": "2.5mm"
-    },
-    "id": 22
+    "details": {},
+    "id": 22,
+    "costo": 3.5
   },
   {
     "name": "Nostril de Titanio con Zircón Blanco 2.5mm",
@@ -782,16 +731,9 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
-    "details": {
-      "gauge": "20G (0.8mm)",
-      "closure_type": "-",
-      "anodization": "Compatible",
-      "material": "Titanio ASTM F-136",
-      "brand": "Right Grand",
-      "stone_type": "Zircón White",
-      "dimensions": "2.5mm"
-    },
-    "id": 23
+    "details": {},
+    "id": 23,
+    "costo": 2.46
   },
   {
     "name": "Barbel de Titanio con Zircón Blanco para Ombligo",
@@ -815,16 +757,9 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
-    "details": {
-      "gauge": "14G (1.6mm)",
-      "closure_type": "Rosca Interna",
-      "anodization": "Compatible",
-      "material": "Titanio ASTM F-136",
-      "brand": "Right Grand",
-      "stone_type": "Zircon Blanco",
-      "dimensions": "Top: 4mm Body: 6mm"
-    },
-    "id": 24
+    "details": {},
+    "id": 24,
+    "costo": 15.5
   },
   {
     "name": "Barbel de Titanio con Zircón AB para Ombligo",
@@ -848,16 +783,9 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
-    "details": {
-      "gauge": "14G (1.6mm)",
-      "closure_type": "Rosca Interna",
-      "anodization": "Compatible",
-      "material": "Titanio ASTM F-136",
-      "brand": "Right Grand",
-      "stone_type": "Zirconias AB",
-      "dimensions": "Top: 5mm Body: 10x8mm"
-    },
-    "id": 25
+    "details": {},
+    "id": 25,
+    "costo": 17.0
   },
   {
     "name": "Barbel redondo de Titanio con Zircón Blanco para Ombligo",
@@ -881,16 +809,9 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
-    "details": {
-      "gauge": "14G (1.6mm)",
-      "closure_type": "Rosca Interna",
-      "anodization": "Compatible",
-      "material": "Titanio ASTM F-136",
-      "brand": "Right Grand",
-      "stone_type": "Zircon Blanco",
-      "dimensions": "Top: 5mm Body: 8mm"
-    },
-    "id": 26
+    "details": {},
+    "id": 26,
+    "costo": 10.11
   },
   {
     "name": "Barbel redondo con Zircón AB para Ombligo",
@@ -914,16 +835,9 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
-    "details": {
-      "gauge": "14G (1.6mm)",
-      "closure_type": "Rosca Interna",
-      "anodization": "Compatible",
-      "material": "Titanio ASTM F-136",
-      "brand": "Right Grand",
-      "stone_type": "Zircon AB",
-      "dimensions": "Top: 5mm Body: 8mm"
-    },
-    "id": 27
+    "details": {},
+    "id": 27,
+    "costo": 10.11
   },
   {
     "name": "Barbel de Titanio con Aquamarine para Ombligo",
@@ -947,16 +861,9 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
-    "details": {
-      "gauge": "14G (1.6mm)",
-      "closure_type": "Rosca Interna",
-      "anodization": "Compatible",
-      "material": "Titanio ASTM -F136",
-      "brand": "Right Grand",
-      "stone_type": "Aquamarine",
-      "dimensions": "Top: 4mm Body: 6mm"
-    },
-    "id": 28
+    "details": {},
+    "id": 28,
+    "costo": 9.0
   },
   {
     "name": "Labret Corazon",
@@ -1275,19 +1182,12 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
-    "details": {
-      "gauge": "14G (1.6mm)",
-      "closure_type": "Rosca Interna",
-      "anodization": "Compatible",
-      "material": "Titanio ASTM - F136",
-      "brand": "Right Grand",
-      "stone_type": "-",
-      "dimensions": "5mm y 10mm"
-    },
+    "details": {},
     "stock": {
       "10mm": 5
     },
-    "id": 38
+    "id": 38,
+    "costo": 2.73
   },
   {
     "name": "Barbel de Titanio con Amatistas para Ombligo",
@@ -1306,19 +1206,12 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
-    "details": {
-      "gauge": "14G (1.6mm)",
-      "closure_type": "Rosca Interna",
-      "anodization": "Compatible",
-      "material": "Titanio ASTM - F136",
-      "brand": "Right Grand",
-      "stone_type": "Amatista",
-      "dimensions": "13mm"
-    },
+    "details": {},
     "stock": {
       "10mm": 1
     },
-    "id": 39
+    "id": 39,
+    "costo": 9.87
   },
   {
     "name": "Barbel de Titanio con Cuarzo Rosa para Ombligo",
@@ -1337,19 +1230,12 @@
     "material": "titanio",
     "popularity": 0,
     "rosca": "interna",
-    "details": {
-      "gauge": "14G (1.6mm)",
-      "closure_type": "Rosca Interna",
-      "anodization": "Compatible",
-      "material": "Titanio ASTM - F136",
-      "brand": "Right Grand",
-      "stone_type": "Cuarzo Rosa",
-      "dimensions": "13mm"
-    },
+    "details": {},
     "stock": {
       "10mm": 1
     },
-    "id": 40
+    "id": 40,
+    "costo": 9.87
   },
   {
     "name": "REQUIEM - Serum Reparador de Granulomas",

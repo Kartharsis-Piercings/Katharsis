@@ -31,3 +31,6 @@ materials.json
 citas.json
 credentials.json
 service_account.json
+credentials_oauth.json
+token.json
+test_calendar.py
